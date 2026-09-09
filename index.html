@@ -90,7 +90,7 @@
     </div>
     <p class="sub">Click headers to sort. Star to shortlist; strike to hide. Stars/strikes save in this browser. $/m² = price ÷ size; True $/m² adds 10yr HOA.</p>
 
-    <div class="callout"><strong>Share tip:</strong> stars/strikes stay in your browser. Use <strong>Submit for review</strong> to open a GitHub issue — a bot turns it into a PR on Rod’s shortlist for him to merge.</div>
+    <div class="callout"><strong>Share tip:</strong> stars/strikes stay in your browser. Use <strong>Copy shortlist</strong> and send Rod the text (Messages, email, etc.) — no account needed.</div>
 
     <div class="stats">
       <div class="stat"><b id="sView">0</b><span>In this view</span></div>
@@ -130,7 +130,7 @@
       </label>
       <button class="ghost" id="btnReset" type="button">Reset filters</button>
       <button class="ghost" id="btnLoadSeed" type="button">Load Rod’s shortlist</button>
-      <button class="ghost" id="btnSubmit" type="button">Submit for review</button>
+      <button class="ghost" id="btnCopy" type="button">Copy shortlist</button>
       <button class="ghost" id="btnClearMarks" type="button">Clear my stars/strikes</button>
     </div>
 
@@ -427,13 +427,9 @@
       state.starred=[]; state.struck=[]; state.seededFrom=null; persist(); render();
     };
 
-    document.getElementById('btnSubmit').onclick = () => {
-      const note = prompt('Optional note for Rod (what changed / why):', '') ?? '';
-      const who = prompt('Your name or handle (optional):', '') ?? '';
+    document.getElementById('btnCopy').onclick = async () => {
       const proposal = {
         type: 'shortlist-proposal',
-        from: who.trim() || 'anonymous',
-        note: note.trim(),
         createdAt: new Date().toISOString(),
         starred: state.starred,
         struck: state.struck,
@@ -444,36 +440,13 @@
         sortKey: state.sortKey,
         sortDir: state.sortDir,
       };
-      const title = `[shortlist] proposal from ${proposal.from}`;
-      const body = [
-        '## Shortlist proposal',
-        '',
-        `From: **${proposal.from}**`,
-        note.trim() ? `Note: ${note.trim()}` : 'Note: _(none)_',
-        '',
-        `Starred: **${proposal.starred.length}** · Struck: **${proposal.struck.length}**`,
-        '',
-        'A GitHub Action will open a PR updating `seed-state.json` for Rod to review.',
-        '',
-        '```json',
-        JSON.stringify(proposal, null, 2),
-        '```',
-        '',
-      ].join('\n');
-      const url = 'https://github.com/rodgoodtrip/tokyo-buy-search/issues/new'
-        + '?title=' + encodeURIComponent(title)
-        + '&body=' + encodeURIComponent(body);
-      if (url.length > 7000) {
-        navigator.clipboard.writeText(body).then(() => {
-          alert('Proposal is large — copied to clipboard. Paste it into the new GitHub issue body.');
-          window.open('https://github.com/rodgoodtrip/tokyo-buy-search/issues/new?title=' + encodeURIComponent(title), '_blank', 'noopener');
-        }).catch(() => {
-          alert('Could not copy automatically. Open an issue titled "[shortlist] …" and paste your shortlist JSON.');
-          window.open('https://github.com/rodgoodtrip/tokyo-buy-search/issues/new', '_blank', 'noopener');
-        });
-        return;
+      const text = JSON.stringify(proposal, null, 2);
+      try {
+        await navigator.clipboard.writeText(text);
+        alert('Shortlist copied. Paste it into a message to Rod.');
+      } catch {
+        prompt('Copy this shortlist and send it to Rod:', text);
       }
-      window.open(url, '_blank', 'noopener');
     };
 
     // URL helper: ?seed=1 forces Rod shortlist
