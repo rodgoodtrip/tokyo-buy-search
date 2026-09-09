@@ -1,188 +1,188 @@
-id,track,kind,title,price_usd,price_jpy,monthly_usd,sqm,usd_per_sqm,true_usd_per_sqm,walk_min,tokyo_min,haneda_min,narita_min,station,line,source,url
-1393811,solo,condo,1LDK,124622,19799943,157,62.15,2005,2308,4,15,17,24,Hiratsuka,REJ solo,REJ,https://realestate.co.jp/en/forsale/view/1393811
-21105313,joint,condo,3LDK,201410,32000021,146,55.31,3641,3958,15,15,15,48,千歳船橋,Odakyu,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_setagaya/nc_21105313/
-21350089,joint,house,3DK,250504,39800076,0,86.7,2889,2889,10,16,60,70,kita,Kita,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_kita/nc_21350089/
-21119463,joint,condo,2LDK,112034,17799962,128,54.54,2054,2336,11,17,49,121,坂戸,Tobu Tojo,Suumo,https://suumo.jp/ms/chuko/saitama/sc_sakado/nc_21119463/
-1393798,joint,condo,3LDK,118328,18799953,113,72.17,1640,1827,3,20,26,33,Namikichuou,REJ joint,REJ,https://realestate.co.jp/en/forsale/view/1393798
-21103311,joint,house,3K,213998,34000002,0,49.14,4355,4355,9,20,72,108,—,Keio,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_suginami/nc_21103311/
-21167281,joint,condo,2LDK,219033,34799963,148,70.43,3110,3362,11,21,67,27,要町,Tobu Tojo,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_itabashi/nc_21167281/
-77143949,joint,condo,3DK,131546,20900028,160,57.91,2272,2603,5,22,22,32,上板橋,Tobu Tojo,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_itabashi/nc_77143949/
-1324128,solo,condo,1LDK,100642,15990001,83,37.1,2713,2981,6,22,73,92,Kamiitabashi,REJ solo,REJ,https://realestate.co.jp/en/forsale/view/1324128
-20955392,solo,condo,1LDK,112034,17799962,119,36.54,3066,3457,6,22,22,32,上板橋,Tobu Tojo,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_itabashi/nc_20955392/
-1324125,solo,condo,1LDK,112034,17799962,94,36.18,3097,3408,7,22,73,92,Kamiitabashi,REJ solo,REJ,https://realestate.co.jp/en/forsale/view/1324125
-21447583,joint,condo,2LDK,212739,33799972,96,48.33,4402,4640,7,22,22,32,上板橋,Tobu Tojo,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_itabashi/nc_21447583/
-21106326,joint,condo,3LDK,132175,20999964,210,59.89,2207,2628,5,23,23,53,京王稲田堤,Nambu KN,Suumo,https://suumo.jp/ms/chuko/kanagawa/sc_kawasakishitama/nc_21106326/
-20547924,joint,condo,3LDK,174975,27800028,265,72.0,2430,2872,8,23,22,53,生田,Odakyu KN,Suumo,https://suumo.jp/ms/chuko/kanagawa/sc_kawasakishitama/nc_20547924/
-1313382,solo,condo,1LDK,132112,20989955,117,27.54,4797,5307,5,24,66,26,Itabashi Honchou,REJ solo,REJ,https://realestate.co.jp/en/forsale/view/1313382
-21260603,joint,condo,3DK,207578,32979993,109,59.39,3495,3715,7,24,66,26,板橋本町,Tobu Tojo,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_itabashi/nc_21260603/
-20333395,joint,house,3LDK,281974,44800029,0,60.54,4658,4658,13,24,77,107,光が丘,Nerima,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_nerima/nc_20333395/
-21158958,joint,condo,2DK,200151,31799991,113,42.48,4712,5031,6,25,58,42,西小山,Tokyu Oimachi,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_shinagawa/nc_21158958/
-21233445,joint,house,5LDK,244209,38799926,0,102.05,2393,2393,17,25,83,95,—,Tobu Tojo,Suumo,https://suumo.jp/chukoikkodate/saitama/sc_wako/nc_21233445/
-21509038,joint,condo,3LDK,207075,32900076,204,66.45,3116,3485,11,26,188,20,桜並木,Tobu Tojo,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_itabashi/nc_21509038/
-21474249,joint,house,4LDK,251699,39989937,0,90.88,2770,2770,3,27,80,117,—,Odakyu KN,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishitama/nc_21474249/
-21536833,joint,house,4LDK,244839,38900020,0,94.81,2582,2582,5,27,80,117,—,Nambu KN,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishitama/nc_21536833/
-21531903,joint,house,3LDK,238545,37900030,0,70.1,3403,3403,12,27,80,117,—,Nambu KN,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishitama/nc_21531903/
-21259946,joint,house,3LDK,238545,37900030,0,70.1,3403,3403,12,27,80,117,—,Odakyu KN,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishitama/nc_21259946/
-21096407,joint,house,2LDK,124622,19799943,0,52.74,2363,2363,13,27,80,101,—,Seibu Ikebukuro,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_nerima/nc_21096407/
-20906655,joint,house,5DK,188633,29970011,0,122.55,1539,1539,19,27,80,117,—,Odakyu KN,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishitama/nc_20906655/
-21403170,joint,house,5DK,194927,30970002,0,122.55,1591,1591,19,27,80,117,—,Odakyu KN,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishitama/nc_21403170/
-21455381,joint,house,3LDK,289464,45990040,0,62.04,4666,4666,15,28,86,121,—,Odakyu,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_komae/nc_21455381/
-21099632,joint,condo,3LDK,137210,21799925,209,78.56,1747,2066,8,30,30,121,聖蹟桜ヶ丘,Keio,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_tama/nc_21099632/
-21474363,joint,house,3LDK,206445,32799982,0,91.69,2252,2252,9,30,90,120,—,Odakyu KN,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishiasao/nc_21474363/
-21344847,joint,house,3LDK,206445,32799982,0,91.69,2252,2252,9,30,90,120,—,Odakyu KN,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishiasao/nc_21344847/
-20320518,joint,condo,3LDK,220229,34989984,207,64.4,3420,3805,9,30,27,123,京王永山,Odakyu Tama,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_tama/nc_20320518/
-20536898,joint,house,3LDK,206445,32799982,0,91.69,2252,2252,10,30,90,120,—,Odakyu KN,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishiasao/nc_20536898/
-21361763,joint,house,3LDK,267497,42499923,0,85.23,3139,3139,10,30,90,120,—,Odakyu KN,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishiasao/nc_21361763/
-20570117,joint,house,3LDK,207641,32990002,0,85.05,2441,2441,18,30,90,120,—,Odakyu,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishiasao/nc_20570117/
-21225171,joint,house,3LDK,235964,37489960,0,81.98,2878,2878,19,30,90,120,—,Odakyu KN,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishiasao/nc_21225171/
-21042139,joint,house,4LDK,237915,37799935,0,99.98,2380,2380,19,30,90,120,—,Odakyu KN,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishiasao/nc_21042139/
-21091715,joint,condo,3LDK,195053,30990021,188,73.69,2647,2953,20,30,29,50,立川,JR Nambu,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_tachikawa/nc_21091715/
-1408271,solo,condo,1DK,101964,16200040,109,30.93,3297,3719,4,31,75,91,itabashi,REJ solo,REJ,https://realestate.co.jp/en/forsale/view/1408271
-20923629,joint,condo,2LDK,163520,25980058,51,52.56,3111,3228,5,31,31,121,布田,Keio,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_chofu/nc_20923629/
-21454484,joint,condo,2LDK,163520,25980058,51,52.56,3111,3228,5,31,31,121,布田,Keio,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_chofu/nc_21454484/
-21282256,joint,condo,3LDK,188696,29980020,163,61.82,3052,3369,4,32,15,123,矢野口,JR Nambu,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_inagi/nc_21282256/
-78414399,joint,condo,3LDK,213872,33979983,139,60.02,3563,3841,10,32,19,125,町田,Odakyu,Suumo,https://suumo.jp/ms/chuko/kanagawa/sc_sagamiharashiminami/nc_78414399/
-21242730,joint,house,4LDK,251133,39900011,0,82.62,3040,3040,10,32,48,61,sumida,Sumida,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_sumida/nc_21242730/
-20698162,joint,condo,4LDK,212739,33799972,218,79.74,2668,2996,8,33,85,124,鶴川,Odakyu,Suumo,https://suumo.jp/ms/chuko/kanagawa/sc_kawasakishiasao/nc_20698162/
-20624411,joint,condo,４SLDK,200151,31799991,167,105.01,1906,2097,15,33,30,127,京王多摩センター,Odakyu Tama,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_tama/nc_20624411/
-21492335,joint,house,3LDK,187563,29800009,0,112.6,1666,1666,20,33,89,109,花小金井,Seibu Shinjuku,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_kodaira/nc_21492335/
-21198762,joint,house,2LDK,149799,23800065,53,47.77,3136,3269,9,34,62,78,JR小岩,Edogawa,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_edogawa/nc_21198762/
-1405876,joint,condo,3LDK,125818,19989964,132,60,2097,2361,10,34,18,125,陽光台,REJ joint,REJ,https://realestate.co.jp/en/forsale/view/1405876
-1393849,joint,condo,3LDK,125818,19989964,132,60,2097,2361,10,34,18,125,陽光台,REJ joint,REJ,https://realestate.co.jp/en/forsale/view/1393849
-21041538,joint,condo,2DK,231621,36799944,153,47.32,4895,5283,10,34,51,49,多摩川,Den-en-toshi,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_ota/nc_21041538/
-79077525,joint,house,3LDK,298338,47399941,0,81.4,3665,3665,13,34,89,109,西武柳沢,Seibu Ikebukuro,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_nishitokyo/nc_79077525/
-78762247,joint,house,5LDK,250504,39800076,0,126.12,1986,1986,10,35,59,69,Adachi,Adachi,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_adachi/nc_78762247/
-21018634,joint,house,2LDK,269386,42800048,0,102.76,2622,2622,10,35,59,69,Adachi,Adachi,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_adachi/nc_21018634/
-21286588,joint,house,4LDK,294562,46800011,0,96.34,3058,3058,10,35,59,69,adachi,Adachi,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_adachi/nc_21286588/
-21329251,joint,condo,2LDK,263092,41800057,160,51.84,5075,5445,8,36,16,89,京急蒲田,Den-en-toshi,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_ota/nc_21329251/
-21345469,joint,condo,2LDK,263092,41800057,160,51.84,5075,5445,8,36,16,89,京急蒲田,Den-en-toshi,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_ota/nc_21345469/
-21502414,joint,condo,2LDK,207641,32990002,214,61.15,3396,3816,9,36,41,134,京王堀之内,Odakyu Tama,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_hachioji/nc_21502414/
-20819855,joint,house,5LDK,288268,45800020,0,117.32,2457,2457,9,36,65,96,—,Seibu Shinjuku,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_nakano/nc_20819855/
-21321178,joint,condo,３LDK,187563,29800009,263,67.74,2769,3235,10,35,91,128,小田急多摩センター,Odakyu Tama,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_tama/nc_21321178/
-21515088,joint,condo,2LDK,207641,32990002,214,61.15,3396,3816,10,36,41,134,京王堀之内,Odakyu Tama,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_hachioji/nc_21515088/
-21338265,joint,condo,2DK,124622,19799943,108,40.09,3109,3432,11,36,28,39,ひばりヶ丘,Seibu Ikebukuro,Suumo,https://suumo.jp/ms/chuko/saitama/sc_niiza/nc_21338265/
-21416458,joint,house,4LDK,187563,29800009,0,95.68,1960,1960,13,36,90,120,—,JR Nambu,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_tachikawa/nc_21416458/
-21431461,joint,condo,3LDK,109517,17400061,144,61.84,1771,2050,15,36,29,47,北朝霞,Tobu Tojo,Suumo,https://suumo.jp/ms/chuko/saitama/sc_asaka/nc_21431461/
-20115828,joint,house,4LDK,200151,31799991,0,96.88,2066,2066,20,36,90,120,—,JR Nambu,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_tachikawa/nc_20115828/
-20919643,joint,condo,3LDK,187563,29800009,245,80.5,2330,2695,11,37,83,129,玉川学園前,Odakyu,Suumo,https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashiaoba/nc_20919643/
-21496392,joint,house,2LDK,231621,36799944,0,95.83,2417,2417,13,37,83,129,玉川学園前,Odakyu,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashiaoba/nc_21496392/
-20948405,joint,condo,3LDK,163646,26000076,240,64.88,2522,2966,14,37,33,53,小平,Seibu Shinjuku,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_kodaira/nc_20948405/
-21380251,joint,condo,3LDK,149799,23800065,229,75.16,1993,2359,15,37,83,129,玉川学園前,Odakyu,Suumo,https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashiaoba/nc_21380251/
-21330874,joint,condo,3DK,218907,34779944,117,55.73,3928,4180,3,38,23,45,雑色,Den-en-toshi,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_ota/nc_21330874/
-21353097,solo,condo,1DK,149799,23800065,50,29.48,5081,5285,4,38,58,52,尾山台,Tokyu Oimachi,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_setagaya/nc_21353097/
-20988140,joint,condo,3LDK,137210,21799925,103,69.58,1972,2150,13,38,32,124,八坂,Seibu Shinjuku,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_higashimurayama/nc_20988140/
-20919179,joint,house,4LDK,191906,30490025,0,85.45,2246,2246,17,38,90,122,東久留米,Seibu Ikebukuro,Suumo,https://suumo.jp/chukoikkodate/saitama/sc_niiza/nc_20919179/
-21327823,joint,condo,3LDK,130916,20799934,278,72.0,1818,2282,13,40,85,103,みずほ台,Tobu Tojo,Suumo,https://suumo.jp/ms/chuko/saitama/sc_fujimi/nc_21327823/
-21399835,joint,house,3LDK,239111,37989956,0,85.25,2805,2805,14,39,93,123,—,Seibu Shinjuku,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_kodaira/nc_21399835/
-21414021,joint,house,4LDK,239111,37989956,0,85.25,2805,2805,14,39,93,123,—,Seibu Shinjuku,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_kodaira/nc_21414021/
-21271037,joint,condo,2LDK,137210,21799925,131,54.18,2532,2823,15,36,94,109,所沢,Seibu Ikebukuro,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_higashimurayama/nc_21271037/
-78179930,joint,condo,2DK,156093,24800056,126,43.02,3628,3980,2,40,51,51,向河原,Nambu KN,Suumo,https://suumo.jp/ms/chuko/kanagawa/sc_kawasakishinakahara/nc_78179930/
-20988153,joint,condo,3LDK,169940,27000067,262,73.02,2327,2758,3,40,93,125,是政,JR Nambu,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_fuchu/nc_20988153/
-21264325,joint,condo,3LDK,188192,29899945,214,66.0,2851,3240,3,40,93,125,是政,JR Nambu,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_fuchu/nc_21264325/
-21345646,joint,condo,3LDK,200151,31799991,171,82.43,2428,2677,6,40,93,125,是政,JR Nambu,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_fuchu/nc_21345646/
-21538503,joint,condo,2DK,149799,23800065,175,60.2,2488,2837,8,40,57,122,羽沢横浜国大,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashikanagawa/nc_21538503/
-21448621,joint,condo,2LDK,156093,24800056,172,63.4,2462,2788,8,40,57,122,羽沢横浜国大,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashikanagawa/nc_21448621/
-21501419,joint,condo,3LDK,181898,28899954,163,86.72,2098,2323,8,40,83,129,東林間,Odakyu KN,Suumo,https://suumo.jp/ms/chuko/kanagawa/sc_sagamiharashiminami/nc_21501419/
-1393751,joint,condo,2LDK,74270,11800018,170,45.09,1647,2100,9,40,83,129,Higashirinkan,REJ joint,REJ,https://realestate.co.jp/en/forsale/view/1393751
-20743401,joint,house,3LDK,207704,33000012,0,74.52,2787,2787,15,40,96,111,秋津,Seibu Ikebukuro,Suumo,https://suumo.jp/chukoikkodate/saitama/sc_tokorozawa/nc_20743401/
-21028848,joint,condo,3LDK,174975,27800028,174,57.47,3045,3408,18,39,85,103,清瀬,Seibu Ikebukuro,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_kiyose/nc_21028848/
-1393770,solo,condo,1LDK,86858,13799999,180,51.12,1699,2122,4,58,101,139,Minamihashimoto,REJ solo,REJ,https://realestate.co.jp/en/forsale/view/1393770
-1378722,solo,condo,1LDK,93152,14799990,94,34.92,2668,2991,10,35,74,94,Shin Takashimadaira,REJ solo,REJ,https://realestate.co.jp/en/forsale/view/1378722
-20864508,joint,house,6K,220292,34999993,0,94.11,2341,2341,10,41,57,56,京成京成立石,Katsushika,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_katsushika/nc_20864508/
-21534660,joint,condo,3LDK,250504,39800076,161,70.29,3564,3839,10,41,41,45,武蔵新田,Den-en-toshi,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_ota/nc_21534660/
-78674406,solo,condo,1LDK,135322,21499959,126,41.31,3276,3642,3,42,44,48,千鳥町,Den-en-toshi,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_ota/nc_78674406/
-1405766,solo,condo,1LDK,118328,18799953,118,35.36,3346,3747,5,42,70,121,Yokohama-Kohoku,REJ solo,REJ,https://realestate.co.jp/en/forsale/view/1405766
-20600574,joint,condo,3LDK,219033,34799963,201,59.16,3702,4110,6,41,100,132,多摩センター,Odakyu Tama,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_tama/nc_20600574/
-20785920,joint,house,3DK,281974,44800029,0,60.27,4679,4679,6,42,59,55,京成京成高砂,Katsushika,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_katsushika/nc_20785920/
-76290616,joint,house,2LDK,231621,36799944,75,76.9,3012,3129,9,42,61,59,堀切菖蒲園,Katsushika,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_katsushika/nc_76290616/
-79077545,joint,house,2LDK,295821,47000040,0,70.98,4168,4168,12,42,49,109,平間,Nambu KN,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishinakahara/nc_79077545/
-21258166,joint,condo,2LDK,169814,26980048,162,51.62,3290,3666,13,42,41,43,尻手,Nambu KN,Suumo,https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashitsurumi/nc_21258166/
-21294061,joint,condo,3LDK,188192,29899945,140,85.09,2212,2409,16,41,100,132,多摩センター,Odakyu Tama,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_tama/nc_21294061/
-21454849,joint,condo,3LDK,162387,25800047,152,79.48,2043,2273,18,41,100,132,多摩センター,Odakyu Tama,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_tama/nc_21454849/
-20285873,joint,condo,2LDK,125818,19989964,158,51.58,2439,2807,20,42,39,54,新秋津,Seibu Ikebukuro,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_higashimurayama/nc_20285873/
-1387839,joint,condo,3LDK,122734,19499978,214,61.95,1981,2396,6,43,96,126,Kita Hachioji,REJ joint,REJ,https://realestate.co.jp/en/forsale/view/1387839
-21114452,joint,condo,3LDK,168681,26800037,199,64.38,2620,2991,6,43,96,134,平山城址公園,Keio,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_hino/nc_21114452/
-77489821,joint,house,2LDK,275680,43800038,0,87.76,3141,3141,8,43,35,114,—,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikanagawa/nc_77489821/
-21527420,joint,condo,2LDK,174975,27800028,212,53.62,3263,3738,12,37,76,96,西高島平,Tobu Tojo,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_itabashi/nc_21527420/
-21216001,joint,house,4LDK,254846,40489932,0,99.77,2554,2554,12,43,35,114,—,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikanagawa/nc_21216001/
-21167371,joint,house,4LDK,254846,40489932,0,99.77,2554,2554,12,43,35,114,—,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikanagawa/nc_21167371/
-21221968,joint,house,4LDK,254846,40489932,0,112.99,2255,2255,12,43,35,114,—,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikanagawa/nc_21221968/
-21455034,joint,condo,3DK,174975,27800028,163,49.14,3561,3959,14,43,51,52,大倉山,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashikohoku/nc_21455034/
-21282383,joint,house,4LDK,181269,28800019,0,93.36,1942,1942,18,43,35,114,—,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikanagawa/nc_21282383/
-21372225,solo,condo,1LDK,124622,19799943,199,56.4,2210,2633,18,41,91,109,新所沢,Seibu Ikebukuro,Suumo,https://suumo.jp/ms/chuko/saitama/sc_tokorozawa/nc_21372225/
-21202061,joint,house,3LDK,219033,34799963,0,92.74,2362,2362,18,44,100,115,—,Seibu Shinjuku,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_higashikurume/nc_21202061/
-20000254,joint,house,4LDK,212739,33799972,0,96.05,2215,2215,5,45,101,138,—,Odakyu KN,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_sagamiharashiminami/nc_20000254/
-20966638,joint,condo,3LDK,187563,29800009,193,64.99,2886,3242,10,45,96,118,東所沢,Seibu Ikebukuro,Suumo,https://suumo.jp/ms/chuko/saitama/sc_tokorozawa/nc_20966638/
-21298606,joint,house,4LDK,219033,34799963,0,102.86,2129,2129,18,45,96,118,東所沢,Seibu Ikebukuro,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_kiyose/nc_21298606/
-21052623,joint,condo,3LDK,74270,11800018,96,70.56,1053,1216,6,43,100,113,小手指,Seibu Ikebukuro,Suumo,https://suumo.jp/ms/chuko/saitama/sc_tokorozawa/nc_21052623/
-21430055,joint,house,4LDK,169877,26990058,0,109.47,1552,1552,7,46,100,132,—,Keio,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_21430055/
-21006026,joint,house,4LDK,263092,41800057,1,96.99,2713,2714,7,46,33,106,—,Nambu KN,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishikawasaki/nc_21006026/
-21144313,joint,house,6LDDKK,163646,26000076,0,135.46,1208,1208,8,46,100,132,—,Keio,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_21144313/
-21377158,joint,house,2LDK,181269,28800019,0,67.74,2676,2676,10,46,33,106,—,Nambu KN,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishikawasaki/nc_21377158/
-21063647,joint,house,3LDK,188192,29899945,0,70.74,2660,2660,10,46,100,132,—,Keio,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_21063647/
-20864509,joint,house,3LDK,188192,29899945,0,70.74,2660,2660,10,46,100,132,—,Keio,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_20864509/
-20153898,joint,house,2LDK,276876,43990059,0,99.97,2770,2770,12,46,87,139,—,Keio Sag KN,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_inagi/nc_20153898/
-72897065,joint,house,3LDK,241062,38299931,0,82.8,2911,2911,14,46,33,106,—,Nambu KN,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishikawasaki/nc_72897065/
-21467690,joint,house,4LDK,219033,34799963,0,95.85,2285,2285,15,46,100,132,—,Keio,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_21467690/
-20762309,joint,house,2LDK,99446,15799980,0,77.91,1276,1276,17,46,102,125,—,JR Nambu,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_higashiyamato/nc_20762309/
-21497139,joint,house,3LDK,213935,33989993,0,77.84,2748,2748,17,46,100,132,—,Keio,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_21497139/
-21142640,joint,house,4LDK,219033,34799963,0,93.57,2341,2341,18,46,100,132,—,Keio,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_21142640/
-21005495,joint,house,2LDK,99446,15799980,0,77.91,1276,1276,19,46,102,125,—,JR Nambu,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_higashiyamato/nc_21005495/
-21472445,joint,house,4LDK,193857,30800000,0,86.11,2251,2251,19,46,102,125,—,Seibu Shinjuku,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_higashiyamato/nc_21472445/
-21533729,joint,house,5DK,225327,35799954,0,115.66,1948,1948,19,46,100,132,—,Keio,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_21533729/
-21161428,joint,house,3LDK,286380,45500054,0,82.8,3459,3459,15,47,99,115,—,Seibu Ikebukuro,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_nishitokyo/nc_21161428/
-21094280,joint,condo,3LDK,156093,24800056,154,66.16,2359,2639,12,48,40,50,上福岡,Tobu Tojo,Suumo,https://suumo.jp/ms/chuko/saitama/sc_fujimino/nc_21094280/
-21280821,joint,house,4LDK,254846,40489932,0,99.77,2554,2554,12,48,54,112,片倉町,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikanagawa/nc_21280821/
-1393766,joint,condo,2LDK,93152,14799990,196,56.49,1649,2065,6,49,45,57,Gumyouji,REJ joint,REJ,https://realestate.co.jp/en/forsale/view/1393766
-21402988,joint,house,4LDK,250504,39800076,0,84.04,2981,2981,13,49,103,135,—,JR Nambu,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_kunitachi/nc_21402988/
-20009540,joint,house,4LDK,294562,46800011,0,93.96,3135,3135,13,49,103,135,—,JR Nambu,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_kunitachi/nc_20009540/
-21462240,joint,condo,3LDK,223376,35489979,156,65.7,3400,3685,14,49,49,118,上星川,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashihodogaya/nc_21462240/
-21109863,joint,house,3LDK,298968,47500036,0,89.25,3350,3350,4,51,36,113,—,Nambu KN,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashitsurumi/nc_21109863/
-1408346,solo,condo,1DK,78676,12500043,62,26.1,3014,3299,7,51,31,53,Namamugi,REJ solo,REJ,https://realestate.co.jp/en/forsale/view/1408346
-21370000,joint,condo,2LDK,162387,25800047,161,63.4,2561,2866,10,51,31,53,生麦,Nambu KN,Suumo,https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashitsurumi/nc_21370000/
-21273053,joint,condo,3DK,105740,16799971,141,57.05,1853,2150,13,47,98,114,武蔵藤沢,Seibu Ikebukuro,Suumo,https://suumo.jp/ms/chuko/saitama/sc_iruma/nc_21273053/
-21068611,joint,condo,3LDK,219033,34799963,294,80.92,2707,3143,3,48,101,131,中央大学・明星大学,Odakyu Tama,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_hachioji/nc_21068611/
-21337104,joint,condo,4LDK,169310,26899973,332,105.65,1603,1980,7,49,99,116,狭山市,Seibu Ikebukuro,Suumo,https://suumo.jp/ms/chuko/saitama/sc_sayama/nc_21337104/
-21082430,joint,condo,3LDK,168681,26800037,214,66.87,2523,2907,8,49,99,116,狭山市,Seibu Ikebukuro,Suumo,https://suumo.jp/ms/chuko/saitama/sc_sayama/nc_21082430/
-21302562,joint,condo,3LDK,160436,25490072,208,72.15,2224,2570,9,52,100,145,武蔵砂川,JR Nambu,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_tachikawa/nc_21302562/
-21406296,joint,house,3LDK,244209,38799926,0,80.32,3040,3040,13,52,62,121,—,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikohoku/nc_21406296/
-20511788,joint,house,3LDK,244209,38799926,0,80.32,3040,3040,16,52,62,121,—,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikohoku/nc_20511788/
-21218155,joint,condo,3LDK,160498,25499922,164,66.7,2406,2701,20,53,76,133,矢部,Odakyu KN,Suumo,https://suumo.jp/ms/chuko/kanagawa/sc_sagamiharashichuo/nc_21218155/
-77852963,joint,house,4LDK,269386,42800048,0,110.96,2428,2428,4,54,95,145,—,Odakyu,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_77852963/
-78242744,joint,house,3LDK,200151,31799991,0,92.11,2173,2173,6,54,95,145,—,Odakyu,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_78242744/
-21256937,joint,house,5LDK,250504,39800076,0,115.92,2161,2161,11,54,95,145,—,Keio Sag KN,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_21256937/
-21272037,joint,house,5LDK,250504,39800076,0,115.92,2161,2161,13,54,95,145,—,Keio Sag KN,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_21272037/
-79150620,joint,house,3LDK,261203,41499933,0,86.94,3004,3004,13,54,95,145,—,Odakyu,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_79150620/
-21417540,joint,house,2LDK,281974,44800029,0,80.23,3515,3515,13,54,95,145,—,Den-en-toshi,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_21417540/
-21400129,joint,house,3LDK,294562,46800011,0,108.89,2705,2705,13,54,95,145,—,Odakyu,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_21400129/
-20488202,joint,house,4LDK,232817,36989965,0,109.3,2130,2130,14,54,95,145,—,Keio Sag KN,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_20488202/
-20436585,joint,house,5LDK,232817,36989965,0,109.3,2130,2130,15,54,95,145,—,Odakyu,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_20436585/
-78728821,joint,house,2LDK,138469,21999955,0,98.43,1407,1407,16,54,95,145,—,Odakyu,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_78728821/
-21005363,joint,house,6DK,198263,31500025,0,155.26,1277,1277,20,54,95,145,—,Odakyu,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_21005363/
-21295476,joint,house,3LDDKK,212739,33799972,0,90.25,2357,2357,20,54,62,133,—,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashiasahi/nc_21295476/
-21371397,joint,house,4LDK,212739,33799972,0,99.36,2141,2141,5,55,104,124,—,Seibu Shinjuku,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_higashimurayama/nc_21371397/
-20723072,joint,house,4LDK,212739,33799972,0,99.36,2141,2141,5,55,104,124,—,Seibu Shinjuku,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_higashimurayama/nc_20723072/
-20792670,joint,house,4LDK,254846,40489932,0,90.22,2825,2825,6,55,104,124,—,Seibu Shinjuku,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_higashimurayama/nc_20792670/
-21070161,joint,house,3LDK,263092,41800057,0,89.07,2954,2954,11,55,104,124,—,Seibu Shinjuku,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_higashimurayama/nc_21070161/
-20629210,joint,house,4LDK,269386,42800048,0,100.19,2689,2689,15,55,100,149,—,Keio Sag KN,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_sagamiharashimidori/nc_20629210/
-20588183,joint,house,3LDK,187563,29800009,0,79.9,2347,2347,10,56,116,146,—,Odakyu Tama,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_hachioji/nc_20588183/
-20445351,joint,house,4DK,149799,23800065,0,67.54,2218,2218,17,56,121,146,—,Odakyu Tama,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_tama/nc_20445351/
-21336417,joint,condo,3LDK,143505,22800074,156,76.1,1886,2132,9,57,47,57,若葉,Tobu Tojo,Suumo,https://suumo.jp/ms/chuko/saitama/sc_tsurugashima/nc_21336417/
-21346525,joint,condo,3LDK,142246,22600044,146,59.68,2383,2677,12,52,45,113,小田栄,Nambu KN,Suumo,https://suumo.jp/ms/chuko/kanagawa/sc_kawasakishikawasaki/nc_21346525/
-20916771,joint,condo,4LDK,124622,19799943,255,84.27,1479,1842,15,57,47,57,若葉,Tobu Tojo,Suumo,https://suumo.jp/ms/chuko/saitama/sc_tsurugashima/nc_20916771/
-21458485,joint,condo,3LDK,112664,17900056,177,61.28,1839,2185,16,57,47,57,若葉,Tobu Tojo,Suumo,https://suumo.jp/ms/chuko/saitama/sc_tsurugashima/nc_21458485/
-21415819,joint,house,4LDK,225957,35900048,0,92.34,2447,2447,18,57,113,144,—,JR Nambu,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_akishima/nc_21415819/
-21390505,joint,house,4LDK,206445,32799982,0,89.42,2309,2309,20,57,113,144,—,JR Nambu,Suumo,https://suumo.jp/chukoikkodate/tokyo/sc_akishima/nc_21390505/
-1405758,joint,condo,2LDK,112664,17900056,217,64.96,1734,2135,3,58,78,145,Mutsuai Nichidai Mae,REJ joint,REJ,https://realestate.co.jp/en/forsale/view/1405758
-21401339,joint,house,4DK,206445,32799982,0,84.87,2432,2432,7,58,53,123,—,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21401339/
-21373883,joint,house,4LDK,206445,32799982,0,84.87,2432,2432,7,58,53,123,—,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21373883/
-21404186,joint,house,4DK,206445,32799982,0,84.87,2432,2432,7,58,53,123,—,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21404186/
-21378520,joint,house,4DK,206445,32799982,0,84.87,2432,2432,7,58,53,123,—,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21378520/
-21490954,joint,house,4DK,206445,32799982,0,84.87,2432,2432,7,58,53,123,—,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21490954/
-21538698,joint,house,4DK,206445,32799982,0,84.87,2432,2432,7,58,53,123,—,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21538698/
-21412324,joint,house,4DK,206445,32799982,0,84.87,2432,2432,7,58,53,123,—,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21412324/
-74972987,joint,house,4LDK,125252,19900038,0,82.1,1526,1526,12,58,53,123,—,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_74972987/
-21464674,joint,house,4LDK,250504,39800076,0,78.51,3191,3191,14,58,53,123,—,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21464674/
-21424513,joint,condo,3LDK,154204,24499932,216,64.37,2396,2798,15,50,44,107,小机,Sotetsu Shin-Yokohama,Suumo,https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashikohoku/nc_21424513/
-21409762,joint,condo,2LDK,147281,23400005,162,72.12,2042,2312,13,38,88,135,南大沢学園瑞樹の丘,Keio Sagamihara,Suumo,https://suumo.jp/ms/chuko/tokyo/sc_hachioji/nc_21409762/
-20978202,joint,condo,4LDK,106370,16900066,116,95.55,1113,1259,12,48,95,124,下山口,Seibu Ikebukuro,Suumo,https://suumo.jp/ms/chuko/saitama/sc_tokorozawa/nc_20978202/
+id,track,kind,title,priceUSD,monthlyUSD,sqm,pricePerSqm,trueCostPerSqm,walk,tokyo,haneda,narita,line,station,href,source
+1393811,solo,condo,1LDK,124622,157,62.15,2005,2308,4,15,17,24,REJ solo,Hiratsuka,https://realestate.co.jp/en/forsale/view/1393811,REJ
+21105313,joint,condo,3LDK,201410,146,55.31,3641,3958,15,15,15,48,Odakyu,千歳船橋,https://suumo.jp/ms/chuko/tokyo/sc_setagaya/nc_21105313/,Suumo
+21350089,joint,house,3DK,250504,0,86.7,2889,2889,10,16,60,70,Kita,kita,https://suumo.jp/chukoikkodate/tokyo/sc_kita/nc_21350089/,Suumo
+21119463,joint,condo,2LDK,112034,128,54.54,2054,2336,11,17,49,121,Tobu Tojo,坂戸,https://suumo.jp/ms/chuko/saitama/sc_sakado/nc_21119463/,Suumo
+1393798,joint,condo,3LDK,118328,113,72.17,1640,1827,3,20,26,33,REJ joint,Namikichuou,https://realestate.co.jp/en/forsale/view/1393798,REJ
+21103311,joint,house,3K,213998,0,49.14,4355,4355,9,20,72,108,Keio,—,https://suumo.jp/chukoikkodate/tokyo/sc_suginami/nc_21103311/,Suumo
+21167281,joint,condo,2LDK,219033,148,70.43,3110,3362,11,21,67,27,Tobu Tojo,要町,https://suumo.jp/ms/chuko/tokyo/sc_itabashi/nc_21167281/,Suumo
+77143949,joint,condo,3DK,131546,160,57.91,2272,2603,5,22,22,32,Tobu Tojo,上板橋,https://suumo.jp/ms/chuko/tokyo/sc_itabashi/nc_77143949/,Suumo
+1324128,solo,condo,1LDK,100642,83,37.1,2713,2981,6,22,73,92,REJ solo,Kamiitabashi,https://realestate.co.jp/en/forsale/view/1324128,REJ
+20955392,solo,condo,1LDK,112034,119,36.54,3066,3457,6,22,22,32,Tobu Tojo,上板橋,https://suumo.jp/ms/chuko/tokyo/sc_itabashi/nc_20955392/,Suumo
+1324125,solo,condo,1LDK,112034,94,36.18,3097,3408,7,22,73,92,REJ solo,Kamiitabashi,https://realestate.co.jp/en/forsale/view/1324125,REJ
+21447583,joint,condo,2LDK,212739,96,48.33,4402,4640,7,22,22,32,Tobu Tojo,上板橋,https://suumo.jp/ms/chuko/tokyo/sc_itabashi/nc_21447583/,Suumo
+21106326,joint,condo,3LDK,132175,210,59.89,2207,2628,5,23,23,53,Nambu KN,京王稲田堤,https://suumo.jp/ms/chuko/kanagawa/sc_kawasakishitama/nc_21106326/,Suumo
+20547924,joint,condo,3LDK,174975,265,72.0,2430,2872,8,23,22,53,Odakyu KN,生田,https://suumo.jp/ms/chuko/kanagawa/sc_kawasakishitama/nc_20547924/,Suumo
+1313382,solo,condo,1LDK,132112,117,27.54,4797,5307,5,24,66,26,REJ solo,Itabashi Honchou,https://realestate.co.jp/en/forsale/view/1313382,REJ
+21260603,joint,condo,3DK,207578,109,59.39,3495,3715,7,24,66,26,Tobu Tojo,板橋本町,https://suumo.jp/ms/chuko/tokyo/sc_itabashi/nc_21260603/,Suumo
+20333395,joint,house,3LDK,281974,0,60.54,4658,4658,13,24,77,107,Nerima,光が丘,https://suumo.jp/chukoikkodate/tokyo/sc_nerima/nc_20333395/,Suumo
+21158958,joint,condo,2DK,200151,113,42.48,4712,5031,6,25,58,42,Tokyu Oimachi,西小山,https://suumo.jp/ms/chuko/tokyo/sc_shinagawa/nc_21158958/,Suumo
+21233445,joint,house,5LDK,244209,0,102.05,2393,2393,17,25,83,95,Tobu Tojo,—,https://suumo.jp/chukoikkodate/saitama/sc_wako/nc_21233445/,Suumo
+21509038,joint,condo,3LDK,207075,204,66.45,3116,3485,11,26,188,20,Tobu Tojo,桜並木,https://suumo.jp/ms/chuko/tokyo/sc_itabashi/nc_21509038/,Suumo
+21474249,joint,house,4LDK,251699,0,90.88,2770,2770,3,27,80,117,Odakyu KN,—,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishitama/nc_21474249/,Suumo
+21536833,joint,house,4LDK,244839,0,94.81,2582,2582,5,27,80,117,Nambu KN,—,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishitama/nc_21536833/,Suumo
+21531903,joint,house,3LDK,238545,0,70.1,3403,3403,12,27,80,117,Nambu KN,—,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishitama/nc_21531903/,Suumo
+21259946,joint,house,3LDK,238545,0,70.1,3403,3403,12,27,80,117,Odakyu KN,—,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishitama/nc_21259946/,Suumo
+21096407,joint,house,2LDK,124622,0,52.74,2363,2363,13,27,80,101,Seibu Ikebukuro,—,https://suumo.jp/chukoikkodate/tokyo/sc_nerima/nc_21096407/,Suumo
+20906655,joint,house,5DK,188633,0,122.55,1539,1539,19,27,80,117,Odakyu KN,—,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishitama/nc_20906655/,Suumo
+21403170,joint,house,5DK,194927,0,122.55,1591,1591,19,27,80,117,Odakyu KN,—,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishitama/nc_21403170/,Suumo
+21455381,joint,house,3LDK,289464,0,62.04,4666,4666,15,28,86,121,Odakyu,—,https://suumo.jp/chukoikkodate/tokyo/sc_komae/nc_21455381/,Suumo
+21099632,joint,condo,3LDK,137210,209,78.56,1747,2066,8,30,30,121,Keio,聖蹟桜ヶ丘,https://suumo.jp/ms/chuko/tokyo/sc_tama/nc_21099632/,Suumo
+21474363,joint,house,3LDK,206445,0,91.69,2252,2252,9,30,90,120,Odakyu KN,—,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishiasao/nc_21474363/,Suumo
+21344847,joint,house,3LDK,206445,0,91.69,2252,2252,9,30,90,120,Odakyu KN,—,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishiasao/nc_21344847/,Suumo
+20320518,joint,condo,3LDK,220229,207,64.4,3420,3805,9,30,27,123,Odakyu Tama,京王永山,https://suumo.jp/ms/chuko/tokyo/sc_tama/nc_20320518/,Suumo
+20536898,joint,house,3LDK,206445,0,91.69,2252,2252,10,30,90,120,Odakyu KN,—,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishiasao/nc_20536898/,Suumo
+21361763,joint,house,3LDK,267497,0,85.23,3139,3139,10,30,90,120,Odakyu KN,—,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishiasao/nc_21361763/,Suumo
+20570117,joint,house,3LDK,207641,0,85.05,2441,2441,18,30,90,120,Odakyu,—,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishiasao/nc_20570117/,Suumo
+21225171,joint,house,3LDK,235964,0,81.98,2878,2878,19,30,90,120,Odakyu KN,—,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishiasao/nc_21225171/,Suumo
+21042139,joint,house,4LDK,237915,0,99.98,2380,2380,19,30,90,120,Odakyu KN,—,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishiasao/nc_21042139/,Suumo
+21091715,joint,condo,3LDK,195053,188,73.69,2647,2953,20,30,29,50,JR Nambu,立川,https://suumo.jp/ms/chuko/tokyo/sc_tachikawa/nc_21091715/,Suumo
+1408271,solo,condo,1DK,101964,109,30.93,3297,3719,4,31,75,91,REJ solo,itabashi,https://realestate.co.jp/en/forsale/view/1408271,REJ
+20923629,joint,condo,2LDK,163520,51,52.56,3111,3228,5,31,31,121,Keio,布田,https://suumo.jp/ms/chuko/tokyo/sc_chofu/nc_20923629/,Suumo
+21454484,joint,condo,2LDK,163520,51,52.56,3111,3228,5,31,31,121,Keio,布田,https://suumo.jp/ms/chuko/tokyo/sc_chofu/nc_21454484/,Suumo
+21282256,joint,condo,3LDK,188696,163,61.82,3052,3369,4,32,15,123,JR Nambu,矢野口,https://suumo.jp/ms/chuko/tokyo/sc_inagi/nc_21282256/,Suumo
+78414399,joint,condo,3LDK,213872,139,60.02,3563,3841,10,32,19,125,Odakyu,町田,https://suumo.jp/ms/chuko/kanagawa/sc_sagamiharashiminami/nc_78414399/,Suumo
+21242730,joint,house,4LDK,251133,0,82.62,3040,3040,10,32,48,61,Sumida,sumida,https://suumo.jp/chukoikkodate/tokyo/sc_sumida/nc_21242730/,Suumo
+20698162,joint,condo,4LDK,212739,218,79.74,2668,2996,8,33,85,124,Odakyu,鶴川,https://suumo.jp/ms/chuko/kanagawa/sc_kawasakishiasao/nc_20698162/,Suumo
+20624411,joint,condo,４SLDK,200151,167,105.01,1906,2097,15,33,30,127,Odakyu Tama,京王多摩センター,https://suumo.jp/ms/chuko/tokyo/sc_tama/nc_20624411/,Suumo
+21492335,joint,house,3LDK,187563,0,112.6,1666,1666,20,33,89,109,Seibu Shinjuku,花小金井,https://suumo.jp/chukoikkodate/tokyo/sc_kodaira/nc_21492335/,Suumo
+21198762,joint,house,2LDK,149799,53,47.77,3136,3269,9,34,62,78,Edogawa,JR小岩,https://suumo.jp/chukoikkodate/tokyo/sc_edogawa/nc_21198762/,Suumo
+1405876,joint,condo,3LDK,125818,132,60,2097,2361,10,34,18,125,REJ joint,陽光台,https://realestate.co.jp/en/forsale/view/1405876,REJ
+1393849,joint,condo,3LDK,125818,132,60,2097,2361,10,34,18,125,REJ joint,陽光台,https://realestate.co.jp/en/forsale/view/1393849,REJ
+21041538,joint,condo,2DK,231621,153,47.32,4895,5283,10,34,51,49,Den-en-toshi,多摩川,https://suumo.jp/ms/chuko/tokyo/sc_ota/nc_21041538/,Suumo
+79077525,joint,house,3LDK,298338,0,81.4,3665,3665,13,34,89,109,Seibu Ikebukuro,西武柳沢,https://suumo.jp/chukoikkodate/tokyo/sc_nishitokyo/nc_79077525/,Suumo
+78762247,joint,house,5LDK,250504,0,126.12,1986,1986,10,35,59,69,Adachi,Adachi,https://suumo.jp/chukoikkodate/tokyo/sc_adachi/nc_78762247/,Suumo
+21018634,joint,house,2LDK,269386,0,102.76,2622,2622,10,35,59,69,Adachi,Adachi,https://suumo.jp/chukoikkodate/tokyo/sc_adachi/nc_21018634/,Suumo
+21286588,joint,house,4LDK,294562,0,96.34,3058,3058,10,35,59,69,Adachi,adachi,https://suumo.jp/chukoikkodate/tokyo/sc_adachi/nc_21286588/,Suumo
+21329251,joint,condo,2LDK,263092,160,51.84,5075,5445,8,36,16,89,Den-en-toshi,京急蒲田,https://suumo.jp/ms/chuko/tokyo/sc_ota/nc_21329251/,Suumo
+21345469,joint,condo,2LDK,263092,160,51.84,5075,5445,8,36,16,89,Den-en-toshi,京急蒲田,https://suumo.jp/ms/chuko/tokyo/sc_ota/nc_21345469/,Suumo
+21502414,joint,condo,2LDK,207641,214,61.15,3396,3816,9,36,41,134,Odakyu Tama,京王堀之内,https://suumo.jp/ms/chuko/tokyo/sc_hachioji/nc_21502414/,Suumo
+20819855,joint,house,5LDK,288268,0,117.32,2457,2457,9,36,65,96,Seibu Shinjuku,—,https://suumo.jp/chukoikkodate/tokyo/sc_nakano/nc_20819855/,Suumo
+21321178,joint,condo,３LDK,187563,263,67.74,2769,3235,10,35,91,128,Odakyu Tama,小田急多摩センター,https://suumo.jp/ms/chuko/tokyo/sc_tama/nc_21321178/,Suumo
+21515088,joint,condo,2LDK,207641,214,61.15,3396,3816,10,36,41,134,Odakyu Tama,京王堀之内,https://suumo.jp/ms/chuko/tokyo/sc_hachioji/nc_21515088/,Suumo
+21338265,joint,condo,2DK,124622,108,40.09,3109,3432,11,36,28,39,Seibu Ikebukuro,ひばりヶ丘,https://suumo.jp/ms/chuko/saitama/sc_niiza/nc_21338265/,Suumo
+21416458,joint,house,4LDK,187563,0,95.68,1960,1960,13,36,90,120,JR Nambu,—,https://suumo.jp/chukoikkodate/tokyo/sc_tachikawa/nc_21416458/,Suumo
+21431461,joint,condo,3LDK,109517,144,61.84,1771,2050,15,36,29,47,Tobu Tojo,北朝霞,https://suumo.jp/ms/chuko/saitama/sc_asaka/nc_21431461/,Suumo
+20115828,joint,house,4LDK,200151,0,96.88,2066,2066,20,36,90,120,JR Nambu,—,https://suumo.jp/chukoikkodate/tokyo/sc_tachikawa/nc_20115828/,Suumo
+20919643,joint,condo,3LDK,187563,245,80.5,2330,2695,11,37,83,129,Odakyu,玉川学園前,https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashiaoba/nc_20919643/,Suumo
+21496392,joint,house,2LDK,231621,0,95.83,2417,2417,13,37,83,129,Odakyu,玉川学園前,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashiaoba/nc_21496392/,Suumo
+20948405,joint,condo,3LDK,163646,240,64.88,2522,2966,14,37,33,53,Seibu Shinjuku,小平,https://suumo.jp/ms/chuko/tokyo/sc_kodaira/nc_20948405/,Suumo
+21380251,joint,condo,3LDK,149799,229,75.16,1993,2359,15,37,83,129,Odakyu,玉川学園前,https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashiaoba/nc_21380251/,Suumo
+21330874,joint,condo,3DK,218907,117,55.73,3928,4180,3,38,23,45,Den-en-toshi,雑色,https://suumo.jp/ms/chuko/tokyo/sc_ota/nc_21330874/,Suumo
+21353097,solo,condo,1DK,149799,50,29.48,5081,5285,4,38,58,52,Tokyu Oimachi,尾山台,https://suumo.jp/ms/chuko/tokyo/sc_setagaya/nc_21353097/,Suumo
+20988140,joint,condo,3LDK,137210,103,69.58,1972,2150,13,38,32,124,Seibu Shinjuku,八坂,https://suumo.jp/ms/chuko/tokyo/sc_higashimurayama/nc_20988140/,Suumo
+20919179,joint,house,4LDK,191906,0,85.45,2246,2246,17,38,90,122,Seibu Ikebukuro,東久留米,https://suumo.jp/chukoikkodate/saitama/sc_niiza/nc_20919179/,Suumo
+21327823,joint,condo,3LDK,130916,278,72.0,1818,2282,13,40,85,103,Tobu Tojo,みずほ台,https://suumo.jp/ms/chuko/saitama/sc_fujimi/nc_21327823/,Suumo
+21399835,joint,house,3LDK,239111,0,85.25,2805,2805,14,39,93,123,Seibu Shinjuku,—,https://suumo.jp/chukoikkodate/tokyo/sc_kodaira/nc_21399835/,Suumo
+21414021,joint,house,4LDK,239111,0,85.25,2805,2805,14,39,93,123,Seibu Shinjuku,—,https://suumo.jp/chukoikkodate/tokyo/sc_kodaira/nc_21414021/,Suumo
+21271037,joint,condo,2LDK,137210,131,54.18,2532,2823,15,36,94,109,Seibu Ikebukuro,所沢,https://suumo.jp/ms/chuko/tokyo/sc_higashimurayama/nc_21271037/,Suumo
+78179930,joint,condo,2DK,156093,126,43.02,3628,3980,2,40,51,51,Nambu KN,向河原,https://suumo.jp/ms/chuko/kanagawa/sc_kawasakishinakahara/nc_78179930/,Suumo
+20988153,joint,condo,3LDK,169940,262,73.02,2327,2758,3,40,93,125,JR Nambu,是政,https://suumo.jp/ms/chuko/tokyo/sc_fuchu/nc_20988153/,Suumo
+21264325,joint,condo,3LDK,188192,214,66.0,2851,3240,3,40,93,125,JR Nambu,是政,https://suumo.jp/ms/chuko/tokyo/sc_fuchu/nc_21264325/,Suumo
+21345646,joint,condo,3LDK,200151,171,82.43,2428,2677,6,40,93,125,JR Nambu,是政,https://suumo.jp/ms/chuko/tokyo/sc_fuchu/nc_21345646/,Suumo
+21538503,joint,condo,2DK,149799,175,60.2,2488,2837,8,40,57,122,Sotetsu Shin-Yokohama,羽沢横浜国大,https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashikanagawa/nc_21538503/,Suumo
+21448621,joint,condo,2LDK,156093,172,63.4,2462,2788,8,40,57,122,Sotetsu Shin-Yokohama,羽沢横浜国大,https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashikanagawa/nc_21448621/,Suumo
+21501419,joint,condo,3LDK,181898,163,86.72,2098,2323,8,40,83,129,Odakyu KN,東林間,https://suumo.jp/ms/chuko/kanagawa/sc_sagamiharashiminami/nc_21501419/,Suumo
+1393751,joint,condo,2LDK,74270,170,45.09,1647,2100,9,40,83,129,REJ joint,Higashirinkan,https://realestate.co.jp/en/forsale/view/1393751,REJ
+20743401,joint,house,3LDK,207704,0,74.52,2787,2787,15,40,96,111,Seibu Ikebukuro,秋津,https://suumo.jp/chukoikkodate/saitama/sc_tokorozawa/nc_20743401/,Suumo
+21028848,joint,condo,3LDK,174975,174,57.47,3045,3408,18,39,85,103,Seibu Ikebukuro,清瀬,https://suumo.jp/ms/chuko/tokyo/sc_kiyose/nc_21028848/,Suumo
+1393770,solo,condo,1LDK,86858,180,51.12,1699,2122,4,58,101,139,REJ solo,Minamihashimoto,https://realestate.co.jp/en/forsale/view/1393770,REJ
+1378722,solo,condo,1LDK,93152,94,34.92,2668,2991,10,35,74,94,REJ solo,Shin Takashimadaira,https://realestate.co.jp/en/forsale/view/1378722,REJ
+20864508,joint,house,6K,220292,0,94.11,2341,2341,10,41,57,56,Katsushika,京成京成立石,https://suumo.jp/chukoikkodate/tokyo/sc_katsushika/nc_20864508/,Suumo
+21534660,joint,condo,3LDK,250504,161,70.29,3564,3839,10,41,41,45,Den-en-toshi,武蔵新田,https://suumo.jp/ms/chuko/tokyo/sc_ota/nc_21534660/,Suumo
+78674406,solo,condo,1LDK,135322,126,41.31,3276,3642,3,42,44,48,Den-en-toshi,千鳥町,https://suumo.jp/ms/chuko/tokyo/sc_ota/nc_78674406/,Suumo
+1405766,solo,condo,1LDK,118328,118,35.36,3346,3747,5,42,70,121,REJ solo,Yokohama-Kohoku,https://realestate.co.jp/en/forsale/view/1405766,REJ
+20600574,joint,condo,3LDK,219033,201,59.16,3702,4110,6,41,100,132,Odakyu Tama,多摩センター,https://suumo.jp/ms/chuko/tokyo/sc_tama/nc_20600574/,Suumo
+20785920,joint,house,3DK,281974,0,60.27,4679,4679,6,42,59,55,Katsushika,京成京成高砂,https://suumo.jp/chukoikkodate/tokyo/sc_katsushika/nc_20785920/,Suumo
+76290616,joint,house,2LDK,231621,75,76.9,3012,3129,9,42,61,59,Katsushika,堀切菖蒲園,https://suumo.jp/chukoikkodate/tokyo/sc_katsushika/nc_76290616/,Suumo
+79077545,joint,house,2LDK,295821,0,70.98,4168,4168,12,42,49,109,Nambu KN,平間,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishinakahara/nc_79077545/,Suumo
+21258166,joint,condo,2LDK,169814,162,51.62,3290,3666,13,42,41,43,Nambu KN,尻手,https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashitsurumi/nc_21258166/,Suumo
+21294061,joint,condo,3LDK,188192,140,85.09,2212,2409,16,41,100,132,Odakyu Tama,多摩センター,https://suumo.jp/ms/chuko/tokyo/sc_tama/nc_21294061/,Suumo
+21454849,joint,condo,3LDK,162387,152,79.48,2043,2273,18,41,100,132,Odakyu Tama,多摩センター,https://suumo.jp/ms/chuko/tokyo/sc_tama/nc_21454849/,Suumo
+20285873,joint,condo,2LDK,125818,158,51.58,2439,2807,20,42,39,54,Seibu Ikebukuro,新秋津,https://suumo.jp/ms/chuko/tokyo/sc_higashimurayama/nc_20285873/,Suumo
+1387839,joint,condo,3LDK,122734,214,61.95,1981,2396,6,43,96,126,REJ joint,Kita Hachioji,https://realestate.co.jp/en/forsale/view/1387839,REJ
+21114452,joint,condo,3LDK,168681,199,64.38,2620,2991,6,43,96,134,Keio,平山城址公園,https://suumo.jp/ms/chuko/tokyo/sc_hino/nc_21114452/,Suumo
+77489821,joint,house,2LDK,275680,0,87.76,3141,3141,8,43,35,114,Sotetsu Shin-Yokohama,—,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikanagawa/nc_77489821/,Suumo
+21527420,joint,condo,2LDK,174975,212,53.62,3263,3738,12,37,76,96,Tobu Tojo,西高島平,https://suumo.jp/ms/chuko/tokyo/sc_itabashi/nc_21527420/,Suumo
+21216001,joint,house,4LDK,254846,0,99.77,2554,2554,12,43,35,114,Sotetsu Shin-Yokohama,—,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikanagawa/nc_21216001/,Suumo
+21167371,joint,house,4LDK,254846,0,99.77,2554,2554,12,43,35,114,Sotetsu Shin-Yokohama,—,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikanagawa/nc_21167371/,Suumo
+21221968,joint,house,4LDK,254846,0,112.99,2255,2255,12,43,35,114,Sotetsu Shin-Yokohama,—,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikanagawa/nc_21221968/,Suumo
+21455034,joint,condo,3DK,174975,163,49.14,3561,3959,14,43,51,52,Sotetsu Shin-Yokohama,大倉山,https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashikohoku/nc_21455034/,Suumo
+21282383,joint,house,4LDK,181269,0,93.36,1942,1942,18,43,35,114,Sotetsu Shin-Yokohama,—,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikanagawa/nc_21282383/,Suumo
+21372225,solo,condo,1LDK,124622,199,56.4,2210,2633,18,41,91,109,Seibu Ikebukuro,新所沢,https://suumo.jp/ms/chuko/saitama/sc_tokorozawa/nc_21372225/,Suumo
+21202061,joint,house,3LDK,219033,0,92.74,2362,2362,18,44,100,115,Seibu Shinjuku,—,https://suumo.jp/chukoikkodate/tokyo/sc_higashikurume/nc_21202061/,Suumo
+20000254,joint,house,4LDK,212739,0,96.05,2215,2215,5,45,101,138,Odakyu KN,—,https://suumo.jp/chukoikkodate/kanagawa/sc_sagamiharashiminami/nc_20000254/,Suumo
+20966638,joint,condo,3LDK,187563,193,64.99,2886,3242,10,45,96,118,Seibu Ikebukuro,東所沢,https://suumo.jp/ms/chuko/saitama/sc_tokorozawa/nc_20966638/,Suumo
+21298606,joint,house,4LDK,219033,0,102.86,2129,2129,18,45,96,118,Seibu Ikebukuro,東所沢,https://suumo.jp/chukoikkodate/tokyo/sc_kiyose/nc_21298606/,Suumo
+21052623,joint,condo,3LDK,74270,96,70.56,1053,1216,6,43,100,113,Seibu Ikebukuro,小手指,https://suumo.jp/ms/chuko/saitama/sc_tokorozawa/nc_21052623/,Suumo
+21430055,joint,house,4LDK,169877,0,109.47,1552,1552,7,46,100,132,Keio,—,https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_21430055/,Suumo
+21006026,joint,house,4LDK,263092,1,96.99,2713,2714,7,46,33,106,Nambu KN,—,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishikawasaki/nc_21006026/,Suumo
+21144313,joint,house,6LDDKK,163646,0,135.46,1208,1208,8,46,100,132,Keio,—,https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_21144313/,Suumo
+21377158,joint,house,2LDK,181269,0,67.74,2676,2676,10,46,33,106,Nambu KN,—,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishikawasaki/nc_21377158/,Suumo
+21063647,joint,house,3LDK,188192,0,70.74,2660,2660,10,46,100,132,Keio,—,https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_21063647/,Suumo
+20864509,joint,house,3LDK,188192,0,70.74,2660,2660,10,46,100,132,Keio,—,https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_20864509/,Suumo
+20153898,joint,house,2LDK,276876,0,99.97,2770,2770,12,46,87,139,Keio Sag KN,—,https://suumo.jp/chukoikkodate/tokyo/sc_inagi/nc_20153898/,Suumo
+72897065,joint,house,3LDK,241062,0,82.8,2911,2911,14,46,33,106,Nambu KN,—,https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishikawasaki/nc_72897065/,Suumo
+21467690,joint,house,4LDK,219033,0,95.85,2285,2285,15,46,100,132,Keio,—,https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_21467690/,Suumo
+20762309,joint,house,2LDK,99446,0,77.91,1276,1276,17,46,102,125,JR Nambu,—,https://suumo.jp/chukoikkodate/tokyo/sc_higashiyamato/nc_20762309/,Suumo
+21497139,joint,house,3LDK,213935,0,77.84,2748,2748,17,46,100,132,Keio,—,https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_21497139/,Suumo
+21142640,joint,house,4LDK,219033,0,93.57,2341,2341,18,46,100,132,Keio,—,https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_21142640/,Suumo
+21005495,joint,house,2LDK,99446,0,77.91,1276,1276,19,46,102,125,JR Nambu,—,https://suumo.jp/chukoikkodate/tokyo/sc_higashiyamato/nc_21005495/,Suumo
+21472445,joint,house,4LDK,193857,0,86.11,2251,2251,19,46,102,125,Seibu Shinjuku,—,https://suumo.jp/chukoikkodate/tokyo/sc_higashiyamato/nc_21472445/,Suumo
+21533729,joint,house,5DK,225327,0,115.66,1948,1948,19,46,100,132,Keio,—,https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_21533729/,Suumo
+21161428,joint,house,3LDK,286380,0,82.8,3459,3459,15,47,99,115,Seibu Ikebukuro,—,https://suumo.jp/chukoikkodate/tokyo/sc_nishitokyo/nc_21161428/,Suumo
+21094280,joint,condo,3LDK,156093,154,66.16,2359,2639,12,48,40,50,Tobu Tojo,上福岡,https://suumo.jp/ms/chuko/saitama/sc_fujimino/nc_21094280/,Suumo
+21280821,joint,house,4LDK,254846,0,99.77,2554,2554,12,48,54,112,Sotetsu Shin-Yokohama,片倉町,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikanagawa/nc_21280821/,Suumo
+1393766,joint,condo,2LDK,93152,196,56.49,1649,2065,6,49,45,57,REJ joint,Gumyouji,https://realestate.co.jp/en/forsale/view/1393766,REJ
+21402988,joint,house,4LDK,250504,0,84.04,2981,2981,13,49,103,135,JR Nambu,—,https://suumo.jp/chukoikkodate/tokyo/sc_kunitachi/nc_21402988/,Suumo
+20009540,joint,house,4LDK,294562,0,93.96,3135,3135,13,49,103,135,JR Nambu,—,https://suumo.jp/chukoikkodate/tokyo/sc_kunitachi/nc_20009540/,Suumo
+21462240,joint,condo,3LDK,223376,156,65.7,3400,3685,14,49,49,118,Sotetsu Shin-Yokohama,上星川,https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashihodogaya/nc_21462240/,Suumo
+21109863,joint,house,3LDK,298968,0,89.25,3350,3350,4,51,36,113,Nambu KN,—,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashitsurumi/nc_21109863/,Suumo
+1408346,solo,condo,1DK,78676,62,26.1,3014,3299,7,51,31,53,REJ solo,Namamugi,https://realestate.co.jp/en/forsale/view/1408346,REJ
+21370000,joint,condo,2LDK,162387,161,63.4,2561,2866,10,51,31,53,Nambu KN,生麦,https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashitsurumi/nc_21370000/,Suumo
+21273053,joint,condo,3DK,105740,141,57.05,1853,2150,13,47,98,114,Seibu Ikebukuro,武蔵藤沢,https://suumo.jp/ms/chuko/saitama/sc_iruma/nc_21273053/,Suumo
+21068611,joint,condo,3LDK,219033,294,80.92,2707,3143,3,48,101,131,Odakyu Tama,中央大学・明星大学,https://suumo.jp/ms/chuko/tokyo/sc_hachioji/nc_21068611/,Suumo
+21337104,joint,condo,4LDK,169310,332,105.65,1603,1980,7,49,99,116,Seibu Ikebukuro,狭山市,https://suumo.jp/ms/chuko/saitama/sc_sayama/nc_21337104/,Suumo
+21082430,joint,condo,3LDK,168681,214,66.87,2523,2907,8,49,99,116,Seibu Ikebukuro,狭山市,https://suumo.jp/ms/chuko/saitama/sc_sayama/nc_21082430/,Suumo
+21302562,joint,condo,3LDK,160436,208,72.15,2224,2570,9,52,100,145,JR Nambu,武蔵砂川,https://suumo.jp/ms/chuko/tokyo/sc_tachikawa/nc_21302562/,Suumo
+21406296,joint,house,3LDK,244209,0,80.32,3040,3040,13,52,62,121,Sotetsu Shin-Yokohama,—,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikohoku/nc_21406296/,Suumo
+20511788,joint,house,3LDK,244209,0,80.32,3040,3040,16,52,62,121,Sotetsu Shin-Yokohama,—,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikohoku/nc_20511788/,Suumo
+21218155,joint,condo,3LDK,160498,164,66.7,2406,2701,20,53,76,133,Odakyu KN,矢部,https://suumo.jp/ms/chuko/kanagawa/sc_sagamiharashichuo/nc_21218155/,Suumo
+77852963,joint,house,4LDK,269386,0,110.96,2428,2428,4,54,95,145,Odakyu,—,https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_77852963/,Suumo
+78242744,joint,house,3LDK,200151,0,92.11,2173,2173,6,54,95,145,Odakyu,—,https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_78242744/,Suumo
+21256937,joint,house,5LDK,250504,0,115.92,2161,2161,11,54,95,145,Keio Sag KN,—,https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_21256937/,Suumo
+21272037,joint,house,5LDK,250504,0,115.92,2161,2161,13,54,95,145,Keio Sag KN,—,https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_21272037/,Suumo
+79150620,joint,house,3LDK,261203,0,86.94,3004,3004,13,54,95,145,Odakyu,—,https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_79150620/,Suumo
+21417540,joint,house,2LDK,281974,0,80.23,3515,3515,13,54,95,145,Den-en-toshi,—,https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_21417540/,Suumo
+21400129,joint,house,3LDK,294562,0,108.89,2705,2705,13,54,95,145,Odakyu,—,https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_21400129/,Suumo
+20488202,joint,house,4LDK,232817,0,109.3,2130,2130,14,54,95,145,Keio Sag KN,—,https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_20488202/,Suumo
+20436585,joint,house,5LDK,232817,0,109.3,2130,2130,15,54,95,145,Odakyu,—,https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_20436585/,Suumo
+78728821,joint,house,2LDK,138469,0,98.43,1407,1407,16,54,95,145,Odakyu,—,https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_78728821/,Suumo
+21005363,joint,house,6DK,198263,0,155.26,1277,1277,20,54,95,145,Odakyu,—,https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_21005363/,Suumo
+21295476,joint,house,3LDDKK,212739,0,90.25,2357,2357,20,54,62,133,Sotetsu Shin-Yokohama,—,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashiasahi/nc_21295476/,Suumo
+21371397,joint,house,4LDK,212739,0,99.36,2141,2141,5,55,104,124,Seibu Shinjuku,—,https://suumo.jp/chukoikkodate/tokyo/sc_higashimurayama/nc_21371397/,Suumo
+20723072,joint,house,4LDK,212739,0,99.36,2141,2141,5,55,104,124,Seibu Shinjuku,—,https://suumo.jp/chukoikkodate/tokyo/sc_higashimurayama/nc_20723072/,Suumo
+20792670,joint,house,4LDK,254846,0,90.22,2825,2825,6,55,104,124,Seibu Shinjuku,—,https://suumo.jp/chukoikkodate/tokyo/sc_higashimurayama/nc_20792670/,Suumo
+21070161,joint,house,3LDK,263092,0,89.07,2954,2954,11,55,104,124,Seibu Shinjuku,—,https://suumo.jp/chukoikkodate/tokyo/sc_higashimurayama/nc_21070161/,Suumo
+20629210,joint,house,4LDK,269386,0,100.19,2689,2689,15,55,100,149,Keio Sag KN,—,https://suumo.jp/chukoikkodate/kanagawa/sc_sagamiharashimidori/nc_20629210/,Suumo
+20588183,joint,house,3LDK,187563,0,79.9,2347,2347,10,56,116,146,Odakyu Tama,—,https://suumo.jp/chukoikkodate/tokyo/sc_hachioji/nc_20588183/,Suumo
+20445351,joint,house,4DK,149799,0,67.54,2218,2218,17,56,121,146,Odakyu Tama,—,https://suumo.jp/chukoikkodate/tokyo/sc_tama/nc_20445351/,Suumo
+21336417,joint,condo,3LDK,143505,156,76.1,1886,2132,9,57,47,57,Tobu Tojo,若葉,https://suumo.jp/ms/chuko/saitama/sc_tsurugashima/nc_21336417/,Suumo
+21346525,joint,condo,3LDK,142246,146,59.68,2383,2677,12,52,45,113,Nambu KN,小田栄,https://suumo.jp/ms/chuko/kanagawa/sc_kawasakishikawasaki/nc_21346525/,Suumo
+20916771,joint,condo,4LDK,124622,255,84.27,1479,1842,15,57,47,57,Tobu Tojo,若葉,https://suumo.jp/ms/chuko/saitama/sc_tsurugashima/nc_20916771/,Suumo
+21458485,joint,condo,3LDK,112664,177,61.28,1839,2185,16,57,47,57,Tobu Tojo,若葉,https://suumo.jp/ms/chuko/saitama/sc_tsurugashima/nc_21458485/,Suumo
+21415819,joint,house,4LDK,225957,0,92.34,2447,2447,18,57,113,144,JR Nambu,—,https://suumo.jp/chukoikkodate/tokyo/sc_akishima/nc_21415819/,Suumo
+21390505,joint,house,4LDK,206445,0,89.42,2309,2309,20,57,113,144,JR Nambu,—,https://suumo.jp/chukoikkodate/tokyo/sc_akishima/nc_21390505/,Suumo
+1405758,joint,condo,2LDK,112664,217,64.96,1734,2135,3,58,78,145,REJ joint,Mutsuai Nichidai Mae,https://realestate.co.jp/en/forsale/view/1405758,REJ
+21401339,joint,house,4DK,206445,0,84.87,2432,2432,7,58,53,123,Sotetsu Shin-Yokohama,—,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21401339/,Suumo
+21373883,joint,house,4LDK,206445,0,84.87,2432,2432,7,58,53,123,Sotetsu Shin-Yokohama,—,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21373883/,Suumo
+21404186,joint,house,4DK,206445,0,84.87,2432,2432,7,58,53,123,Sotetsu Shin-Yokohama,—,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21404186/,Suumo
+21378520,joint,house,4DK,206445,0,84.87,2432,2432,7,58,53,123,Sotetsu Shin-Yokohama,—,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21378520/,Suumo
+21490954,joint,house,4DK,206445,0,84.87,2432,2432,7,58,53,123,Sotetsu Shin-Yokohama,—,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21490954/,Suumo
+21538698,joint,house,4DK,206445,0,84.87,2432,2432,7,58,53,123,Sotetsu Shin-Yokohama,—,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21538698/,Suumo
+21412324,joint,house,4DK,206445,0,84.87,2432,2432,7,58,53,123,Sotetsu Shin-Yokohama,—,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21412324/,Suumo
+74972987,joint,house,4LDK,125252,0,82.1,1526,1526,12,58,53,123,Sotetsu Shin-Yokohama,—,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_74972987/,Suumo
+21464674,joint,house,4LDK,250504,0,78.51,3191,3191,14,58,53,123,Sotetsu Shin-Yokohama,—,https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21464674/,Suumo
+21424513,joint,condo,3LDK,154204,216,64.37,2396,2798,15,50,44,107,Sotetsu Shin-Yokohama,小机,https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashikohoku/nc_21424513/,Suumo
+21409762,joint,condo,2LDK,147281,162,72.12,2042,2312,13,38,88,135,Keio Sagamihara,南大沢学園瑞樹の丘,https://suumo.jp/ms/chuko/tokyo/sc_hachioji/nc_21409762/,Suumo
+20978202,joint,condo,4LDK,106370,116,95.55,1113,1259,12,48,95,124,Seibu Ikebukuro,下山口,https://suumo.jp/ms/chuko/saitama/sc_tokorozawa/nc_20978202/,Suumo
