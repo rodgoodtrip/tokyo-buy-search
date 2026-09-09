@@ -1,0 +1,150 @@
+name: Shortlist proposal → PR
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  open-pr:
+    if: startsWith(github.event.issue.title, '[shortlist]')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build PR from issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const issue = context.payload.issue;
+            const body = issue.body || '';
+            const match = body.match(/```json\s*([\s\S]*?)```/i);
+            if (!match) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: 'Could not find a `json` code block in this issue. Please include the proposal JSON from the site’s **Submit for review** button.'
+              });
+              return;
+            }
+
+            let proposal;
+            try {
+              proposal = JSON.parse(match[1]);
+            } catch (e) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: 'Proposal JSON failed to parse: `' + e.message + '`'
+              });
+              return;
+            }
+
+            const seed = {
+              starred: Array.isArray(proposal.starred) ? proposal.starred.map(String) : [],
+              struck: Array.isArray(proposal.struck) ? proposal.struck.map(String) : [],
+              view: proposal.view || 'active',
+              track: proposal.track || 'all',
+              kind: proposal.kind || 'all',
+              line: proposal.line || 'all',
+              sortKey: proposal.sortKey || 'tokyo',
+              sortDir: proposal.sortDir || 'asc',
+            };
+
+            const branch = `shortlist/issue-${issue.number}`;
+            const path = 'seed-state.json';
+            const content = JSON.stringify(seed, null, 2) + '\n';
+            const repoInfo = await github.rest.repos.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+            const base = repoInfo.data.default_branch || 'main';
+
+            // create branch from default branch tip
+            const mainRef = await github.rest.git.getRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: `heads/${base}`,
+            });
+            const baseSha = mainRef.data.object.sha;
+
+            try {
+              await github.rest.git.createRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: `refs/heads/${branch}`,
+                sha: baseSha,
+              });
+            } catch (e) {
+              // branch may already exist; continue
+            }
+
+            let sha;
+            try {
+              const existing = await github.rest.repos.getContent({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                path,
+                ref: branch,
+              });
+              sha = existing.data.sha;
+            } catch (_) {}
+
+            await github.rest.repos.createOrUpdateFileContents({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              path,
+              message: `chore: shortlist proposal from issue #${issue.number}`,
+              content: Buffer.from(content).toString('base64'),
+              branch,
+              sha,
+            });
+
+            const from = proposal.from || 'anonymous';
+            const note = proposal.note ? `\n\n> ${proposal.note}` : '';
+            const pr = await github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Shortlist proposal from ${from} (#${issue.number})`,
+              head: branch,
+              base,
+              body: [
+                `Closes #${issue.number}`,
+                '',
+                `Proposed by **${from}** via the public app.`,
+                note,
+                '',
+                `| | count |`,
+                `|---|---|`,
+                `| Starred | ${seed.starred.length} |`,
+                `| Struck | ${seed.struck.length} |`,
+                '',
+                'Merging updates `seed-state.json` (first-visit / “Load Rod’s shortlist” seed). Listing rows themselves are unchanged.',
+              ].join('\n'),
+            });
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body: `Opened PR for review: ${pr.data.html_url}`,
+            });
+
+            try {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: ['shortlist-proposal'],
+              });
+            } catch (_) {
+              // label may not exist yet; ignore
+            }

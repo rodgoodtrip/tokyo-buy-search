@@ -8,6 +8,13 @@ https://rodgoodtrip.github.io/tokyo-buy-search/
 
 Force-load Rod’s exported shortlist: https://rodgoodtrip.github.io/tokyo-buy-search/?seed=1
 
+## Submit updates for review
+
+On the live page, **Submit for review** opens a GitHub issue with your current stars/strikes (you need a GitHub account).  
+A workflow then opens a PR that updates `seed-state.json` for Rod to merge.
+
+Issue titles must start with `[shortlist]` (the button does this for you).
+
 ## Shortlist sync
 
 `seed-state.json` is exported from the Cursor canvas (`starredIds` / `struckIds`). The SPA:
