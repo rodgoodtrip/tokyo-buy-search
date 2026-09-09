@@ -10,7 +10,17 @@ Force-load Rod’s exported shortlist: https://rodgoodtrip.github.io/tokyo-buy-s
 
 ## Share a shortlist (no account)
 
-Use **Copy shortlist** on the live page, then send Rod the JSON via Messages/email. He can paste it into `seed-state.json`.
+On the live page, **Export shortlist** downloads `tokyo-shortlist-proposal-YYYY-MM-DD.json` with:
+
+- `seed` — drop-in `seed-state.json` contents
+- `changes` — added/removed starred & struck vs Rod’s baked-in seed
+
+Send that file to Rod. To accept:
+
+```bash
+python3 apply-proposal.py ~/Downloads/tokyo-shortlist-proposal-YYYY-MM-DD.json
+git diff seed-state.json   # review, then commit if good
+```
 
 ## Shortlist sync
 

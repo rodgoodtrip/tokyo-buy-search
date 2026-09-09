@@ -90,7 +90,7 @@
     </div>
     <p class="sub">Click headers to sort. Star to shortlist; strike to hide. Stars/strikes save in this browser. $/m² = price ÷ size; True $/m² adds 10yr HOA.</p>
 
-    <div class="callout"><strong>Share tip:</strong> stars/strikes stay in your browser. Use <strong>Copy shortlist</strong> and send Rod the text (Messages, email, etc.) — no account needed.</div>
+    <div class="callout"><strong>Share tip:</strong> stars/strikes stay in your browser. Use <strong>Export shortlist</strong> to download a proposal file (diff vs Rod’s seed) and send it to him — no account needed.</div>
 
     <div class="stats">
       <div class="stat"><b id="sView">0</b><span>In this view</span></div>
@@ -130,7 +130,7 @@
       </label>
       <button class="ghost" id="btnReset" type="button">Reset filters</button>
       <button class="ghost" id="btnLoadSeed" type="button">Load Rod’s shortlist</button>
-      <button class="ghost" id="btnCopy" type="button">Copy shortlist</button>
+      <button class="ghost" id="btnExport" type="button">Export shortlist</button>
       <button class="ghost" id="btnClearMarks" type="button">Clear my stars/strikes</button>
     </div>
 
@@ -427,10 +427,8 @@
       state.starred=[]; state.struck=[]; state.seededFrom=null; persist(); render();
     };
 
-    document.getElementById('btnCopy').onclick = async () => {
-      const proposal = {
-        type: 'shortlist-proposal',
-        createdAt: new Date().toISOString(),
+    document.getElementById('btnExport').onclick = () => {
+      const seed = {
         starred: state.starred,
         struck: state.struck,
         view: state.view,
@@ -440,13 +438,40 @@
         sortKey: state.sortKey,
         sortDir: state.sortDir,
       };
-      const text = JSON.stringify(proposal, null, 2);
-      try {
-        await navigator.clipboard.writeText(text);
-        alert('Shortlist copied. Paste it into a message to Rod.');
-      } catch {
-        prompt('Copy this shortlist and send it to Rod:', text);
-      }
+      const baseStar = new Set((SEED.starred || []).map(String));
+      const baseStruck = new Set((SEED.struck || []).map(String));
+      const nextStar = new Set(seed.starred.map(String));
+      const nextStruck = new Set(seed.struck.map(String));
+      const changes = {
+        starredAdded: [...nextStar].filter(x => !baseStar.has(x)).sort(),
+        starredRemoved: [...baseStar].filter(x => !nextStar.has(x)).sort(),
+        struckAdded: [...nextStruck].filter(x => !baseStruck.has(x)).sort(),
+        struckRemoved: [...baseStruck].filter(x => !nextStruck.has(x)).sort(),
+      };
+      const proposal = {
+        format: 'tokyo-buy-search-shortlist-v1',
+        createdAt: new Date().toISOString(),
+        comparedTo: 'page-seed (Rod baseline baked into the site)',
+        changes,
+        seed,
+      };
+      const stamp = new Date().toISOString().slice(0,10);
+      const blob = new Blob([JSON.stringify(proposal, null, 2) + '\n'], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `tokyo-shortlist-proposal-${stamp}.json`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+      const summary = [
+        `Exported proposal (${stamp})`,
+        `+starred ${changes.starredAdded.length}  -starred ${changes.starredRemoved.length}`,
+        `+struck ${changes.struckAdded.length}  -struck ${changes.struckRemoved.length}`,
+        '',
+        'Send this file to Rod. He can run:',
+        '  python3 apply-proposal.py tokyo-shortlist-proposal-....json',
+        'then review with git diff seed-state.json',
+      ].join('\n');
+      alert(summary);
     };
 
     // URL helper: ?seed=1 forces Rod shortlist
