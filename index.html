@@ -11,6 +11,7 @@
       --star: #e8c547;
     }
     * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
     body {
       margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
       background: var(--bg); color: var(--text); line-height: 1.4;
@@ -58,7 +59,25 @@
     }
     th:hover, th.sorted { color: var(--accent); }
     th.sorted { font-weight: 650; }
-    td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .chart { margin: 4px 0 18px; }
+    .chart-scale, .bar-row {
+      display: grid;
+      grid-template-columns: minmax(12rem, 15.5rem) minmax(0, 1fr) 4.6rem;
+      column-gap: 10px;
+      align-items: center;
+    }
+    .chart-scale { height: 22px; color: var(--muted); font-size: 0.75rem; }
+    .chart-ref-label { grid-column: 2; justify-self: center; }
+    .bar-name { text-align: right; font-size: 0.8rem; white-space: nowrap; }
+    .bar-track { position: relative; height: 16px; }
+    .bar-fill { height: 100%; background: #8eafd4; }
+    .bar-mark {
+      position: absolute; left: 50%; top: -5px; bottom: -5px; z-index: 2;
+      border-left: 1px dashed rgba(255, 255, 255, 0.85);
+    }
+    .bar-value { font-variant-numeric: tabular-nums; font-size: 0.8rem; }
+    .chart-note { color: var(--muted); font-size: 0.78rem; margin: 6px 0 0; max-width: 78ch; }
     tr:hover td { background: rgba(110,168,254,0.05); }
     tr.starred td { background: rgba(61,214,140,0.07); }
     tr.struck td { opacity: 0.45; text-decoration: line-through; }
@@ -180,8 +199,10 @@
         fx: "¥159.10/$",
         sub: "Median asking price of used condos built in 1982 or later, at or under $600k. Airport times sit on the ward, from one central station.",
         callout: "Each median is the middle of Suumo’s first six pages under ¥100M after the 1982 and $600k cuts. In central wards that is the stock Suumo surfaces first, not a census of the ward.",
-        notes: "Built is the completion year-month. Renovated is the oldest dated reform on the Suumo page, blank when none is listed. HND and NRT minutes are weekday 10:00 Yahoo times on 18 Nov 2026.",
-        mode: "wards"
+        notes: "Built is the completion year-month. Renovated is the oldest dated reform on the Suumo page, blank when none is listed. HND and NRT minutes are weekday 10:00 Yahoo times on 18 Nov 2026. Click a ward-table header to sort.",
+        mode: "wards",
+        sortKey: "medianUSD",
+        sortDir: "desc"
       },
       {
         id: "nov",
@@ -303,6 +324,7 @@
         view: state.view, track: state.track, kind: state.kind, line: state.line,
         area: state.area, beds: state.beds, q: state.q,
         sortKey: state.sortKey, sortDir: state.sortDir,
+        listSortKey: state.listSortKey || null, listSortDir: state.listSortDir || null,
         starred: state.starred, struck: state.struck, seededFrom: state.seededFrom || null
       }));
     }
@@ -439,7 +461,8 @@
         if (c.k.startsWith("_")) return "<th>" + c.label + "</th>";
         const sorted = state.sortKey === c.k;
         const arrow = sorted ? (state.sortDir === "asc" ? " ↑" : " ↓") : "";
-        return `<th data-k="${c.k}"${sorted ? ' class="sorted"' : ""}>${c.label}${arrow}</th>`;
+        const cls = [col.num ? "num" : "", sorted ? "sorted" : ""].filter(Boolean).join(" ");
+        return `<th data-k="${c.k}"${cls ? ` class="${cls}"` : ""}>${c.label}${arrow}</th>`;
       }).join("") + "</tr>";
     }
     function cellHtml(r, col, i) {
@@ -533,19 +556,99 @@
       } else empty.hidden = true;
     }
 
+    const WARD_COLS = [
+      { k: "ward", label: "Ward" },
+      { k: "sampleN", label: "Sample", num: true },
+      { k: "medianUSD", label: "Median", num: true },
+      { k: "p25USD", label: "P25", num: true },
+      { k: "p75USD", label: "P75", num: true },
+      { k: "medianPerSqm", label: "Median $/m²", num: true },
+      { k: "familyShare", label: "2+ rooms", num: true },
+      { k: "station", label: "From" },
+      { k: "haneda", label: "→HND", num: true },
+      { k: "narita", label: "→NRT", num: true }
+    ];
+    const LIST_COLS = [
+      { k: "title", label: "Listing" },
+      { k: "priceUSD", label: "Price", num: true },
+      { k: "beds", label: "Beds", num: true },
+      { k: "sqm", label: "Size", num: true },
+      { k: "walk", label: "Walk", num: true },
+      { k: "built", label: "Built" },
+      { k: "reno", label: "Renovated" },
+      { k: "station", label: "Station" }
+    ];
+
+    function cmpVal(av, bv, sign) {
+      if (av == null && bv == null) return 0;
+      if (av == null || av === "") return 1;
+      if (bv == null || bv === "") return -1;
+      const cmp = (typeof av === "string" || typeof bv === "string")
+        ? String(av).localeCompare(String(bv))
+        : (av - bv);
+      return sign * cmp;
+    }
+    function sortedWards(wards) {
+      const known = WARD_COLS.some((c) => c.k === state.sortKey);
+      const k = known ? state.sortKey : "medianUSD";
+      const sign = state.sortDir === "asc" ? 1 : -1;
+      return [...wards].sort((a, b) => cmpVal(a[k], b[k], sign));
+    }
+    function sortedListings(list) {
+      if (!state.listSortKey) return list || [];
+      const sign = state.listSortDir === "desc" ? -1 : 1;
+      const k = state.listSortKey;
+      return [...(list || [])].sort((a, b) => cmpVal(a[k], b[k], sign));
+    }
+    function headCells(cols, key, dir) {
+      return cols.map((c) => {
+        const sorted = key === c.k;
+        const arrow = sorted ? (dir === "asc" ? " ↑" : " ↓") : "";
+        const cls = [c.num ? "num" : "", sorted ? "sorted" : ""].filter(Boolean).join(" ");
+        return `<th data-k="${c.k}"${cls ? ` class="${cls}"` : ""}>${c.label}${arrow}</th>`;
+      }).join("");
+    }
+    function listingCells(r) {
+      return `<tr>
+        <td><a href="${esc(r.href)}" target="_blank" rel="noopener">${esc(r.title)}</a>${r.name ? `<div class="name">${esc(r.name)}</div>` : ""}</td>
+        <td class="num">${usd(r.priceUSD)}</td>
+        <td class="num">${r.beds == null ? "—" : r.beds}</td>
+        <td class="num">${r.sqm != null ? esc(r.sqm) + " m²" : "—"}</td>
+        <td class="num">${mins(r.walk)}</td>
+        <td>${esc(r.built || r.year || "—")}</td>
+        <td>${esc(r.reno || "—")}</td>
+        <td>${esc(r.station || "—")}</td>
+      </tr>`;
+    }
+
     function renderWards(wards) {
-      const ranked = [...wards].sort((a, b) => b.medianUSD - a.medianUSD);
+      const byMedian = [...wards].sort((a, b) => b.medianUSD - a.medianUSD);
       const cheapest = [...wards].sort((a, b) => a.medianUSD - b.medianUSD)[0];
-      const mid = ranked[Math.floor(ranked.length / 2)];
+      const ranked = sortedWards(wards);
+      const sortKey = WARD_COLS.some((c) => c.k === state.sortKey) ? state.sortKey : "medianUSD";
+      const sortDir = state.sortDir === "asc" ? "asc" : "desc";
+      const bars = ranked.map((w) => {
+        const pct = Math.max(0, Math.min(100, (w.medianUSD / 600000) * 100));
+        return `<div class="bar-row">
+          <div class="bar-name">${esc(w.ward)}</div>
+          <div class="bar-track"><div class="bar-fill" style="width:${pct.toFixed(2)}%"></div><div class="bar-mark"></div></div>
+          <div class="bar-value">${usd(w.medianUSD)}</div>
+        </div>`;
+      }).join("");
       const head = `<div class="stats">
-        <div class="stat"><b>${usd(ranked[0].medianUSD)}</b><span>Highest median · ${esc(ranked[0].ward)}</span></div>
+        <div class="stat"><b>${usd(byMedian[0].medianUSD)}</b><span>Highest median · ${esc(byMedian[0].ward)}</span></div>
         <div class="stat"><b>${usd(cheapest.medianUSD)}</b><span>Lowest median · ${esc(cheapest.ward)}</span></div>
-        <div class="stat"><b>${usd(mid.medianUSD)}</b><span>Middle ward · ${esc(mid.ward)}</span></div>
+        <div class="stat"><b>${usd(byMedian[Math.floor(byMedian.length / 2)].medianUSD)}</b><span>Middle ward · ${esc(byMedian[Math.floor(byMedian.length / 2)].ward)}</span></div>
         <div class="stat"><b>23</b><span>Wards</span></div>
       </div>
       <h2>Median asking price by ward</h2>
-      <div class="table-wrap"><table><thead><tr>
-        <th>Ward</th><th>Sample</th><th>Median</th><th>P25</th><th>P75</th><th>Median $/m²</th><th>2+ rooms</th><th>From</th><th>→HND</th><th>→NRT</th>
+      <div class="chart">
+        <div class="chart-scale"><span class="chart-ref-label">$300k</span></div>
+        ${bars}
+      </div>
+      <p class="chart-note">Bars are the median asking price, scaled to $600k. The dashed line is $300k. Click a column header to sort the chart and the table together.</p>
+      <div class="table-wrap"><table id="wardTbl"><thead><tr>
+        ${headCells(WARD_COLS, sortKey, sortDir)}
       </tr></thead><tbody>
       ${ranked.map((w) => `<tr>
         <td>${esc(w.ward)}</td>
@@ -561,24 +664,44 @@
       </tr>`).join("")}
       </tbody></table></div>
       <h2>Listings by ward</h2>`;
+      const listKey = state.listSortKey || "";
+      const listDir = state.listSortDir === "desc" ? "desc" : "asc";
       const blocks = ranked.map((w) => `<section class="ward-block">
         <h3>${esc(w.ward)} · median ${usd(w.medianUSD)} · HND ${w.haneda}m from ${esc(w.station)} · NRT ${w.narita}m</h3>
-        <div class="table-wrap"><table><thead><tr>
-          <th>Listing</th><th>Price</th><th>Beds</th><th>Size</th><th>Walk</th><th>Built</th><th>Renovated</th><th>Station</th>
+        <div class="table-wrap"><table class="ward-listings"><thead><tr>
+          ${headCells(LIST_COLS, listKey, listDir)}
         </tr></thead><tbody>
-        ${(w.listings || []).map((r) => `<tr>
-          <td><a href="${esc(r.href)}" target="_blank" rel="noopener">${esc(r.title)}</a>${r.name ? `<div class="name">${esc(r.name)}</div>` : ""}</td>
-          <td class="num">${usd(r.priceUSD)}</td>
-          <td class="num">${r.beds == null ? "—" : r.beds}</td>
-          <td class="num">${r.sqm != null ? esc(r.sqm) + " m²" : "—"}</td>
-          <td class="num">${mins(r.walk)}</td>
-          <td>${esc(r.built || r.year || "—")}</td>
-          <td>${esc(r.reno || "—")}</td>
-          <td>${esc(r.station || "—")}</td>
-        </tr>`).join("")}
+        ${sortedListings(w.listings).map(listingCells).join("")}
         </tbody></table></div>
       </section>`).join("");
-      document.getElementById("wardView").innerHTML = head + blocks;
+      const view = document.getElementById("wardView");
+      view.innerHTML = head + blocks;
+      view.querySelector("#wardTbl").tHead.onclick = (e) => {
+        const th = e.target.closest("th[data-k]");
+        if (!th) return;
+        const k = th.dataset.k;
+        if (state.sortKey === k) state.sortDir = state.sortDir === "asc" ? "desc" : "asc";
+        else {
+          state.sortKey = k;
+          state.sortDir = (k === "ward" || k === "station") ? "asc" : "desc";
+        }
+        saveState();
+        renderWards(wards);
+      };
+      view.querySelectorAll("table.ward-listings").forEach((table) => {
+        table.tHead.onclick = (e) => {
+          const th = e.target.closest("th[data-k]");
+          if (!th) return;
+          const k = th.dataset.k;
+          if (state.listSortKey === k) state.listSortDir = state.listSortDir === "asc" ? "desc" : "asc";
+          else {
+            state.listSortKey = k;
+            state.listSortDir = (k === "title" || k === "station" || k === "built" || k === "reno") ? "asc" : "desc";
+          }
+          saveState();
+          renderWards(wards);
+        };
+      });
     }
 
     async function loadSearch(id, push) {
@@ -598,6 +721,10 @@
       state.starred = Array.isArray(state.starred) ? state.starred.filter((x) => typeof x === "string") : [];
       state.struck = Array.isArray(state.struck) ? state.struck.filter((x) => typeof x === "string") : [];
       if (search.mode === "wards") {
+        if (!WARD_COLS.some((c) => c.k === state.sortKey)) {
+          state.sortKey = "medianUSD";
+          state.sortDir = "desc";
+        }
         renderWards(dataCache[search.id]);
         return;
       }
