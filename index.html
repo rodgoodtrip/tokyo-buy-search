@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tokyo / Yokohama Buy Search</title>
+  <title>Tokyo buy search</title>
   <style>
     :root {
       --bg: #0f1117; --panel: #161922; --text: #e8eaed; --muted: #9aa0a6;
@@ -17,8 +17,9 @@
     }
     .wrap { max-width: 1480px; margin: 0 auto; padding: 20px 16px 48px; }
     h1 { font-size: 1.45rem; margin: 0; font-weight: 650; letter-spacing: -0.02em; }
-    h2 { font-size: 1.05rem; margin: 0 0 8px; font-weight: 600; }
-    .sub { color: var(--muted); font-size: 0.88rem; margin: 6px 0 16px; max-width: 70ch; }
+    h2 { font-size: 1.05rem; margin: 18px 0 8px; font-weight: 600; }
+    h3 { font-size: 0.95rem; margin: 16px 0 8px; font-weight: 600; }
+    .sub { color: var(--muted); font-size: 0.88rem; margin: 6px 0 16px; max-width: 78ch; }
     .callout {
       background: color-mix(in srgb, var(--accent) 10%, var(--panel));
       border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
@@ -26,6 +27,12 @@
       color: var(--muted);
     }
     .callout strong { color: var(--text); }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+    .nav button {
+      background: var(--panel); color: var(--text); border: 1px solid var(--border);
+      border-radius: 999px; padding: 6px 12px; font: inherit; cursor: pointer; font-size: 0.82rem;
+    }
+    .nav button.active { border-color: var(--accent); color: var(--accent); }
     .stats { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin-bottom: 14px; }
     @media (max-width: 800px) { .stats { grid-template-columns: repeat(2, 1fr); } }
     .stat { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
@@ -38,8 +45,7 @@
       border-radius: 6px; padding: 7px 10px; font: inherit;
     }
     button.ghost { cursor: pointer; }
-    button.ghost:hover { border-color: var(--accent); color: var(--accent); }
-    .section { margin-top: 18px; }
+    button.ghost:hover, .nav button:hover { border-color: var(--accent); color: var(--accent); }
     .table-wrap {
       overflow: auto; max-height: min(70vh, 820px);
       border: 1px solid var(--border); border-radius: 8px; background: var(--panel);
@@ -59,6 +65,7 @@
     tr.struck td:first-child, tr.struck td:nth-child(2) { text-decoration: none; opacity: 1; }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
+    .name { color: var(--muted); font-size: 0.72rem; margin-top: 2px; }
     .pill {
       display: inline-block; padding: 1px 7px; border-radius: 999px; font-size: 0.68rem;
       background: #12151d; border: 1px solid var(--border); text-transform: capitalize;
@@ -75,58 +82,69 @@
       padding: 18px; color: var(--muted); font-size: 0.9rem;
       border: 1px dashed var(--border); border-radius: 8px; margin-top: 8px;
     }
-    .notes { margin-top: 22px; color: var(--muted); font-size: 0.84rem; max-width: 70ch; }
+    .notes { margin-top: 22px; color: var(--muted); font-size: 0.84rem; max-width: 78ch; }
     .notes h2 { color: var(--text); }
     .hdr { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
     .badge { font-size: 0.7rem; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 2px 8px; }
+    .ward-block { margin-top: 8px; }
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="hdr">
-      <h1>Tokyo buy search — owner-occupy</h1>
-      <span class="badge">Updated 2026-09-09</span>
-      <span class="badge">FX ¥158.88/$</span>
+      <h1 id="pageTitle">Tokyo buy search</h1>
+      <span class="badge" id="badgeDate"></span>
+      <span class="badge" id="badgeFx"></span>
     </div>
-    <p class="sub">Click headers to sort. Star to shortlist; strike to hide. Stars/strikes save in this browser. $/m² = price ÷ size; True $/m² adds 10yr HOA.</p>
+    <nav id="searchNav" class="nav" aria-label="Searches"></nav>
+    <p class="sub" id="pageSub"></p>
+    <div class="callout" id="pageCallout"></div>
 
-    <div class="callout"><strong>Share tip:</strong> stars/strikes stay in your browser. Use <strong>Export shortlist</strong> to download a proposal file (diff vs Rod’s seed) and send it to him — no account needed.</div>
-
-    <div class="stats">
+    <div class="stats" id="stats">
       <div class="stat"><b id="sView">0</b><span>In this view</span></div>
       <div class="stat"><b id="sTotal">0</b><span>Total in dataset</span></div>
       <div class="stat"><b id="sStar">0</b><span>Starred</span></div>
-      <div class="stat"><b id="sActive">0</b><span>Active (unreviewed)</span></div>
+      <div class="stat"><b id="sActive">0</b><span>Not yet reviewed</span></div>
     </div>
 
-    <div class="filters">
+    <div class="filters" id="filters">
       <label>View
         <select id="fView">
-          <option value="active">Active (hide starred &amp; struck)</option>
+          <option value="active">Active (hide starred and struck)</option>
           <option value="starred">Starred only</option>
           <option value="struck">Struck only</option>
-          <option value="all">All (incl. struck)</option>
+          <option value="all">All</option>
         </select>
       </label>
-      <label>Track
+      <label id="labTrack">Track
         <select id="fTrack">
-          <option value="all">All</option>
-          <option value="joint">Joint only</option>
-          <option value="solo">Solo only</option>
+          <option value="all">Solo and joint</option>
+          <option value="joint">Joint (2+ rooms)</option>
+          <option value="solo">Solo (1 room)</option>
+        </select>
+      </label>
+      <label id="labBeds">Bedrooms
+        <select id="fBeds">
+          <option value="all">2+ bedrooms</option>
+          <option value="3">3+ bedrooms</option>
+          <option value="2">2 bedrooms</option>
         </select>
       </label>
       <label>Type
         <select id="fKind">
-          <option value="all">House + condo</option>
-          <option value="house">House only</option>
-          <option value="condo">Condo only</option>
+          <option value="all">House and condo</option>
+          <option value="house">House</option>
+          <option value="condo">Condo</option>
         </select>
       </label>
-      <label>Line
+      <label id="labLine">Line
         <select id="fLine"><option value="all">All lines</option></select>
       </label>
+      <label id="labArea">Area
+        <select id="fArea"><option value="all">All areas</option></select>
+      </label>
       <label>Search
-        <input id="fSearch" placeholder="station, line, title…" style="min-width:200px" />
+        <input id="fSearch" placeholder="station, area, title…" style="min-width:200px" />
       </label>
       <button class="ghost" id="btnReset" type="button">Reset filters</button>
       <button class="ghost" id="btnLoadSeed" type="button">Load Rod’s shortlist</button>
@@ -134,354 +152,557 @@
       <button class="ghost" id="btnClearMarks" type="button">Clear my stars/strikes</button>
     </div>
 
-    <div id="starredSection" class="section" hidden>
-      <h2>Starred</h2>
-      <div class="table-wrap"><table id="starTbl"><thead></thead><tbody></tbody></table></div>
-    </div>
-
-    <div class="section">
-      <h2 id="mainTitle">Active listings (not starred)</h2>
+    <div id="listView">
+      <div id="starredSection" hidden>
+        <h2>Starred</h2>
+        <div class="table-wrap"><table id="starTbl"><thead></thead><tbody></tbody></table></div>
+      </div>
+      <h2 id="mainTitle">Active listings</h2>
       <div id="emptyMsg" class="empty" hidden></div>
       <div class="table-wrap"><table id="mainTbl"><thead></thead><tbody></tbody></table></div>
     </div>
 
+    <div id="wardView" hidden></div>
+
     <div class="notes">
       <h2>Notes</h2>
-      <p>Transit minutes from Yahoo乗換案内 (weekday ~10:00): →新宿 via Shinjuku proxy; →HND / →NRT = airports. Occupied/investment, offices, and all-transit&gt;60min listings removed. Joint houses ideally 2 toilets — verify floor plans.</p>
+      <p id="notes"></p>
     </div>
   </div>
   <script>
-    const DATA = [{"id":"1393811","track":"solo","kind":"condo","title":"1LDK","priceUSD":124622,"monthlyUSD":157,"sqm":62.15,"pricePerSqm":2005,"trueCostPerSqm":2308,"walk":4,"tokyo":15,"haneda":17,"narita":24,"line":"REJ solo","station":"Hiratsuka","href":"https://realestate.co.jp/en/forsale/view/1393811","source":"REJ"},{"id":"21105313","track":"joint","kind":"condo","title":"3LDK","priceUSD":201410,"monthlyUSD":146,"sqm":55.31,"pricePerSqm":3641,"trueCostPerSqm":3958,"walk":15,"tokyo":15,"haneda":15,"narita":48,"line":"Odakyu","station":"千歳船橋","href":"https://suumo.jp/ms/chuko/tokyo/sc_setagaya/nc_21105313/","source":"Suumo"},{"id":"21350089","track":"joint","kind":"house","title":"3DK","priceUSD":250504,"monthlyUSD":0,"sqm":86.7,"pricePerSqm":2889,"trueCostPerSqm":2889,"walk":10,"tokyo":16,"haneda":60,"narita":70,"line":"Kita","station":"kita","href":"https://suumo.jp/chukoikkodate/tokyo/sc_kita/nc_21350089/","source":"Suumo"},{"id":"21119463","track":"joint","kind":"condo","title":"2LDK","priceUSD":112034,"monthlyUSD":128,"sqm":54.54,"pricePerSqm":2054,"trueCostPerSqm":2336,"walk":11,"tokyo":17,"haneda":49,"narita":121,"line":"Tobu Tojo","station":"坂戸","href":"https://suumo.jp/ms/chuko/saitama/sc_sakado/nc_21119463/","source":"Suumo"},{"id":"1393798","track":"joint","kind":"condo","title":"3LDK","priceUSD":118328,"monthlyUSD":113,"sqm":72.17,"pricePerSqm":1640,"trueCostPerSqm":1827,"walk":3,"tokyo":20,"haneda":26,"narita":33,"line":"REJ joint","station":"Namikichuou","href":"https://realestate.co.jp/en/forsale/view/1393798","source":"REJ"},{"id":"21103311","track":"joint","kind":"house","title":"3K","priceUSD":213998,"monthlyUSD":0,"sqm":49.14,"pricePerSqm":4355,"trueCostPerSqm":4355,"walk":9,"tokyo":20,"haneda":72,"narita":108,"line":"Keio","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_suginami/nc_21103311/","source":"Suumo"},{"id":"21167281","track":"joint","kind":"condo","title":"2LDK","priceUSD":219033,"monthlyUSD":148,"sqm":70.43,"pricePerSqm":3110,"trueCostPerSqm":3362,"walk":11,"tokyo":21,"haneda":67,"narita":27,"line":"Tobu Tojo","station":"要町","href":"https://suumo.jp/ms/chuko/tokyo/sc_itabashi/nc_21167281/","source":"Suumo"},{"id":"77143949","track":"joint","kind":"condo","title":"3DK","priceUSD":131546,"monthlyUSD":160,"sqm":57.91,"pricePerSqm":2272,"trueCostPerSqm":2603,"walk":5,"tokyo":22,"haneda":22,"narita":32,"line":"Tobu Tojo","station":"上板橋","href":"https://suumo.jp/ms/chuko/tokyo/sc_itabashi/nc_77143949/","source":"Suumo"},{"id":"1324128","track":"solo","kind":"condo","title":"1LDK","priceUSD":100642,"monthlyUSD":83,"sqm":37.1,"pricePerSqm":2713,"trueCostPerSqm":2981,"walk":6,"tokyo":22,"haneda":73,"narita":92,"line":"REJ solo","station":"Kamiitabashi","href":"https://realestate.co.jp/en/forsale/view/1324128","source":"REJ"},{"id":"20955392","track":"solo","kind":"condo","title":"1LDK","priceUSD":112034,"monthlyUSD":119,"sqm":36.54,"pricePerSqm":3066,"trueCostPerSqm":3457,"walk":6,"tokyo":22,"haneda":22,"narita":32,"line":"Tobu Tojo","station":"上板橋","href":"https://suumo.jp/ms/chuko/tokyo/sc_itabashi/nc_20955392/","source":"Suumo"},{"id":"1324125","track":"solo","kind":"condo","title":"1LDK","priceUSD":112034,"monthlyUSD":94,"sqm":36.18,"pricePerSqm":3097,"trueCostPerSqm":3408,"walk":7,"tokyo":22,"haneda":73,"narita":92,"line":"REJ solo","station":"Kamiitabashi","href":"https://realestate.co.jp/en/forsale/view/1324125","source":"REJ"},{"id":"21447583","track":"joint","kind":"condo","title":"2LDK","priceUSD":212739,"monthlyUSD":96,"sqm":48.33,"pricePerSqm":4402,"trueCostPerSqm":4640,"walk":7,"tokyo":22,"haneda":22,"narita":32,"line":"Tobu Tojo","station":"上板橋","href":"https://suumo.jp/ms/chuko/tokyo/sc_itabashi/nc_21447583/","source":"Suumo"},{"id":"21106326","track":"joint","kind":"condo","title":"3LDK","priceUSD":132175,"monthlyUSD":210,"sqm":59.89,"pricePerSqm":2207,"trueCostPerSqm":2628,"walk":5,"tokyo":23,"haneda":23,"narita":53,"line":"Nambu KN","station":"京王稲田堤","href":"https://suumo.jp/ms/chuko/kanagawa/sc_kawasakishitama/nc_21106326/","source":"Suumo"},{"id":"20547924","track":"joint","kind":"condo","title":"3LDK","priceUSD":174975,"monthlyUSD":265,"sqm":72.0,"pricePerSqm":2430,"trueCostPerSqm":2872,"walk":8,"tokyo":23,"haneda":22,"narita":53,"line":"Odakyu KN","station":"生田","href":"https://suumo.jp/ms/chuko/kanagawa/sc_kawasakishitama/nc_20547924/","source":"Suumo"},{"id":"1313382","track":"solo","kind":"condo","title":"1LDK","priceUSD":132112,"monthlyUSD":117,"sqm":27.54,"pricePerSqm":4797,"trueCostPerSqm":5307,"walk":5,"tokyo":24,"haneda":66,"narita":26,"line":"REJ solo","station":"Itabashi Honchou","href":"https://realestate.co.jp/en/forsale/view/1313382","source":"REJ"},{"id":"21260603","track":"joint","kind":"condo","title":"3DK","priceUSD":207578,"monthlyUSD":109,"sqm":59.39,"pricePerSqm":3495,"trueCostPerSqm":3715,"walk":7,"tokyo":24,"haneda":66,"narita":26,"line":"Tobu Tojo","station":"板橋本町","href":"https://suumo.jp/ms/chuko/tokyo/sc_itabashi/nc_21260603/","source":"Suumo"},{"id":"20333395","track":"joint","kind":"house","title":"3LDK","priceUSD":281974,"monthlyUSD":0,"sqm":60.54,"pricePerSqm":4658,"trueCostPerSqm":4658,"walk":13,"tokyo":24,"haneda":77,"narita":107,"line":"Nerima","station":"光が丘","href":"https://suumo.jp/chukoikkodate/tokyo/sc_nerima/nc_20333395/","source":"Suumo"},{"id":"21158958","track":"joint","kind":"condo","title":"2DK","priceUSD":200151,"monthlyUSD":113,"sqm":42.48,"pricePerSqm":4712,"trueCostPerSqm":5031,"walk":6,"tokyo":25,"haneda":58,"narita":42,"line":"Tokyu Oimachi","station":"西小山","href":"https://suumo.jp/ms/chuko/tokyo/sc_shinagawa/nc_21158958/","source":"Suumo"},{"id":"21233445","track":"joint","kind":"house","title":"5LDK","priceUSD":244209,"monthlyUSD":0,"sqm":102.05,"pricePerSqm":2393,"trueCostPerSqm":2393,"walk":17,"tokyo":25,"haneda":83,"narita":95,"line":"Tobu Tojo","station":"—","href":"https://suumo.jp/chukoikkodate/saitama/sc_wako/nc_21233445/","source":"Suumo"},{"id":"21509038","track":"joint","kind":"condo","title":"3LDK","priceUSD":207075,"monthlyUSD":204,"sqm":66.45,"pricePerSqm":3116,"trueCostPerSqm":3485,"walk":11,"tokyo":26,"haneda":188,"narita":20,"line":"Tobu Tojo","station":"桜並木","href":"https://suumo.jp/ms/chuko/tokyo/sc_itabashi/nc_21509038/","source":"Suumo"},{"id":"21474249","track":"joint","kind":"house","title":"4LDK","priceUSD":251699,"monthlyUSD":0,"sqm":90.88,"pricePerSqm":2770,"trueCostPerSqm":2770,"walk":3,"tokyo":27,"haneda":80,"narita":117,"line":"Odakyu KN","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishitama/nc_21474249/","source":"Suumo"},{"id":"21536833","track":"joint","kind":"house","title":"4LDK","priceUSD":244839,"monthlyUSD":0,"sqm":94.81,"pricePerSqm":2582,"trueCostPerSqm":2582,"walk":5,"tokyo":27,"haneda":80,"narita":117,"line":"Nambu KN","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishitama/nc_21536833/","source":"Suumo"},{"id":"21531903","track":"joint","kind":"house","title":"3LDK","priceUSD":238545,"monthlyUSD":0,"sqm":70.1,"pricePerSqm":3403,"trueCostPerSqm":3403,"walk":12,"tokyo":27,"haneda":80,"narita":117,"line":"Nambu KN","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishitama/nc_21531903/","source":"Suumo"},{"id":"21259946","track":"joint","kind":"house","title":"3LDK","priceUSD":238545,"monthlyUSD":0,"sqm":70.1,"pricePerSqm":3403,"trueCostPerSqm":3403,"walk":12,"tokyo":27,"haneda":80,"narita":117,"line":"Odakyu KN","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishitama/nc_21259946/","source":"Suumo"},{"id":"21096407","track":"joint","kind":"house","title":"2LDK","priceUSD":124622,"monthlyUSD":0,"sqm":52.74,"pricePerSqm":2363,"trueCostPerSqm":2363,"walk":13,"tokyo":27,"haneda":80,"narita":101,"line":"Seibu Ikebukuro","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_nerima/nc_21096407/","source":"Suumo"},{"id":"20906655","track":"joint","kind":"house","title":"5DK","priceUSD":188633,"monthlyUSD":0,"sqm":122.55,"pricePerSqm":1539,"trueCostPerSqm":1539,"walk":19,"tokyo":27,"haneda":80,"narita":117,"line":"Odakyu KN","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishitama/nc_20906655/","source":"Suumo"},{"id":"21403170","track":"joint","kind":"house","title":"5DK","priceUSD":194927,"monthlyUSD":0,"sqm":122.55,"pricePerSqm":1591,"trueCostPerSqm":1591,"walk":19,"tokyo":27,"haneda":80,"narita":117,"line":"Odakyu KN","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishitama/nc_21403170/","source":"Suumo"},{"id":"21455381","track":"joint","kind":"house","title":"3LDK","priceUSD":289464,"monthlyUSD":0,"sqm":62.04,"pricePerSqm":4666,"trueCostPerSqm":4666,"walk":15,"tokyo":28,"haneda":86,"narita":121,"line":"Odakyu","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_komae/nc_21455381/","source":"Suumo"},{"id":"21099632","track":"joint","kind":"condo","title":"3LDK","priceUSD":137210,"monthlyUSD":209,"sqm":78.56,"pricePerSqm":1747,"trueCostPerSqm":2066,"walk":8,"tokyo":30,"haneda":30,"narita":121,"line":"Keio","station":"聖蹟桜ヶ丘","href":"https://suumo.jp/ms/chuko/tokyo/sc_tama/nc_21099632/","source":"Suumo"},{"id":"21474363","track":"joint","kind":"house","title":"3LDK","priceUSD":206445,"monthlyUSD":0,"sqm":91.69,"pricePerSqm":2252,"trueCostPerSqm":2252,"walk":9,"tokyo":30,"haneda":90,"narita":120,"line":"Odakyu KN","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishiasao/nc_21474363/","source":"Suumo"},{"id":"21344847","track":"joint","kind":"house","title":"3LDK","priceUSD":206445,"monthlyUSD":0,"sqm":91.69,"pricePerSqm":2252,"trueCostPerSqm":2252,"walk":9,"tokyo":30,"haneda":90,"narita":120,"line":"Odakyu KN","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishiasao/nc_21344847/","source":"Suumo"},{"id":"20320518","track":"joint","kind":"condo","title":"3LDK","priceUSD":220229,"monthlyUSD":207,"sqm":64.4,"pricePerSqm":3420,"trueCostPerSqm":3805,"walk":9,"tokyo":30,"haneda":27,"narita":123,"line":"Odakyu Tama","station":"京王永山","href":"https://suumo.jp/ms/chuko/tokyo/sc_tama/nc_20320518/","source":"Suumo"},{"id":"20536898","track":"joint","kind":"house","title":"3LDK","priceUSD":206445,"monthlyUSD":0,"sqm":91.69,"pricePerSqm":2252,"trueCostPerSqm":2252,"walk":10,"tokyo":30,"haneda":90,"narita":120,"line":"Odakyu KN","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishiasao/nc_20536898/","source":"Suumo"},{"id":"21361763","track":"joint","kind":"house","title":"3LDK","priceUSD":267497,"monthlyUSD":0,"sqm":85.23,"pricePerSqm":3139,"trueCostPerSqm":3139,"walk":10,"tokyo":30,"haneda":90,"narita":120,"line":"Odakyu KN","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishiasao/nc_21361763/","source":"Suumo"},{"id":"20570117","track":"joint","kind":"house","title":"3LDK","priceUSD":207641,"monthlyUSD":0,"sqm":85.05,"pricePerSqm":2441,"trueCostPerSqm":2441,"walk":18,"tokyo":30,"haneda":90,"narita":120,"line":"Odakyu","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishiasao/nc_20570117/","source":"Suumo"},{"id":"21225171","track":"joint","kind":"house","title":"3LDK","priceUSD":235964,"monthlyUSD":0,"sqm":81.98,"pricePerSqm":2878,"trueCostPerSqm":2878,"walk":19,"tokyo":30,"haneda":90,"narita":120,"line":"Odakyu KN","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishiasao/nc_21225171/","source":"Suumo"},{"id":"21042139","track":"joint","kind":"house","title":"4LDK","priceUSD":237915,"monthlyUSD":0,"sqm":99.98,"pricePerSqm":2380,"trueCostPerSqm":2380,"walk":19,"tokyo":30,"haneda":90,"narita":120,"line":"Odakyu KN","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishiasao/nc_21042139/","source":"Suumo"},{"id":"21091715","track":"joint","kind":"condo","title":"3LDK","priceUSD":195053,"monthlyUSD":188,"sqm":73.69,"pricePerSqm":2647,"trueCostPerSqm":2953,"walk":20,"tokyo":30,"haneda":29,"narita":50,"line":"JR Nambu","station":"立川","href":"https://suumo.jp/ms/chuko/tokyo/sc_tachikawa/nc_21091715/","source":"Suumo"},{"id":"1408271","track":"solo","kind":"condo","title":"1DK","priceUSD":101964,"monthlyUSD":109,"sqm":30.93,"pricePerSqm":3297,"trueCostPerSqm":3719,"walk":4,"tokyo":31,"haneda":75,"narita":91,"line":"REJ solo","station":"itabashi","href":"https://realestate.co.jp/en/forsale/view/1408271","source":"REJ"},{"id":"20923629","track":"joint","kind":"condo","title":"2LDK","priceUSD":163520,"monthlyUSD":51,"sqm":52.56,"pricePerSqm":3111,"trueCostPerSqm":3228,"walk":5,"tokyo":31,"haneda":31,"narita":121,"line":"Keio","station":"布田","href":"https://suumo.jp/ms/chuko/tokyo/sc_chofu/nc_20923629/","source":"Suumo"},{"id":"21454484","track":"joint","kind":"condo","title":"2LDK","priceUSD":163520,"monthlyUSD":51,"sqm":52.56,"pricePerSqm":3111,"trueCostPerSqm":3228,"walk":5,"tokyo":31,"haneda":31,"narita":121,"line":"Keio","station":"布田","href":"https://suumo.jp/ms/chuko/tokyo/sc_chofu/nc_21454484/","source":"Suumo"},{"id":"21282256","track":"joint","kind":"condo","title":"3LDK","priceUSD":188696,"monthlyUSD":163,"sqm":61.82,"pricePerSqm":3052,"trueCostPerSqm":3369,"walk":4,"tokyo":32,"haneda":15,"narita":123,"line":"JR Nambu","station":"矢野口","href":"https://suumo.jp/ms/chuko/tokyo/sc_inagi/nc_21282256/","source":"Suumo"},{"id":"78414399","track":"joint","kind":"condo","title":"3LDK","priceUSD":213872,"monthlyUSD":139,"sqm":60.02,"pricePerSqm":3563,"trueCostPerSqm":3841,"walk":10,"tokyo":32,"haneda":19,"narita":125,"line":"Odakyu","station":"町田","href":"https://suumo.jp/ms/chuko/kanagawa/sc_sagamiharashiminami/nc_78414399/","source":"Suumo"},{"id":"21242730","track":"joint","kind":"house","title":"4LDK","priceUSD":251133,"monthlyUSD":0,"sqm":82.62,"pricePerSqm":3040,"trueCostPerSqm":3040,"walk":10,"tokyo":32,"haneda":48,"narita":61,"line":"Sumida","station":"sumida","href":"https://suumo.jp/chukoikkodate/tokyo/sc_sumida/nc_21242730/","source":"Suumo"},{"id":"20698162","track":"joint","kind":"condo","title":"4LDK","priceUSD":212739,"monthlyUSD":218,"sqm":79.74,"pricePerSqm":2668,"trueCostPerSqm":2996,"walk":8,"tokyo":33,"haneda":85,"narita":124,"line":"Odakyu","station":"鶴川","href":"https://suumo.jp/ms/chuko/kanagawa/sc_kawasakishiasao/nc_20698162/","source":"Suumo"},{"id":"20624411","track":"joint","kind":"condo","title":"４SLDK","priceUSD":200151,"monthlyUSD":167,"sqm":105.01,"pricePerSqm":1906,"trueCostPerSqm":2097,"walk":15,"tokyo":33,"haneda":30,"narita":127,"line":"Odakyu Tama","station":"京王多摩センター","href":"https://suumo.jp/ms/chuko/tokyo/sc_tama/nc_20624411/","source":"Suumo"},{"id":"21492335","track":"joint","kind":"house","title":"3LDK","priceUSD":187563,"monthlyUSD":0,"sqm":112.6,"pricePerSqm":1666,"trueCostPerSqm":1666,"walk":20,"tokyo":33,"haneda":89,"narita":109,"line":"Seibu Shinjuku","station":"花小金井","href":"https://suumo.jp/chukoikkodate/tokyo/sc_kodaira/nc_21492335/","source":"Suumo"},{"id":"21198762","track":"joint","kind":"house","title":"2LDK","priceUSD":149799,"monthlyUSD":53,"sqm":47.77,"pricePerSqm":3136,"trueCostPerSqm":3269,"walk":9,"tokyo":34,"haneda":62,"narita":78,"line":"Edogawa","station":"JR小岩","href":"https://suumo.jp/chukoikkodate/tokyo/sc_edogawa/nc_21198762/","source":"Suumo"},{"id":"1405876","track":"joint","kind":"condo","title":"3LDK","priceUSD":125818,"monthlyUSD":132,"sqm":60,"pricePerSqm":2097,"trueCostPerSqm":2361,"walk":10,"tokyo":34,"haneda":18,"narita":125,"line":"REJ joint","station":"陽光台","href":"https://realestate.co.jp/en/forsale/view/1405876","source":"REJ"},{"id":"1393849","track":"joint","kind":"condo","title":"3LDK","priceUSD":125818,"monthlyUSD":132,"sqm":60,"pricePerSqm":2097,"trueCostPerSqm":2361,"walk":10,"tokyo":34,"haneda":18,"narita":125,"line":"REJ joint","station":"陽光台","href":"https://realestate.co.jp/en/forsale/view/1393849","source":"REJ"},{"id":"21041538","track":"joint","kind":"condo","title":"2DK","priceUSD":231621,"monthlyUSD":153,"sqm":47.32,"pricePerSqm":4895,"trueCostPerSqm":5283,"walk":10,"tokyo":34,"haneda":51,"narita":49,"line":"Den-en-toshi","station":"多摩川","href":"https://suumo.jp/ms/chuko/tokyo/sc_ota/nc_21041538/","source":"Suumo"},{"id":"79077525","track":"joint","kind":"house","title":"3LDK","priceUSD":298338,"monthlyUSD":0,"sqm":81.4,"pricePerSqm":3665,"trueCostPerSqm":3665,"walk":13,"tokyo":34,"haneda":89,"narita":109,"line":"Seibu Ikebukuro","station":"西武柳沢","href":"https://suumo.jp/chukoikkodate/tokyo/sc_nishitokyo/nc_79077525/","source":"Suumo"},{"id":"78762247","track":"joint","kind":"house","title":"5LDK","priceUSD":250504,"monthlyUSD":0,"sqm":126.12,"pricePerSqm":1986,"trueCostPerSqm":1986,"walk":10,"tokyo":35,"haneda":59,"narita":69,"line":"Adachi","station":"Adachi","href":"https://suumo.jp/chukoikkodate/tokyo/sc_adachi/nc_78762247/","source":"Suumo"},{"id":"21018634","track":"joint","kind":"house","title":"2LDK","priceUSD":269386,"monthlyUSD":0,"sqm":102.76,"pricePerSqm":2622,"trueCostPerSqm":2622,"walk":10,"tokyo":35,"haneda":59,"narita":69,"line":"Adachi","station":"Adachi","href":"https://suumo.jp/chukoikkodate/tokyo/sc_adachi/nc_21018634/","source":"Suumo"},{"id":"21286588","track":"joint","kind":"house","title":"4LDK","priceUSD":294562,"monthlyUSD":0,"sqm":96.34,"pricePerSqm":3058,"trueCostPerSqm":3058,"walk":10,"tokyo":35,"haneda":59,"narita":69,"line":"Adachi","station":"adachi","href":"https://suumo.jp/chukoikkodate/tokyo/sc_adachi/nc_21286588/","source":"Suumo"},{"id":"21329251","track":"joint","kind":"condo","title":"2LDK","priceUSD":263092,"monthlyUSD":160,"sqm":51.84,"pricePerSqm":5075,"trueCostPerSqm":5445,"walk":8,"tokyo":36,"haneda":16,"narita":89,"line":"Den-en-toshi","station":"京急蒲田","href":"https://suumo.jp/ms/chuko/tokyo/sc_ota/nc_21329251/","source":"Suumo"},{"id":"21345469","track":"joint","kind":"condo","title":"2LDK","priceUSD":263092,"monthlyUSD":160,"sqm":51.84,"pricePerSqm":5075,"trueCostPerSqm":5445,"walk":8,"tokyo":36,"haneda":16,"narita":89,"line":"Den-en-toshi","station":"京急蒲田","href":"https://suumo.jp/ms/chuko/tokyo/sc_ota/nc_21345469/","source":"Suumo"},{"id":"21502414","track":"joint","kind":"condo","title":"2LDK","priceUSD":207641,"monthlyUSD":214,"sqm":61.15,"pricePerSqm":3396,"trueCostPerSqm":3816,"walk":9,"tokyo":36,"haneda":41,"narita":134,"line":"Odakyu Tama","station":"京王堀之内","href":"https://suumo.jp/ms/chuko/tokyo/sc_hachioji/nc_21502414/","source":"Suumo"},{"id":"20819855","track":"joint","kind":"house","title":"5LDK","priceUSD":288268,"monthlyUSD":0,"sqm":117.32,"pricePerSqm":2457,"trueCostPerSqm":2457,"walk":9,"tokyo":36,"haneda":65,"narita":96,"line":"Seibu Shinjuku","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_nakano/nc_20819855/","source":"Suumo"},{"id":"21321178","track":"joint","kind":"condo","title":"３LDK","priceUSD":187563,"monthlyUSD":263,"sqm":67.74,"pricePerSqm":2769,"trueCostPerSqm":3235,"walk":10,"tokyo":35,"haneda":91,"narita":128,"line":"Odakyu Tama","station":"小田急多摩センター","href":"https://suumo.jp/ms/chuko/tokyo/sc_tama/nc_21321178/","source":"Suumo"},{"id":"21515088","track":"joint","kind":"condo","title":"2LDK","priceUSD":207641,"monthlyUSD":214,"sqm":61.15,"pricePerSqm":3396,"trueCostPerSqm":3816,"walk":10,"tokyo":36,"haneda":41,"narita":134,"line":"Odakyu Tama","station":"京王堀之内","href":"https://suumo.jp/ms/chuko/tokyo/sc_hachioji/nc_21515088/","source":"Suumo"},{"id":"21338265","track":"joint","kind":"condo","title":"2DK","priceUSD":124622,"monthlyUSD":108,"sqm":40.09,"pricePerSqm":3109,"trueCostPerSqm":3432,"walk":11,"tokyo":36,"haneda":28,"narita":39,"line":"Seibu Ikebukuro","station":"ひばりヶ丘","href":"https://suumo.jp/ms/chuko/saitama/sc_niiza/nc_21338265/","source":"Suumo"},{"id":"21416458","track":"joint","kind":"house","title":"4LDK","priceUSD":187563,"monthlyUSD":0,"sqm":95.68,"pricePerSqm":1960,"trueCostPerSqm":1960,"walk":13,"tokyo":36,"haneda":90,"narita":120,"line":"JR Nambu","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_tachikawa/nc_21416458/","source":"Suumo"},{"id":"21431461","track":"joint","kind":"condo","title":"3LDK","priceUSD":109517,"monthlyUSD":144,"sqm":61.84,"pricePerSqm":1771,"trueCostPerSqm":2050,"walk":15,"tokyo":36,"haneda":29,"narita":47,"line":"Tobu Tojo","station":"北朝霞","href":"https://suumo.jp/ms/chuko/saitama/sc_asaka/nc_21431461/","source":"Suumo"},{"id":"20115828","track":"joint","kind":"house","title":"4LDK","priceUSD":200151,"monthlyUSD":0,"sqm":96.88,"pricePerSqm":2066,"trueCostPerSqm":2066,"walk":20,"tokyo":36,"haneda":90,"narita":120,"line":"JR Nambu","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_tachikawa/nc_20115828/","source":"Suumo"},{"id":"20919643","track":"joint","kind":"condo","title":"3LDK","priceUSD":187563,"monthlyUSD":245,"sqm":80.5,"pricePerSqm":2330,"trueCostPerSqm":2695,"walk":11,"tokyo":37,"haneda":83,"narita":129,"line":"Odakyu","station":"玉川学園前","href":"https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashiaoba/nc_20919643/","source":"Suumo"},{"id":"21496392","track":"joint","kind":"house","title":"2LDK","priceUSD":231621,"monthlyUSD":0,"sqm":95.83,"pricePerSqm":2417,"trueCostPerSqm":2417,"walk":13,"tokyo":37,"haneda":83,"narita":129,"line":"Odakyu","station":"玉川学園前","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashiaoba/nc_21496392/","source":"Suumo"},{"id":"20948405","track":"joint","kind":"condo","title":"3LDK","priceUSD":163646,"monthlyUSD":240,"sqm":64.88,"pricePerSqm":2522,"trueCostPerSqm":2966,"walk":14,"tokyo":37,"haneda":33,"narita":53,"line":"Seibu Shinjuku","station":"小平","href":"https://suumo.jp/ms/chuko/tokyo/sc_kodaira/nc_20948405/","source":"Suumo"},{"id":"21380251","track":"joint","kind":"condo","title":"3LDK","priceUSD":149799,"monthlyUSD":229,"sqm":75.16,"pricePerSqm":1993,"trueCostPerSqm":2359,"walk":15,"tokyo":37,"haneda":83,"narita":129,"line":"Odakyu","station":"玉川学園前","href":"https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashiaoba/nc_21380251/","source":"Suumo"},{"id":"21330874","track":"joint","kind":"condo","title":"3DK","priceUSD":218907,"monthlyUSD":117,"sqm":55.73,"pricePerSqm":3928,"trueCostPerSqm":4180,"walk":3,"tokyo":38,"haneda":23,"narita":45,"line":"Den-en-toshi","station":"雑色","href":"https://suumo.jp/ms/chuko/tokyo/sc_ota/nc_21330874/","source":"Suumo"},{"id":"21353097","track":"solo","kind":"condo","title":"1DK","priceUSD":149799,"monthlyUSD":50,"sqm":29.48,"pricePerSqm":5081,"trueCostPerSqm":5285,"walk":4,"tokyo":38,"haneda":58,"narita":52,"line":"Tokyu Oimachi","station":"尾山台","href":"https://suumo.jp/ms/chuko/tokyo/sc_setagaya/nc_21353097/","source":"Suumo"},{"id":"20988140","track":"joint","kind":"condo","title":"3LDK","priceUSD":137210,"monthlyUSD":103,"sqm":69.58,"pricePerSqm":1972,"trueCostPerSqm":2150,"walk":13,"tokyo":38,"haneda":32,"narita":124,"line":"Seibu Shinjuku","station":"八坂","href":"https://suumo.jp/ms/chuko/tokyo/sc_higashimurayama/nc_20988140/","source":"Suumo"},{"id":"20919179","track":"joint","kind":"house","title":"4LDK","priceUSD":191906,"monthlyUSD":0,"sqm":85.45,"pricePerSqm":2246,"trueCostPerSqm":2246,"walk":17,"tokyo":38,"haneda":90,"narita":122,"line":"Seibu Ikebukuro","station":"東久留米","href":"https://suumo.jp/chukoikkodate/saitama/sc_niiza/nc_20919179/","source":"Suumo"},{"id":"21327823","track":"joint","kind":"condo","title":"3LDK","priceUSD":130916,"monthlyUSD":278,"sqm":72.0,"pricePerSqm":1818,"trueCostPerSqm":2282,"walk":13,"tokyo":40,"haneda":85,"narita":103,"line":"Tobu Tojo","station":"みずほ台","href":"https://suumo.jp/ms/chuko/saitama/sc_fujimi/nc_21327823/","source":"Suumo"},{"id":"21399835","track":"joint","kind":"house","title":"3LDK","priceUSD":239111,"monthlyUSD":0,"sqm":85.25,"pricePerSqm":2805,"trueCostPerSqm":2805,"walk":14,"tokyo":39,"haneda":93,"narita":123,"line":"Seibu Shinjuku","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_kodaira/nc_21399835/","source":"Suumo"},{"id":"21414021","track":"joint","kind":"house","title":"4LDK","priceUSD":239111,"monthlyUSD":0,"sqm":85.25,"pricePerSqm":2805,"trueCostPerSqm":2805,"walk":14,"tokyo":39,"haneda":93,"narita":123,"line":"Seibu Shinjuku","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_kodaira/nc_21414021/","source":"Suumo"},{"id":"21271037","track":"joint","kind":"condo","title":"2LDK","priceUSD":137210,"monthlyUSD":131,"sqm":54.18,"pricePerSqm":2532,"trueCostPerSqm":2823,"walk":15,"tokyo":36,"haneda":94,"narita":109,"line":"Seibu Ikebukuro","station":"所沢","href":"https://suumo.jp/ms/chuko/tokyo/sc_higashimurayama/nc_21271037/","source":"Suumo"},{"id":"78179930","track":"joint","kind":"condo","title":"2DK","priceUSD":156093,"monthlyUSD":126,"sqm":43.02,"pricePerSqm":3628,"trueCostPerSqm":3980,"walk":2,"tokyo":40,"haneda":51,"narita":51,"line":"Nambu KN","station":"向河原","href":"https://suumo.jp/ms/chuko/kanagawa/sc_kawasakishinakahara/nc_78179930/","source":"Suumo"},{"id":"20988153","track":"joint","kind":"condo","title":"3LDK","priceUSD":169940,"monthlyUSD":262,"sqm":73.02,"pricePerSqm":2327,"trueCostPerSqm":2758,"walk":3,"tokyo":40,"haneda":93,"narita":125,"line":"JR Nambu","station":"是政","href":"https://suumo.jp/ms/chuko/tokyo/sc_fuchu/nc_20988153/","source":"Suumo"},{"id":"21264325","track":"joint","kind":"condo","title":"3LDK","priceUSD":188192,"monthlyUSD":214,"sqm":66.0,"pricePerSqm":2851,"trueCostPerSqm":3240,"walk":3,"tokyo":40,"haneda":93,"narita":125,"line":"JR Nambu","station":"是政","href":"https://suumo.jp/ms/chuko/tokyo/sc_fuchu/nc_21264325/","source":"Suumo"},{"id":"21345646","track":"joint","kind":"condo","title":"3LDK","priceUSD":200151,"monthlyUSD":171,"sqm":82.43,"pricePerSqm":2428,"trueCostPerSqm":2677,"walk":6,"tokyo":40,"haneda":93,"narita":125,"line":"JR Nambu","station":"是政","href":"https://suumo.jp/ms/chuko/tokyo/sc_fuchu/nc_21345646/","source":"Suumo"},{"id":"21538503","track":"joint","kind":"condo","title":"2DK","priceUSD":149799,"monthlyUSD":175,"sqm":60.2,"pricePerSqm":2488,"trueCostPerSqm":2837,"walk":8,"tokyo":40,"haneda":57,"narita":122,"line":"Sotetsu Shin-Yokohama","station":"羽沢横浜国大","href":"https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashikanagawa/nc_21538503/","source":"Suumo"},{"id":"21448621","track":"joint","kind":"condo","title":"2LDK","priceUSD":156093,"monthlyUSD":172,"sqm":63.4,"pricePerSqm":2462,"trueCostPerSqm":2788,"walk":8,"tokyo":40,"haneda":57,"narita":122,"line":"Sotetsu Shin-Yokohama","station":"羽沢横浜国大","href":"https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashikanagawa/nc_21448621/","source":"Suumo"},{"id":"21501419","track":"joint","kind":"condo","title":"3LDK","priceUSD":181898,"monthlyUSD":163,"sqm":86.72,"pricePerSqm":2098,"trueCostPerSqm":2323,"walk":8,"tokyo":40,"haneda":83,"narita":129,"line":"Odakyu KN","station":"東林間","href":"https://suumo.jp/ms/chuko/kanagawa/sc_sagamiharashiminami/nc_21501419/","source":"Suumo"},{"id":"1393751","track":"joint","kind":"condo","title":"2LDK","priceUSD":74270,"monthlyUSD":170,"sqm":45.09,"pricePerSqm":1647,"trueCostPerSqm":2100,"walk":9,"tokyo":40,"haneda":83,"narita":129,"line":"REJ joint","station":"Higashirinkan","href":"https://realestate.co.jp/en/forsale/view/1393751","source":"REJ"},{"id":"20743401","track":"joint","kind":"house","title":"3LDK","priceUSD":207704,"monthlyUSD":0,"sqm":74.52,"pricePerSqm":2787,"trueCostPerSqm":2787,"walk":15,"tokyo":40,"haneda":96,"narita":111,"line":"Seibu Ikebukuro","station":"秋津","href":"https://suumo.jp/chukoikkodate/saitama/sc_tokorozawa/nc_20743401/","source":"Suumo"},{"id":"21028848","track":"joint","kind":"condo","title":"3LDK","priceUSD":174975,"monthlyUSD":174,"sqm":57.47,"pricePerSqm":3045,"trueCostPerSqm":3408,"walk":18,"tokyo":39,"haneda":85,"narita":103,"line":"Seibu Ikebukuro","station":"清瀬","href":"https://suumo.jp/ms/chuko/tokyo/sc_kiyose/nc_21028848/","source":"Suumo"},{"id":"1393770","track":"solo","kind":"condo","title":"1LDK","priceUSD":86858,"monthlyUSD":180,"sqm":51.12,"pricePerSqm":1699,"trueCostPerSqm":2122,"walk":4,"tokyo":58,"haneda":101,"narita":139,"line":"REJ solo","station":"Minamihashimoto","href":"https://realestate.co.jp/en/forsale/view/1393770","source":"REJ"},{"id":"1378722","track":"solo","kind":"condo","title":"1LDK","priceUSD":93152,"monthlyUSD":94,"sqm":34.92,"pricePerSqm":2668,"trueCostPerSqm":2991,"walk":10,"tokyo":35,"haneda":74,"narita":94,"line":"REJ solo","station":"Shin Takashimadaira","href":"https://realestate.co.jp/en/forsale/view/1378722","source":"REJ"},{"id":"20864508","track":"joint","kind":"house","title":"6K","priceUSD":220292,"monthlyUSD":0,"sqm":94.11,"pricePerSqm":2341,"trueCostPerSqm":2341,"walk":10,"tokyo":41,"haneda":57,"narita":56,"line":"Katsushika","station":"京成京成立石","href":"https://suumo.jp/chukoikkodate/tokyo/sc_katsushika/nc_20864508/","source":"Suumo"},{"id":"21534660","track":"joint","kind":"condo","title":"3LDK","priceUSD":250504,"monthlyUSD":161,"sqm":70.29,"pricePerSqm":3564,"trueCostPerSqm":3839,"walk":10,"tokyo":41,"haneda":41,"narita":45,"line":"Den-en-toshi","station":"武蔵新田","href":"https://suumo.jp/ms/chuko/tokyo/sc_ota/nc_21534660/","source":"Suumo"},{"id":"78674406","track":"solo","kind":"condo","title":"1LDK","priceUSD":135322,"monthlyUSD":126,"sqm":41.31,"pricePerSqm":3276,"trueCostPerSqm":3642,"walk":3,"tokyo":42,"haneda":44,"narita":48,"line":"Den-en-toshi","station":"千鳥町","href":"https://suumo.jp/ms/chuko/tokyo/sc_ota/nc_78674406/","source":"Suumo"},{"id":"1405766","track":"solo","kind":"condo","title":"1LDK","priceUSD":118328,"monthlyUSD":118,"sqm":35.36,"pricePerSqm":3346,"trueCostPerSqm":3747,"walk":5,"tokyo":42,"haneda":70,"narita":121,"line":"REJ solo","station":"Yokohama-Kohoku","href":"https://realestate.co.jp/en/forsale/view/1405766","source":"REJ"},{"id":"20600574","track":"joint","kind":"condo","title":"3LDK","priceUSD":219033,"monthlyUSD":201,"sqm":59.16,"pricePerSqm":3702,"trueCostPerSqm":4110,"walk":6,"tokyo":41,"haneda":100,"narita":132,"line":"Odakyu Tama","station":"多摩センター","href":"https://suumo.jp/ms/chuko/tokyo/sc_tama/nc_20600574/","source":"Suumo"},{"id":"20785920","track":"joint","kind":"house","title":"3DK","priceUSD":281974,"monthlyUSD":0,"sqm":60.27,"pricePerSqm":4679,"trueCostPerSqm":4679,"walk":6,"tokyo":42,"haneda":59,"narita":55,"line":"Katsushika","station":"京成京成高砂","href":"https://suumo.jp/chukoikkodate/tokyo/sc_katsushika/nc_20785920/","source":"Suumo"},{"id":"76290616","track":"joint","kind":"house","title":"2LDK","priceUSD":231621,"monthlyUSD":75,"sqm":76.9,"pricePerSqm":3012,"trueCostPerSqm":3129,"walk":9,"tokyo":42,"haneda":61,"narita":59,"line":"Katsushika","station":"堀切菖蒲園","href":"https://suumo.jp/chukoikkodate/tokyo/sc_katsushika/nc_76290616/","source":"Suumo"},{"id":"79077545","track":"joint","kind":"house","title":"2LDK","priceUSD":295821,"monthlyUSD":0,"sqm":70.98,"pricePerSqm":4168,"trueCostPerSqm":4168,"walk":12,"tokyo":42,"haneda":49,"narita":109,"line":"Nambu KN","station":"平間","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishinakahara/nc_79077545/","source":"Suumo"},{"id":"21258166","track":"joint","kind":"condo","title":"2LDK","priceUSD":169814,"monthlyUSD":162,"sqm":51.62,"pricePerSqm":3290,"trueCostPerSqm":3666,"walk":13,"tokyo":42,"haneda":41,"narita":43,"line":"Nambu KN","station":"尻手","href":"https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashitsurumi/nc_21258166/","source":"Suumo"},{"id":"21294061","track":"joint","kind":"condo","title":"3LDK","priceUSD":188192,"monthlyUSD":140,"sqm":85.09,"pricePerSqm":2212,"trueCostPerSqm":2409,"walk":16,"tokyo":41,"haneda":100,"narita":132,"line":"Odakyu Tama","station":"多摩センター","href":"https://suumo.jp/ms/chuko/tokyo/sc_tama/nc_21294061/","source":"Suumo"},{"id":"21454849","track":"joint","kind":"condo","title":"3LDK","priceUSD":162387,"monthlyUSD":152,"sqm":79.48,"pricePerSqm":2043,"trueCostPerSqm":2273,"walk":18,"tokyo":41,"haneda":100,"narita":132,"line":"Odakyu Tama","station":"多摩センター","href":"https://suumo.jp/ms/chuko/tokyo/sc_tama/nc_21454849/","source":"Suumo"},{"id":"20285873","track":"joint","kind":"condo","title":"2LDK","priceUSD":125818,"monthlyUSD":158,"sqm":51.58,"pricePerSqm":2439,"trueCostPerSqm":2807,"walk":20,"tokyo":42,"haneda":39,"narita":54,"line":"Seibu Ikebukuro","station":"新秋津","href":"https://suumo.jp/ms/chuko/tokyo/sc_higashimurayama/nc_20285873/","source":"Suumo"},{"id":"1387839","track":"joint","kind":"condo","title":"3LDK","priceUSD":122734,"monthlyUSD":214,"sqm":61.95,"pricePerSqm":1981,"trueCostPerSqm":2396,"walk":6,"tokyo":43,"haneda":96,"narita":126,"line":"REJ joint","station":"Kita Hachioji","href":"https://realestate.co.jp/en/forsale/view/1387839","source":"REJ"},{"id":"21114452","track":"joint","kind":"condo","title":"3LDK","priceUSD":168681,"monthlyUSD":199,"sqm":64.38,"pricePerSqm":2620,"trueCostPerSqm":2991,"walk":6,"tokyo":43,"haneda":96,"narita":134,"line":"Keio","station":"平山城址公園","href":"https://suumo.jp/ms/chuko/tokyo/sc_hino/nc_21114452/","source":"Suumo"},{"id":"77489821","track":"joint","kind":"house","title":"2LDK","priceUSD":275680,"monthlyUSD":0,"sqm":87.76,"pricePerSqm":3141,"trueCostPerSqm":3141,"walk":8,"tokyo":43,"haneda":35,"narita":114,"line":"Sotetsu Shin-Yokohama","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikanagawa/nc_77489821/","source":"Suumo"},{"id":"21527420","track":"joint","kind":"condo","title":"2LDK","priceUSD":174975,"monthlyUSD":212,"sqm":53.62,"pricePerSqm":3263,"trueCostPerSqm":3738,"walk":12,"tokyo":37,"haneda":76,"narita":96,"line":"Tobu Tojo","station":"西高島平","href":"https://suumo.jp/ms/chuko/tokyo/sc_itabashi/nc_21527420/","source":"Suumo"},{"id":"21216001","track":"joint","kind":"house","title":"4LDK","priceUSD":254846,"monthlyUSD":0,"sqm":99.77,"pricePerSqm":2554,"trueCostPerSqm":2554,"walk":12,"tokyo":43,"haneda":35,"narita":114,"line":"Sotetsu Shin-Yokohama","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikanagawa/nc_21216001/","source":"Suumo"},{"id":"21167371","track":"joint","kind":"house","title":"4LDK","priceUSD":254846,"monthlyUSD":0,"sqm":99.77,"pricePerSqm":2554,"trueCostPerSqm":2554,"walk":12,"tokyo":43,"haneda":35,"narita":114,"line":"Sotetsu Shin-Yokohama","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikanagawa/nc_21167371/","source":"Suumo"},{"id":"21221968","track":"joint","kind":"house","title":"4LDK","priceUSD":254846,"monthlyUSD":0,"sqm":112.99,"pricePerSqm":2255,"trueCostPerSqm":2255,"walk":12,"tokyo":43,"haneda":35,"narita":114,"line":"Sotetsu Shin-Yokohama","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikanagawa/nc_21221968/","source":"Suumo"},{"id":"21455034","track":"joint","kind":"condo","title":"3DK","priceUSD":174975,"monthlyUSD":163,"sqm":49.14,"pricePerSqm":3561,"trueCostPerSqm":3959,"walk":14,"tokyo":43,"haneda":51,"narita":52,"line":"Sotetsu Shin-Yokohama","station":"大倉山","href":"https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashikohoku/nc_21455034/","source":"Suumo"},{"id":"21282383","track":"joint","kind":"house","title":"4LDK","priceUSD":181269,"monthlyUSD":0,"sqm":93.36,"pricePerSqm":1942,"trueCostPerSqm":1942,"walk":18,"tokyo":43,"haneda":35,"narita":114,"line":"Sotetsu Shin-Yokohama","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikanagawa/nc_21282383/","source":"Suumo"},{"id":"21372225","track":"solo","kind":"condo","title":"1LDK","priceUSD":124622,"monthlyUSD":199,"sqm":56.4,"pricePerSqm":2210,"trueCostPerSqm":2633,"walk":18,"tokyo":41,"haneda":91,"narita":109,"line":"Seibu Ikebukuro","station":"新所沢","href":"https://suumo.jp/ms/chuko/saitama/sc_tokorozawa/nc_21372225/","source":"Suumo"},{"id":"21202061","track":"joint","kind":"house","title":"3LDK","priceUSD":219033,"monthlyUSD":0,"sqm":92.74,"pricePerSqm":2362,"trueCostPerSqm":2362,"walk":18,"tokyo":44,"haneda":100,"narita":115,"line":"Seibu Shinjuku","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_higashikurume/nc_21202061/","source":"Suumo"},{"id":"20000254","track":"joint","kind":"house","title":"4LDK","priceUSD":212739,"monthlyUSD":0,"sqm":96.05,"pricePerSqm":2215,"trueCostPerSqm":2215,"walk":5,"tokyo":45,"haneda":101,"narita":138,"line":"Odakyu KN","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_sagamiharashiminami/nc_20000254/","source":"Suumo"},{"id":"20966638","track":"joint","kind":"condo","title":"3LDK","priceUSD":187563,"monthlyUSD":193,"sqm":64.99,"pricePerSqm":2886,"trueCostPerSqm":3242,"walk":10,"tokyo":45,"haneda":96,"narita":118,"line":"Seibu Ikebukuro","station":"東所沢","href":"https://suumo.jp/ms/chuko/saitama/sc_tokorozawa/nc_20966638/","source":"Suumo"},{"id":"21298606","track":"joint","kind":"house","title":"4LDK","priceUSD":219033,"monthlyUSD":0,"sqm":102.86,"pricePerSqm":2129,"trueCostPerSqm":2129,"walk":18,"tokyo":45,"haneda":96,"narita":118,"line":"Seibu Ikebukuro","station":"東所沢","href":"https://suumo.jp/chukoikkodate/tokyo/sc_kiyose/nc_21298606/","source":"Suumo"},{"id":"21052623","track":"joint","kind":"condo","title":"3LDK","priceUSD":74270,"monthlyUSD":96,"sqm":70.56,"pricePerSqm":1053,"trueCostPerSqm":1216,"walk":6,"tokyo":43,"haneda":100,"narita":113,"line":"Seibu Ikebukuro","station":"小手指","href":"https://suumo.jp/ms/chuko/saitama/sc_tokorozawa/nc_21052623/","source":"Suumo"},{"id":"21430055","track":"joint","kind":"house","title":"4LDK","priceUSD":169877,"monthlyUSD":0,"sqm":109.47,"pricePerSqm":1552,"trueCostPerSqm":1552,"walk":7,"tokyo":46,"haneda":100,"narita":132,"line":"Keio","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_21430055/","source":"Suumo"},{"id":"21006026","track":"joint","kind":"house","title":"4LDK","priceUSD":263092,"monthlyUSD":1,"sqm":96.99,"pricePerSqm":2713,"trueCostPerSqm":2714,"walk":7,"tokyo":46,"haneda":33,"narita":106,"line":"Nambu KN","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishikawasaki/nc_21006026/","source":"Suumo"},{"id":"21144313","track":"joint","kind":"house","title":"6LDDKK","priceUSD":163646,"monthlyUSD":0,"sqm":135.46,"pricePerSqm":1208,"trueCostPerSqm":1208,"walk":8,"tokyo":46,"haneda":100,"narita":132,"line":"Keio","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_21144313/","source":"Suumo"},{"id":"21377158","track":"joint","kind":"house","title":"2LDK","priceUSD":181269,"monthlyUSD":0,"sqm":67.74,"pricePerSqm":2676,"trueCostPerSqm":2676,"walk":10,"tokyo":46,"haneda":33,"narita":106,"line":"Nambu KN","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishikawasaki/nc_21377158/","source":"Suumo"},{"id":"21063647","track":"joint","kind":"house","title":"3LDK","priceUSD":188192,"monthlyUSD":0,"sqm":70.74,"pricePerSqm":2660,"trueCostPerSqm":2660,"walk":10,"tokyo":46,"haneda":100,"narita":132,"line":"Keio","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_21063647/","source":"Suumo"},{"id":"20864509","track":"joint","kind":"house","title":"3LDK","priceUSD":188192,"monthlyUSD":0,"sqm":70.74,"pricePerSqm":2660,"trueCostPerSqm":2660,"walk":10,"tokyo":46,"haneda":100,"narita":132,"line":"Keio","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_20864509/","source":"Suumo"},{"id":"20153898","track":"joint","kind":"house","title":"2LDK","priceUSD":276876,"monthlyUSD":0,"sqm":99.97,"pricePerSqm":2770,"trueCostPerSqm":2770,"walk":12,"tokyo":46,"haneda":87,"narita":139,"line":"Keio Sag KN","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_inagi/nc_20153898/","source":"Suumo"},{"id":"72897065","track":"joint","kind":"house","title":"3LDK","priceUSD":241062,"monthlyUSD":0,"sqm":82.8,"pricePerSqm":2911,"trueCostPerSqm":2911,"walk":14,"tokyo":46,"haneda":33,"narita":106,"line":"Nambu KN","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_kawasakishikawasaki/nc_72897065/","source":"Suumo"},{"id":"21467690","track":"joint","kind":"house","title":"4LDK","priceUSD":219033,"monthlyUSD":0,"sqm":95.85,"pricePerSqm":2285,"trueCostPerSqm":2285,"walk":15,"tokyo":46,"haneda":100,"narita":132,"line":"Keio","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_21467690/","source":"Suumo"},{"id":"20762309","track":"joint","kind":"house","title":"2LDK","priceUSD":99446,"monthlyUSD":0,"sqm":77.91,"pricePerSqm":1276,"trueCostPerSqm":1276,"walk":17,"tokyo":46,"haneda":102,"narita":125,"line":"JR Nambu","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_higashiyamato/nc_20762309/","source":"Suumo"},{"id":"21497139","track":"joint","kind":"house","title":"3LDK","priceUSD":213935,"monthlyUSD":0,"sqm":77.84,"pricePerSqm":2748,"trueCostPerSqm":2748,"walk":17,"tokyo":46,"haneda":100,"narita":132,"line":"Keio","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_21497139/","source":"Suumo"},{"id":"21142640","track":"joint","kind":"house","title":"4LDK","priceUSD":219033,"monthlyUSD":0,"sqm":93.57,"pricePerSqm":2341,"trueCostPerSqm":2341,"walk":18,"tokyo":46,"haneda":100,"narita":132,"line":"Keio","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_21142640/","source":"Suumo"},{"id":"21005495","track":"joint","kind":"house","title":"2LDK","priceUSD":99446,"monthlyUSD":0,"sqm":77.91,"pricePerSqm":1276,"trueCostPerSqm":1276,"walk":19,"tokyo":46,"haneda":102,"narita":125,"line":"JR Nambu","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_higashiyamato/nc_21005495/","source":"Suumo"},{"id":"21472445","track":"joint","kind":"house","title":"4LDK","priceUSD":193857,"monthlyUSD":0,"sqm":86.11,"pricePerSqm":2251,"trueCostPerSqm":2251,"walk":19,"tokyo":46,"haneda":102,"narita":125,"line":"Seibu Shinjuku","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_higashiyamato/nc_21472445/","source":"Suumo"},{"id":"21533729","track":"joint","kind":"house","title":"5DK","priceUSD":225327,"monthlyUSD":0,"sqm":115.66,"pricePerSqm":1948,"trueCostPerSqm":1948,"walk":19,"tokyo":46,"haneda":100,"narita":132,"line":"Keio","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_hino/nc_21533729/","source":"Suumo"},{"id":"21161428","track":"joint","kind":"house","title":"3LDK","priceUSD":286380,"monthlyUSD":0,"sqm":82.8,"pricePerSqm":3459,"trueCostPerSqm":3459,"walk":15,"tokyo":47,"haneda":99,"narita":115,"line":"Seibu Ikebukuro","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_nishitokyo/nc_21161428/","source":"Suumo"},{"id":"21094280","track":"joint","kind":"condo","title":"3LDK","priceUSD":156093,"monthlyUSD":154,"sqm":66.16,"pricePerSqm":2359,"trueCostPerSqm":2639,"walk":12,"tokyo":48,"haneda":40,"narita":50,"line":"Tobu Tojo","station":"上福岡","href":"https://suumo.jp/ms/chuko/saitama/sc_fujimino/nc_21094280/","source":"Suumo"},{"id":"21280821","track":"joint","kind":"house","title":"4LDK","priceUSD":254846,"monthlyUSD":0,"sqm":99.77,"pricePerSqm":2554,"trueCostPerSqm":2554,"walk":12,"tokyo":48,"haneda":54,"narita":112,"line":"Sotetsu Shin-Yokohama","station":"片倉町","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikanagawa/nc_21280821/","source":"Suumo"},{"id":"1393766","track":"joint","kind":"condo","title":"2LDK","priceUSD":93152,"monthlyUSD":196,"sqm":56.49,"pricePerSqm":1649,"trueCostPerSqm":2065,"walk":6,"tokyo":49,"haneda":45,"narita":57,"line":"REJ joint","station":"Gumyouji","href":"https://realestate.co.jp/en/forsale/view/1393766","source":"REJ"},{"id":"21402988","track":"joint","kind":"house","title":"4LDK","priceUSD":250504,"monthlyUSD":0,"sqm":84.04,"pricePerSqm":2981,"trueCostPerSqm":2981,"walk":13,"tokyo":49,"haneda":103,"narita":135,"line":"JR Nambu","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_kunitachi/nc_21402988/","source":"Suumo"},{"id":"20009540","track":"joint","kind":"house","title":"4LDK","priceUSD":294562,"monthlyUSD":0,"sqm":93.96,"pricePerSqm":3135,"trueCostPerSqm":3135,"walk":13,"tokyo":49,"haneda":103,"narita":135,"line":"JR Nambu","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_kunitachi/nc_20009540/","source":"Suumo"},{"id":"21462240","track":"joint","kind":"condo","title":"3LDK","priceUSD":223376,"monthlyUSD":156,"sqm":65.7,"pricePerSqm":3400,"trueCostPerSqm":3685,"walk":14,"tokyo":49,"haneda":49,"narita":118,"line":"Sotetsu Shin-Yokohama","station":"上星川","href":"https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashihodogaya/nc_21462240/","source":"Suumo"},{"id":"21109863","track":"joint","kind":"house","title":"3LDK","priceUSD":298968,"monthlyUSD":0,"sqm":89.25,"pricePerSqm":3350,"trueCostPerSqm":3350,"walk":4,"tokyo":51,"haneda":36,"narita":113,"line":"Nambu KN","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashitsurumi/nc_21109863/","source":"Suumo"},{"id":"1408346","track":"solo","kind":"condo","title":"1DK","priceUSD":78676,"monthlyUSD":62,"sqm":26.1,"pricePerSqm":3014,"trueCostPerSqm":3299,"walk":7,"tokyo":51,"haneda":31,"narita":53,"line":"REJ solo","station":"Namamugi","href":"https://realestate.co.jp/en/forsale/view/1408346","source":"REJ"},{"id":"21370000","track":"joint","kind":"condo","title":"2LDK","priceUSD":162387,"monthlyUSD":161,"sqm":63.4,"pricePerSqm":2561,"trueCostPerSqm":2866,"walk":10,"tokyo":51,"haneda":31,"narita":53,"line":"Nambu KN","station":"生麦","href":"https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashitsurumi/nc_21370000/","source":"Suumo"},{"id":"21273053","track":"joint","kind":"condo","title":"3DK","priceUSD":105740,"monthlyUSD":141,"sqm":57.05,"pricePerSqm":1853,"trueCostPerSqm":2150,"walk":13,"tokyo":47,"haneda":98,"narita":114,"line":"Seibu Ikebukuro","station":"武蔵藤沢","href":"https://suumo.jp/ms/chuko/saitama/sc_iruma/nc_21273053/","source":"Suumo"},{"id":"21068611","track":"joint","kind":"condo","title":"3LDK","priceUSD":219033,"monthlyUSD":294,"sqm":80.92,"pricePerSqm":2707,"trueCostPerSqm":3143,"walk":3,"tokyo":48,"haneda":101,"narita":131,"line":"Odakyu Tama","station":"中央大学・明星大学","href":"https://suumo.jp/ms/chuko/tokyo/sc_hachioji/nc_21068611/","source":"Suumo"},{"id":"21337104","track":"joint","kind":"condo","title":"4LDK","priceUSD":169310,"monthlyUSD":332,"sqm":105.65,"pricePerSqm":1603,"trueCostPerSqm":1980,"walk":7,"tokyo":49,"haneda":99,"narita":116,"line":"Seibu Ikebukuro","station":"狭山市","href":"https://suumo.jp/ms/chuko/saitama/sc_sayama/nc_21337104/","source":"Suumo"},{"id":"21082430","track":"joint","kind":"condo","title":"3LDK","priceUSD":168681,"monthlyUSD":214,"sqm":66.87,"pricePerSqm":2523,"trueCostPerSqm":2907,"walk":8,"tokyo":49,"haneda":99,"narita":116,"line":"Seibu Ikebukuro","station":"狭山市","href":"https://suumo.jp/ms/chuko/saitama/sc_sayama/nc_21082430/","source":"Suumo"},{"id":"21302562","track":"joint","kind":"condo","title":"3LDK","priceUSD":160436,"monthlyUSD":208,"sqm":72.15,"pricePerSqm":2224,"trueCostPerSqm":2570,"walk":9,"tokyo":52,"haneda":100,"narita":145,"line":"JR Nambu","station":"武蔵砂川","href":"https://suumo.jp/ms/chuko/tokyo/sc_tachikawa/nc_21302562/","source":"Suumo"},{"id":"21406296","track":"joint","kind":"house","title":"3LDK","priceUSD":244209,"monthlyUSD":0,"sqm":80.32,"pricePerSqm":3040,"trueCostPerSqm":3040,"walk":13,"tokyo":52,"haneda":62,"narita":121,"line":"Sotetsu Shin-Yokohama","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikohoku/nc_21406296/","source":"Suumo"},{"id":"20511788","track":"joint","kind":"house","title":"3LDK","priceUSD":244209,"monthlyUSD":0,"sqm":80.32,"pricePerSqm":3040,"trueCostPerSqm":3040,"walk":16,"tokyo":52,"haneda":62,"narita":121,"line":"Sotetsu Shin-Yokohama","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashikohoku/nc_20511788/","source":"Suumo"},{"id":"21218155","track":"joint","kind":"condo","title":"3LDK","priceUSD":160498,"monthlyUSD":164,"sqm":66.7,"pricePerSqm":2406,"trueCostPerSqm":2701,"walk":20,"tokyo":53,"haneda":76,"narita":133,"line":"Odakyu KN","station":"矢部","href":"https://suumo.jp/ms/chuko/kanagawa/sc_sagamiharashichuo/nc_21218155/","source":"Suumo"},{"id":"77852963","track":"joint","kind":"house","title":"4LDK","priceUSD":269386,"monthlyUSD":0,"sqm":110.96,"pricePerSqm":2428,"trueCostPerSqm":2428,"walk":4,"tokyo":54,"haneda":95,"narita":145,"line":"Odakyu","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_77852963/","source":"Suumo"},{"id":"78242744","track":"joint","kind":"house","title":"3LDK","priceUSD":200151,"monthlyUSD":0,"sqm":92.11,"pricePerSqm":2173,"trueCostPerSqm":2173,"walk":6,"tokyo":54,"haneda":95,"narita":145,"line":"Odakyu","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_78242744/","source":"Suumo"},{"id":"21256937","track":"joint","kind":"house","title":"5LDK","priceUSD":250504,"monthlyUSD":0,"sqm":115.92,"pricePerSqm":2161,"trueCostPerSqm":2161,"walk":11,"tokyo":54,"haneda":95,"narita":145,"line":"Keio Sag KN","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_21256937/","source":"Suumo"},{"id":"21272037","track":"joint","kind":"house","title":"5LDK","priceUSD":250504,"monthlyUSD":0,"sqm":115.92,"pricePerSqm":2161,"trueCostPerSqm":2161,"walk":13,"tokyo":54,"haneda":95,"narita":145,"line":"Keio Sag KN","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_21272037/","source":"Suumo"},{"id":"79150620","track":"joint","kind":"house","title":"3LDK","priceUSD":261203,"monthlyUSD":0,"sqm":86.94,"pricePerSqm":3004,"trueCostPerSqm":3004,"walk":13,"tokyo":54,"haneda":95,"narita":145,"line":"Odakyu","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_79150620/","source":"Suumo"},{"id":"21417540","track":"joint","kind":"house","title":"2LDK","priceUSD":281974,"monthlyUSD":0,"sqm":80.23,"pricePerSqm":3515,"trueCostPerSqm":3515,"walk":13,"tokyo":54,"haneda":95,"narita":145,"line":"Den-en-toshi","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_21417540/","source":"Suumo"},{"id":"21400129","track":"joint","kind":"house","title":"3LDK","priceUSD":294562,"monthlyUSD":0,"sqm":108.89,"pricePerSqm":2705,"trueCostPerSqm":2705,"walk":13,"tokyo":54,"haneda":95,"narita":145,"line":"Odakyu","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_21400129/","source":"Suumo"},{"id":"20488202","track":"joint","kind":"house","title":"4LDK","priceUSD":232817,"monthlyUSD":0,"sqm":109.3,"pricePerSqm":2130,"trueCostPerSqm":2130,"walk":14,"tokyo":54,"haneda":95,"narita":145,"line":"Keio Sag KN","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_20488202/","source":"Suumo"},{"id":"20436585","track":"joint","kind":"house","title":"5LDK","priceUSD":232817,"monthlyUSD":0,"sqm":109.3,"pricePerSqm":2130,"trueCostPerSqm":2130,"walk":15,"tokyo":54,"haneda":95,"narita":145,"line":"Odakyu","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_20436585/","source":"Suumo"},{"id":"78728821","track":"joint","kind":"house","title":"2LDK","priceUSD":138469,"monthlyUSD":0,"sqm":98.43,"pricePerSqm":1407,"trueCostPerSqm":1407,"walk":16,"tokyo":54,"haneda":95,"narita":145,"line":"Odakyu","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_78728821/","source":"Suumo"},{"id":"21005363","track":"joint","kind":"house","title":"6DK","priceUSD":198263,"monthlyUSD":0,"sqm":155.26,"pricePerSqm":1277,"trueCostPerSqm":1277,"walk":20,"tokyo":54,"haneda":95,"narita":145,"line":"Odakyu","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_machida/nc_21005363/","source":"Suumo"},{"id":"21295476","track":"joint","kind":"house","title":"3LDDKK","priceUSD":212739,"monthlyUSD":0,"sqm":90.25,"pricePerSqm":2357,"trueCostPerSqm":2357,"walk":20,"tokyo":54,"haneda":62,"narita":133,"line":"Sotetsu Shin-Yokohama","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashiasahi/nc_21295476/","source":"Suumo"},{"id":"21371397","track":"joint","kind":"house","title":"4LDK","priceUSD":212739,"monthlyUSD":0,"sqm":99.36,"pricePerSqm":2141,"trueCostPerSqm":2141,"walk":5,"tokyo":55,"haneda":104,"narita":124,"line":"Seibu Shinjuku","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_higashimurayama/nc_21371397/","source":"Suumo"},{"id":"20723072","track":"joint","kind":"house","title":"4LDK","priceUSD":212739,"monthlyUSD":0,"sqm":99.36,"pricePerSqm":2141,"trueCostPerSqm":2141,"walk":5,"tokyo":55,"haneda":104,"narita":124,"line":"Seibu Shinjuku","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_higashimurayama/nc_20723072/","source":"Suumo"},{"id":"20792670","track":"joint","kind":"house","title":"4LDK","priceUSD":254846,"monthlyUSD":0,"sqm":90.22,"pricePerSqm":2825,"trueCostPerSqm":2825,"walk":6,"tokyo":55,"haneda":104,"narita":124,"line":"Seibu Shinjuku","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_higashimurayama/nc_20792670/","source":"Suumo"},{"id":"21070161","track":"joint","kind":"house","title":"3LDK","priceUSD":263092,"monthlyUSD":0,"sqm":89.07,"pricePerSqm":2954,"trueCostPerSqm":2954,"walk":11,"tokyo":55,"haneda":104,"narita":124,"line":"Seibu Shinjuku","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_higashimurayama/nc_21070161/","source":"Suumo"},{"id":"20629210","track":"joint","kind":"house","title":"4LDK","priceUSD":269386,"monthlyUSD":0,"sqm":100.19,"pricePerSqm":2689,"trueCostPerSqm":2689,"walk":15,"tokyo":55,"haneda":100,"narita":149,"line":"Keio Sag KN","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_sagamiharashimidori/nc_20629210/","source":"Suumo"},{"id":"20588183","track":"joint","kind":"house","title":"3LDK","priceUSD":187563,"monthlyUSD":0,"sqm":79.9,"pricePerSqm":2347,"trueCostPerSqm":2347,"walk":10,"tokyo":56,"haneda":116,"narita":146,"line":"Odakyu Tama","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_hachioji/nc_20588183/","source":"Suumo"},{"id":"20445351","track":"joint","kind":"house","title":"4DK","priceUSD":149799,"monthlyUSD":0,"sqm":67.54,"pricePerSqm":2218,"trueCostPerSqm":2218,"walk":17,"tokyo":56,"haneda":121,"narita":146,"line":"Odakyu Tama","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_tama/nc_20445351/","source":"Suumo"},{"id":"21336417","track":"joint","kind":"condo","title":"3LDK","priceUSD":143505,"monthlyUSD":156,"sqm":76.1,"pricePerSqm":1886,"trueCostPerSqm":2132,"walk":9,"tokyo":57,"haneda":47,"narita":57,"line":"Tobu Tojo","station":"若葉","href":"https://suumo.jp/ms/chuko/saitama/sc_tsurugashima/nc_21336417/","source":"Suumo"},{"id":"21346525","track":"joint","kind":"condo","title":"3LDK","priceUSD":142246,"monthlyUSD":146,"sqm":59.68,"pricePerSqm":2383,"trueCostPerSqm":2677,"walk":12,"tokyo":52,"haneda":45,"narita":113,"line":"Nambu KN","station":"小田栄","href":"https://suumo.jp/ms/chuko/kanagawa/sc_kawasakishikawasaki/nc_21346525/","source":"Suumo"},{"id":"20916771","track":"joint","kind":"condo","title":"4LDK","priceUSD":124622,"monthlyUSD":255,"sqm":84.27,"pricePerSqm":1479,"trueCostPerSqm":1842,"walk":15,"tokyo":57,"haneda":47,"narita":57,"line":"Tobu Tojo","station":"若葉","href":"https://suumo.jp/ms/chuko/saitama/sc_tsurugashima/nc_20916771/","source":"Suumo"},{"id":"21458485","track":"joint","kind":"condo","title":"3LDK","priceUSD":112664,"monthlyUSD":177,"sqm":61.28,"pricePerSqm":1839,"trueCostPerSqm":2185,"walk":16,"tokyo":57,"haneda":47,"narita":57,"line":"Tobu Tojo","station":"若葉","href":"https://suumo.jp/ms/chuko/saitama/sc_tsurugashima/nc_21458485/","source":"Suumo"},{"id":"21415819","track":"joint","kind":"house","title":"4LDK","priceUSD":225957,"monthlyUSD":0,"sqm":92.34,"pricePerSqm":2447,"trueCostPerSqm":2447,"walk":18,"tokyo":57,"haneda":113,"narita":144,"line":"JR Nambu","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_akishima/nc_21415819/","source":"Suumo"},{"id":"21390505","track":"joint","kind":"house","title":"4LDK","priceUSD":206445,"monthlyUSD":0,"sqm":89.42,"pricePerSqm":2309,"trueCostPerSqm":2309,"walk":20,"tokyo":57,"haneda":113,"narita":144,"line":"JR Nambu","station":"—","href":"https://suumo.jp/chukoikkodate/tokyo/sc_akishima/nc_21390505/","source":"Suumo"},{"id":"1405758","track":"joint","kind":"condo","title":"2LDK","priceUSD":112664,"monthlyUSD":217,"sqm":64.96,"pricePerSqm":1734,"trueCostPerSqm":2135,"walk":3,"tokyo":58,"haneda":78,"narita":145,"line":"REJ joint","station":"Mutsuai Nichidai Mae","href":"https://realestate.co.jp/en/forsale/view/1405758","source":"REJ"},{"id":"21401339","track":"joint","kind":"house","title":"4DK","priceUSD":206445,"monthlyUSD":0,"sqm":84.87,"pricePerSqm":2432,"trueCostPerSqm":2432,"walk":7,"tokyo":58,"haneda":53,"narita":123,"line":"Sotetsu Shin-Yokohama","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21401339/","source":"Suumo"},{"id":"21373883","track":"joint","kind":"house","title":"4LDK","priceUSD":206445,"monthlyUSD":0,"sqm":84.87,"pricePerSqm":2432,"trueCostPerSqm":2432,"walk":7,"tokyo":58,"haneda":53,"narita":123,"line":"Sotetsu Shin-Yokohama","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21373883/","source":"Suumo"},{"id":"21404186","track":"joint","kind":"house","title":"4DK","priceUSD":206445,"monthlyUSD":0,"sqm":84.87,"pricePerSqm":2432,"trueCostPerSqm":2432,"walk":7,"tokyo":58,"haneda":53,"narita":123,"line":"Sotetsu Shin-Yokohama","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21404186/","source":"Suumo"},{"id":"21378520","track":"joint","kind":"house","title":"4DK","priceUSD":206445,"monthlyUSD":0,"sqm":84.87,"pricePerSqm":2432,"trueCostPerSqm":2432,"walk":7,"tokyo":58,"haneda":53,"narita":123,"line":"Sotetsu Shin-Yokohama","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21378520/","source":"Suumo"},{"id":"21490954","track":"joint","kind":"house","title":"4DK","priceUSD":206445,"monthlyUSD":0,"sqm":84.87,"pricePerSqm":2432,"trueCostPerSqm":2432,"walk":7,"tokyo":58,"haneda":53,"narita":123,"line":"Sotetsu Shin-Yokohama","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21490954/","source":"Suumo"},{"id":"21538698","track":"joint","kind":"house","title":"4DK","priceUSD":206445,"monthlyUSD":0,"sqm":84.87,"pricePerSqm":2432,"trueCostPerSqm":2432,"walk":7,"tokyo":58,"haneda":53,"narita":123,"line":"Sotetsu Shin-Yokohama","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21538698/","source":"Suumo"},{"id":"21412324","track":"joint","kind":"house","title":"4DK","priceUSD":206445,"monthlyUSD":0,"sqm":84.87,"pricePerSqm":2432,"trueCostPerSqm":2432,"walk":7,"tokyo":58,"haneda":53,"narita":123,"line":"Sotetsu Shin-Yokohama","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21412324/","source":"Suumo"},{"id":"74972987","track":"joint","kind":"house","title":"4LDK","priceUSD":125252,"monthlyUSD":0,"sqm":82.1,"pricePerSqm":1526,"trueCostPerSqm":1526,"walk":12,"tokyo":58,"haneda":53,"narita":123,"line":"Sotetsu Shin-Yokohama","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_74972987/","source":"Suumo"},{"id":"21464674","track":"joint","kind":"house","title":"4LDK","priceUSD":250504,"monthlyUSD":0,"sqm":78.51,"pricePerSqm":3191,"trueCostPerSqm":3191,"walk":14,"tokyo":58,"haneda":53,"narita":123,"line":"Sotetsu Shin-Yokohama","station":"—","href":"https://suumo.jp/chukoikkodate/kanagawa/sc_yokohamashihodogaya/nc_21464674/","source":"Suumo"},{"id":"21424513","track":"joint","kind":"condo","title":"3LDK","priceUSD":154204,"monthlyUSD":216,"sqm":64.37,"pricePerSqm":2396,"trueCostPerSqm":2798,"walk":15,"tokyo":50,"haneda":44,"narita":107,"line":"Sotetsu Shin-Yokohama","station":"小机","href":"https://suumo.jp/ms/chuko/kanagawa/sc_yokohamashikohoku/nc_21424513/","source":"Suumo"},{"id":"21409762","track":"joint","kind":"condo","title":"2LDK","priceUSD":147281,"monthlyUSD":162,"sqm":72.12,"pricePerSqm":2042,"trueCostPerSqm":2312,"walk":13,"tokyo":38,"haneda":88,"narita":135,"line":"Keio Sagamihara","station":"南大沢学園瑞樹の丘","href":"https://suumo.jp/ms/chuko/tokyo/sc_hachioji/nc_21409762/","source":"Suumo"},{"id":"20978202","track":"joint","kind":"condo","title":"4LDK","priceUSD":106370,"monthlyUSD":116,"sqm":95.55,"pricePerSqm":1113,"trueCostPerSqm":1259,"walk":12,"tokyo":48,"haneda":95,"narita":124,"line":"Seibu Ikebukuro","station":"下山口","href":"https://suumo.jp/ms/chuko/saitama/sc_tokorozawa/nc_20978202/","source":"Suumo"}];
-    const SEED = {"starred":["1393798","20978202","1405758","21350089","21119463","21167281","21447583","21106326","20547924","21260603","20333395","1393751","21052623","21144313","78728821","20916771","20906655","21337104","1393766","21492335","1393811"],"struck":["21105313","21103311","77143949","20762309","21005495","74972987","21430055","21099632","21431461","1408271","1313382"],"view":"active","track":"solo","kind":"condo","line":"all","sortKey":"tokyo","sortDir":"asc"};
-    const STORE = 'tokyo-buy-search-v2';
-    const COLS = [
-      {k:'_acts', label:''},
-      {k:'_i', label:'#'},
-      {k:'track', label:'Track'},
-      {k:'kind', label:'Type'},
-      {k:'title', label:'Listing'},
-      {k:'priceUSD', label:'Price', num:true},
-      {k:'monthlyUSD', label:'Fees/mo', num:true},
-      {k:'sqm', label:'Size', num:true},
-      {k:'pricePerSqm', label:'$/m²', num:true, hint:'Purchase price per m²'},
-      {k:'trueCostPerSqm', label:'True $/m²', num:true, hint:'Purchase + 10yr HOA, per m²'},
-      {k:'walk', label:'Walk', num:true},
-      {k:'tokyo', label:'→新宿', num:true},
-      {k:'haneda', label:'→HND', num:true},
-      {k:'narita', label:'→NRT', num:true},
-      {k:'line', label:'Line'},
-      {k:'station', label:'Station'},
+    const SEARCHES = [
+      {
+        id: "august",
+        label: "August snapshot",
+        file: "data/august.json",
+        title: "Tokyo / Yokohama — August snapshot",
+        updated: "2026-08-26",
+        fx: "¥158.88/$",
+        sub: "The original owner-occupy list, kept so those prices stay as they were. Solo 1-room and joint 2+ rooms.",
+        callout: "Stars and strikes on this view stay in this browser. Export shortlist downloads a proposal against Rod’s baked-in seed.",
+        notes: "Transit minutes from Yahoo乗換案内 (weekday ~10:00): →新宿 via Shinjuku; →HND and →NRT are the airports. This snapshot is the August canvas and is not refreshed.",
+        seed: true,
+        track: true,
+        line: true,
+        sortKey: "tokyo",
+        cols: ["track","kind","title","priceUSD","monthlyUSD","sqm","pricePerSqm","trueCostPerSqm","walk","tokyo","haneda","narita","line","station"]
+      },
+      {
+        id: "nov",
+        label: "Tokyo / Yokohama",
+        file: "data/nov.json",
+        title: "Tokyo / Yokohama — Nov 2026",
+        updated: "2026-11-17",
+        fx: "¥159.10/$",
+        sub: "Same bands as August: solo 1-room ≤ $150k, joint 2+ rooms ≤ $300k, walk ≤ 20 min, built 1982 or later.",
+        callout: "Further Suumo pages, cheap end and the top of the cap. Listings that redirect to Suumo’s building archive are removed.",
+        notes: "Built is the completion year-month. Renovated is the oldest dated reform on the Suumo page, blank when none is listed. FX is the 17 Nov 2026 Bank of Japan rate.",
+        track: true,
+        area: true,
+        sortKey: "tokyo",
+        cols: ["track","kind","title","priceUSD","monthlyUSD","sqm","pricePerSqm","trueCostPerSqm","beds","baths","built","reno","walk","tokyo","haneda","narita","area","station"]
+      },
+      {
+        id: "shinjuku",
+        label: "Shinjuku",
+        file: "data/shinjuku.json",
+        title: "Shinjuku ≤ $600k",
+        updated: "2026-11-17",
+        fx: "¥159.10/$",
+        sub: "Shinjuku ward. 2+ bedrooms, 3+ ranked above 2, 1.5 baths ranked above 1. Built 1982 or later. Times to Haneda and Narita.",
+        callout: "Cap $600k. One-bath homes stay in the list. Condos under 40 m² are left out.",
+        notes: "Built is the completion year-month. Renovated is the oldest dated reform on the Suumo page, blank when none is listed.",
+        beds: true,
+        sortKey: "priority",
+        sortDir: "desc",
+        cols: ["kind","title","priceUSD","monthlyUSD","sqm","pricePerSqm","trueCostPerSqm","beds","baths","built","reno","walk","haneda","narita","station"]
+      },
+      {
+        id: "ueno",
+        label: "Ueno / Taito",
+        file: "data/ueno.json",
+        title: "Ueno / Taito ≤ $600k",
+        updated: "2026-11-17",
+        fx: "¥159.10/$",
+        sub: "Taito ward (Ueno). 2+ bedrooms, 3+ ranked above 2, 1.5 baths ranked above 1. Time to Narita only.",
+        callout: "Cap $600k. Built 1982 or later. One-bath homes stay in the list.",
+        notes: "Built is the completion year-month. Renovated is the oldest dated reform on the Suumo page, blank when none is listed.",
+        beds: true,
+        sortKey: "priority",
+        sortDir: "desc",
+        cols: ["kind","title","priceUSD","monthlyUSD","sqm","pricePerSqm","trueCostPerSqm","beds","baths","built","reno","walk","narita","area","station"]
+      },
+      {
+        id: "osaka",
+        label: "Osaka",
+        file: "data/osaka.json",
+        title: "Osaka — Kansai airport",
+        updated: "2026-11-17",
+        fx: "¥159.10/$",
+        sub: "Osaka city. Solo 1-room ≤ $150k, joint 2+ rooms ≤ $300k, walk ≤ 20 min, built 1982 or later. Times to Osaka station and Kansai airport.",
+        callout: "Same price bands as the Tokyo search. Airport minutes are to KIX, not Haneda or Narita.",
+        notes: "Built is the completion year-month. Renovated is the oldest dated reform on the Suumo page, blank when none is listed.",
+        track: true,
+        area: true,
+        sortKey: "kix",
+        cols: ["track","kind","title","priceUSD","monthlyUSD","sqm","pricePerSqm","trueCostPerSqm","beds","baths","built","reno","walk","osaka","kix","area","station"]
+      },
+      {
+        id: "wards",
+        label: "23 wards",
+        file: "data/wards.json",
+        title: "Tokyo 23 wards under $600k",
+        updated: "2026-11-17",
+        fx: "¥159.10/$",
+        sub: "Median asking price of used condos built in 1982 or later, at or under $600k. Airport times sit on the ward, from one central station.",
+        callout: "Each median is the middle of Suumo’s first six pages under ¥100M after the 1982 and $600k cuts. In central wards that is the stock Suumo surfaces first, not a census of the ward.",
+        notes: "Built is the completion year-month. Renovated is the oldest dated reform on the Suumo page, blank when none is listed. HND and NRT minutes are weekday 10:00 Yahoo times on 18 Nov 2026.",
+        mode: "wards"
+      }
     ];
 
-    function loadState() {
-      try { return JSON.parse(localStorage.getItem(STORE) || 'null'); } catch { return null; }
-    }
-    function saveState(s) { localStorage.setItem(STORE, JSON.stringify(s)); }
-
-    function applySeed(base) {
-      return Object.assign({}, base, {
-        starred: [...(SEED.starred || [])],
-        struck: [...(SEED.struck || [])],
-        view: SEED.view || 'active',
-        track: SEED.track || 'all',
-        kind: SEED.kind || 'all',
-        line: SEED.line || 'all',
-        sortKey: SEED.sortKey || 'tokyo',
-        sortDir: SEED.sortDir || 'asc',
-        seededFrom: 'rod-canvas',
-      });
-    }
-
-    const defaults = {
-      view:'active', track:'all', kind:'all', line:'all', q:'',
-      sortKey:'tokyo', sortDir:'asc',
-      starred:[], struck:[], seededFrom: null
+    const COL = {
+      track: { k: "track", label: "Track" },
+      kind: { k: "kind", label: "Type" },
+      title: { k: "title", label: "Listing" },
+      priceUSD: { k: "priceUSD", label: "Price", num: true },
+      monthlyUSD: { k: "monthlyUSD", label: "Fees/mo", num: true },
+      sqm: { k: "sqm", label: "Size", num: true },
+      pricePerSqm: { k: "pricePerSqm", label: "$/m²", num: true },
+      trueCostPerSqm: { k: "trueCostPerSqm", label: "True $/m²", num: true },
+      beds: { k: "beds", label: "Beds", num: true },
+      baths: { k: "baths", label: "Baths", num: true },
+      built: { k: "built", label: "Built" },
+      reno: { k: "reno", label: "Renovated" },
+      walk: { k: "walk", label: "Walk", num: true },
+      tokyo: { k: "tokyo", label: "→新宿", num: true },
+      haneda: { k: "haneda", label: "→HND", num: true },
+      narita: { k: "narita", label: "→NRT", num: true },
+      osaka: { k: "osaka", label: "→大阪", num: true },
+      kix: { k: "kix", label: "→KIX", num: true },
+      line: { k: "line", label: "Line" },
+      area: { k: "area", label: "Area" },
+      station: { k: "station", label: "Station" }
     };
 
-    let saved = loadState();
-    // First visit: auto-apply Rod's canvas shortlist. Later visits keep browser state.
-    if (!saved) saved = applySeed(defaults);
-    const state = Object.assign({}, defaults, saved);
-    state.starred = Array.isArray(state.starred) ? state.starred.filter(x => typeof x === 'string') : [];
-    state.struck = Array.isArray(state.struck) ? state.struck.filter(x => typeof x === 'string') : [];
+    const AUGUST_SEED = {"starred":["1393798","20978202","1405758","21350089","21119463","21167281","21447583","21106326","20547924","21260603","20333395","1393751","21052623","21144313","78728821","20916771","20906655","21337104","1393766","21492335","1393811"],"struck":["21105313","21103311","77143949","20762309","21005495","74972987","21430055","21099632","21431461","1408271","1313382"],"view":"active","track":"solo","kind":"condo","line":"all","sortKey":"tokyo","sortDir":"asc"};
 
-    const lineSel = document.getElementById('fLine');
-    [...new Set(DATA.map(r => r.line).filter(Boolean))].sort().forEach(l => {
-      const o = document.createElement('option'); o.value = l; o.textContent = l; lineSel.appendChild(o);
-    });
+    const dataCache = {};
+    let search = SEARCHES[0];
+    let rows = [];
+    let state = null;
 
-    document.getElementById('fView').value = state.view;
-    document.getElementById('fTrack').value = state.track;
-    document.getElementById('fKind').value = state.kind;
-    document.getElementById('fLine').value = state.line;
-    document.getElementById('fSearch').value = state.q || '';
-    document.getElementById('sTotal').textContent = DATA.length;
-
-    function persist() {
-      saveState({
-        view: state.view, track: state.track, kind: state.kind, line: state.line, q: state.q,
+    function storeKey(id) {
+      return id === "august" ? "tokyo-buy-search-v2" : "tokyo-buy-search-v3:" + id;
+    }
+    function loadState(id) {
+      try { return JSON.parse(localStorage.getItem(storeKey(id)) || "null"); } catch { return null; }
+    }
+    function saveState() {
+      localStorage.setItem(storeKey(search.id), JSON.stringify({
+        view: state.view, track: state.track, kind: state.kind, line: state.line,
+        area: state.area, beds: state.beds, q: state.q,
         sortKey: state.sortKey, sortDir: state.sortDir,
-        starred: state.starred, struck: state.struck,
-        seededFrom: state.seededFrom || null
+        starred: state.starred, struck: state.struck, seededFrom: state.seededFrom || null
+      }));
+    }
+    function defaultsFor(s) {
+      return {
+        view: "active", track: "all", kind: "all", line: "all", area: "all", beds: "all", q: "",
+        sortKey: s.sortKey || "priceUSD", sortDir: s.sortDir || "asc",
+        starred: [], struck: [], seededFrom: null
+      };
+    }
+    function applyAugustSeed(base) {
+      return Object.assign({}, base, {
+        starred: [...AUGUST_SEED.starred],
+        struck: [...AUGUST_SEED.struck],
+        view: AUGUST_SEED.view,
+        track: AUGUST_SEED.track,
+        kind: AUGUST_SEED.kind,
+        line: AUGUST_SEED.line,
+        sortKey: AUGUST_SEED.sortKey,
+        sortDir: AUGUST_SEED.sortDir,
+        seededFrom: "rod-canvas"
       });
     }
-
+    function esc(s) {
+      return String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    }
     function usd(n) {
-      if (n == null || Number.isNaN(Number(n))) return '—';
-      return '$' + Math.round(Number(n)/1000) + 'k';
+      if (n == null || Number.isNaN(Number(n))) return "—";
+      return "$" + Math.round(Number(n) / 1000) + "k";
     }
-    function fee(n) { return n ? ('$' + n + '/mo') : '$0'; }
-    function pps(n) { return n == null ? '—' : ('$' + Number(n).toLocaleString() + '/m²'); }
-    function mins(n) { return (n == null || Number.isNaN(Number(n))) ? '—' : (n + 'm'); }
-    function toggle(list, id) {
-      return list.includes(id) ? list.filter(x => x !== id) : list.concat(id);
+    function fee(n) { return n ? ("$" + n + "/mo") : "$0"; }
+    function pps(n) { return n == null ? "—" : ("$" + Number(n).toLocaleString() + "/m²"); }
+    function mins(n) { return (n == null || Number.isNaN(Number(n))) ? "—" : (n + "m"); }
+
+    function columns() {
+      return [{ k: "_acts", label: "" }, { k: "_i", label: "#" }].concat((search.cols || []).map((k) => COL[k]));
     }
 
-    function matchesLine(r, line) {
-      if (line === 'all') return true;
-      if (line === 'Keio Sag') return String(r.line).startsWith('Keio Sag');
-      if (line === 'Sotetsu') return String(r.line).startsWith('Sotetsu');
-      if (line === 'Odakyu') return r.line === 'Odakyu' || String(r.line).startsWith('Odakyu ');
-      if (line === 'Keio') return r.line === 'Keio' || String(r.line).startsWith('Keio ');
-      return r.line === line || String(r.line).startsWith(line);
+    function fillSelect(sel, values, allLabel) {
+      const current = sel.value;
+      sel.innerHTML = "";
+      const all = document.createElement("option");
+      all.value = "all";
+      all.textContent = allLabel;
+      sel.appendChild(all);
+      values.forEach((v) => {
+        const o = document.createElement("option");
+        o.value = v;
+        o.textContent = v;
+        sel.appendChild(o);
+      });
+      if ([...sel.options].some((o) => o.value === current)) sel.value = current;
+    }
+
+    function showChrome() {
+      document.getElementById("pageTitle").textContent = search.title;
+      document.getElementById("badgeDate").textContent = search.updated;
+      document.getElementById("badgeFx").textContent = search.fx;
+      document.getElementById("pageSub").textContent = search.sub;
+      document.getElementById("pageCallout").innerHTML = "<strong>" + esc(search.label) + ".</strong> " + esc(search.callout);
+      document.getElementById("notes").textContent = search.notes;
+      document.getElementById("labTrack").hidden = !search.track;
+      document.getElementById("labBeds").hidden = !search.beds;
+      document.getElementById("labLine").hidden = !search.line;
+      document.getElementById("labArea").hidden = !search.area;
+      document.getElementById("btnLoadSeed").hidden = !search.seed;
+      document.getElementById("filters").hidden = search.mode === "wards";
+      document.getElementById("stats").hidden = search.mode === "wards";
+      document.getElementById("listView").hidden = search.mode === "wards";
+      document.getElementById("wardView").hidden = search.mode !== "wards";
+      document.querySelectorAll("#searchNav button").forEach((b) => {
+        b.classList.toggle("active", b.dataset.id === search.id);
+      });
+      document.title = search.title;
+    }
+
+    function syncFilters() {
+      document.getElementById("fView").value = state.view;
+      document.getElementById("fTrack").value = state.track;
+      document.getElementById("fKind").value = state.kind;
+      document.getElementById("fBeds").value = state.beds || "all";
+      document.getElementById("fLine").value = state.line || "all";
+      document.getElementById("fArea").value = state.area || "all";
+      document.getElementById("fSearch").value = state.q || "";
     }
 
     function baseFilters(r) {
-      if (state.track !== 'all' && r.track !== state.track) return false;
-      if (state.kind !== 'all' && r.kind !== state.kind) return false;
-      if (!matchesLine(r, state.line)) return false;
+      if (search.track && state.track !== "all" && r.track !== state.track) return false;
+      if (state.kind !== "all" && r.kind !== state.kind) return false;
+      if (search.beds && state.beds === "3" && (r.beds || 0) < 3) return false;
+      if (search.beds && state.beds === "2" && r.beds !== 2) return false;
+      if (search.line && state.line !== "all") {
+        const line = String(r.line || "");
+        if (state.line === "Keio Sag" && !line.startsWith("Keio Sag")) return false;
+        else if (state.line === "Sotetsu" && !line.startsWith("Sotetsu")) return false;
+        else if (state.line === "Odakyu" && !(line === "Odakyu" || line.startsWith("Odakyu "))) return false;
+        else if (state.line === "Keio" && !(line === "Keio" || line.startsWith("Keio "))) return false;
+        else if (!["Keio Sag", "Sotetsu", "Odakyu", "Keio"].includes(state.line) && line !== state.line && !line.startsWith(state.line)) return false;
+      }
+      if (search.area && state.area !== "all" && r.area !== state.area) return false;
       if (state.q) {
-        const hay = (r.title + ' ' + r.line + ' ' + r.station).toLowerCase();
+        const hay = [r.title, r.name, r.line, r.area, r.station, r.built].join(" ").toLowerCase();
         if (!hay.includes(state.q.toLowerCase())) return false;
       }
       return true;
     }
-
     function viewFilter(r) {
       const starred = state.starred.includes(r.id);
       const struck = state.struck.includes(r.id);
-      if (state.view === 'active') return !starred && !struck;
-      if (state.view === 'starred') return starred;
-      if (state.view === 'struck') return struck;
+      if (state.view === "active") return !starred && !struck;
+      if (state.view === "starred") return starred;
+      if (state.view === "struck") return struck;
       return true;
     }
-
     function sortRows(items) {
-      const sign = state.sortDir === 'asc' ? 1 : -1;
+      const sign = state.sortDir === "asc" ? 1 : -1;
       const k = state.sortKey;
-      const nullable = k === 'sqm' || k === 'pricePerSqm' || k === 'trueCostPerSqm';
-      return [...items].sort((a,b) => {
-        let av = a[k], bv = b[k];
-        if (typeof av === 'string') return sign * String(av).localeCompare(String(bv));
-        if (nullable) {
-          if ((av == null || av < 0) && (bv == null || bv < 0)) return 0;
-          if (av == null || av < 0) return 1;
-          if (bv == null || bv < 0) return -1;
-        }
-        return sign * ((av ?? -1) - (bv ?? -1));
+      return [...items].sort((a, b) => {
+        const av = a[k];
+        const bv = b[k];
+        if (av == null && bv == null) return (a.walk || 999) - (b.walk || 999);
+        if (av == null) return 1;
+        if (bv == null) return -1;
+        const cmp = (typeof av === "string" || typeof bv === "string")
+          ? String(av).localeCompare(String(bv))
+          : (av - bv);
+        if (cmp !== 0) return sign * cmp;
+        return (a.walk || 999) - (b.walk || 999);
       });
     }
 
     function theadHtml() {
-      return '<tr>' + COLS.map(c => {
-        if (c.k.startsWith('_')) return `<th>${c.label}</th>`;
+      return "<tr>" + columns().map((c) => {
+        if (c.k.startsWith("_")) return "<th>" + c.label + "</th>";
         const sorted = state.sortKey === c.k;
-        const arrow = sorted ? (state.sortDir === 'asc' ? ' ↑' : ' ↓') : '';
-        const cls = sorted ? ' class="sorted"' : '';
-        const title = c.hint ? ` title="${c.hint}"` : '';
-        return `<th data-k="${c.k}"${cls}${title}>${c.label}${arrow}</th>`;
-      }).join('') + '</tr>';
+        const arrow = sorted ? (state.sortDir === "asc" ? " ↑" : " ↓") : "";
+        return `<th data-k="${c.k}"${sorted ? ' class="sorted"' : ""}>${c.label}${arrow}</th>`;
+      }).join("") + "</tr>";
     }
-
-    function cell(r, i) {
-      const isStar = state.starred.includes(r.id);
-      const isStruck = state.struck.includes(r.id);
-      const cls = isStar ? 'starred' : (isStruck ? 'struck' : '');
-      return `<tr class="${cls}" data-id="${r.id}">
-        <td><div class="acts">
-          <button type="button" data-act="star" class="${isStar?'on-star':''}" title="${isStar?'Unstar':'Star'}">${isStar?'★':'☆'}</button>
-          <button type="button" data-act="strike" class="${isStruck?'on-x':''}" title="${isStruck?'Unstrike':'Strike'}">${isStruck?'+':'✕'}</button>
-        </div></td>
-        <td class="num">${i+1}</td>
-        <td><span class="pill">${r.track}</span></td>
-        <td>${r.kind}</td>
-        <td><a href="${r.href}" target="_blank" rel="noopener">${r.title}</a></td>
-        <td class="num">${usd(r.priceUSD)}</td>
-        <td class="num">${fee(r.monthlyUSD||0)}</td>
-        <td class="num">${r.sqm != null ? r.sqm + ' m²' : '—'}</td>
-        <td class="num">${pps(r.pricePerSqm)}</td>
-        <td class="num">${pps(r.trueCostPerSqm)}</td>
-        <td class="num">${mins(r.walk)}</td>
-        <td class="num">${mins(r.tokyo)}</td>
-        <td class="num">${mins(r.haneda)}</td>
-        <td class="num">${mins(r.narita)}</td>
-        <td>${r.line}</td>
-        <td>${r.station === '—' ? 'see listing' : r.station}</td>
-      </tr>`;
+    function cellHtml(r, col, i) {
+      const k = col.k;
+      if (k === "_acts") {
+        const isStar = state.starred.includes(r.id);
+        const isStruck = state.struck.includes(r.id);
+        return `<td><div class="acts">
+          <button type="button" data-act="star" class="${isStar ? "on-star" : ""}">${isStar ? "★" : "☆"}</button>
+          <button type="button" data-act="strike" class="${isStruck ? "on-x" : ""}">${isStruck ? "+" : "✕"}</button>
+        </div></td>`;
+      }
+      if (k === "_i") return `<td class="num">${i + 1}</td>`;
+      if (k === "title") {
+        const name = r.name ? `<div class="name">${esc(r.name)}</div>` : "";
+        return `<td><a href="${esc(r.href)}" target="_blank" rel="noopener">${esc(r.title)}</a>${name}</td>`;
+      }
+      if (k === "priceUSD") return `<td class="num">${usd(r.priceUSD)}</td>`;
+      if (k === "monthlyUSD") return `<td class="num">${fee(r.monthlyUSD || 0)}</td>`;
+      if (k === "sqm") return `<td class="num">${r.sqm != null ? esc(r.sqm) + " m²" : "—"}</td>`;
+      if (k === "pricePerSqm" || k === "trueCostPerSqm") return `<td class="num">${pps(r[k])}</td>`;
+      if (k === "walk" || k === "tokyo" || k === "haneda" || k === "narita" || k === "osaka" || k === "kix") return `<td class="num">${mins(r[k])}</td>`;
+      if (k === "track" || k === "kind") return `<td><span class="pill">${esc(r[k] || "—")}</span></td>`;
+      if (k === "station") return `<td>${r.station === "—" ? "see listing" : esc(r.station)}</td>`;
+      if (k === "beds" || k === "baths") return `<td class="num">${r[k] == null ? "—" : esc(r[k])}</td>`;
+      return `<td class="${col.num ? "num" : ""}">${r[k] == null || r[k] === "" ? "—" : esc(r[k])}</td>`;
     }
-
+    function rowHtml(r, i) {
+      const cls = state.starred.includes(r.id) ? "starred" : (state.struck.includes(r.id) ? "struck" : "");
+      return `<tr class="${cls}" data-id="${esc(r.id)}">` + columns().map((c) => cellHtml(r, c, i)).join("") + "</tr>";
+    }
     function bindTable(table) {
       table.tHead.innerHTML = theadHtml();
-      table.tHead.querySelectorAll('th[data-k]').forEach(th => {
+      table.tHead.querySelectorAll("th[data-k]").forEach((th) => {
         th.onclick = () => {
           const k = th.dataset.k;
-          if (state.sortKey === k) state.sortDir = state.sortDir === 'asc' ? 'desc' : 'asc';
-          else { state.sortKey = k; state.sortDir = 'asc'; }
-          persist(); render();
+          if (state.sortKey === k) state.sortDir = state.sortDir === "asc" ? "desc" : "asc";
+          else {
+            state.sortKey = k;
+            state.sortDir = (k === "beds" || k === "baths" || k === "sqm" || k === "built" || k === "reno") ? "desc" : "asc";
+          }
+          saveState();
+          renderList();
         };
       });
       table.tBodies[0].onclick = (e) => {
-        const btn = e.target.closest('button[data-act]');
+        const btn = e.target.closest("button[data-act]");
         if (!btn) return;
-        const tr = btn.closest('tr');
-        const id = tr && tr.dataset.id;
-        if (!id) return;
-        if (btn.dataset.act === 'star') {
+        const id = btn.closest("tr").dataset.id;
+        if (btn.dataset.act === "star") {
           const will = !state.starred.includes(id);
-          state.starred = toggle(state.starred, id);
-          if (will) state.struck = state.struck.filter(x => x !== id);
+          state.starred = will ? state.starred.concat(id) : state.starred.filter((x) => x !== id);
+          if (will) state.struck = state.struck.filter((x) => x !== id);
         } else {
           const will = !state.struck.includes(id);
-          state.struck = toggle(state.struck, id);
-          if (will) state.starred = state.starred.filter(x => x !== id);
+          state.struck = will ? state.struck.concat(id) : state.struck.filter((x) => x !== id);
+          if (will) state.starred = state.starred.filter((x) => x !== id);
         }
-        persist(); render();
+        saveState();
+        renderList();
       };
     }
 
-    function syncFiltersUI() {
-      document.getElementById('fView').value = state.view;
-      document.getElementById('fTrack').value = state.track;
-      document.getElementById('fKind').value = state.kind;
-      document.getElementById('fLine').value = state.line;
-      document.getElementById('fSearch').value = state.q || '';
-    }
-
-    function render() {
-      const filtered = DATA.filter(r => baseFilters(r) && viewFilter(r));
+    function renderList() {
+      const filtered = rows.filter((r) => baseFilters(r) && viewFilter(r));
       const sorted = sortRows(filtered);
-      const favorites = sortRows(DATA.filter(r => state.starred.includes(r.id) && baseFilters(r)));
-      const activeN = DATA.filter(r => !state.starred.includes(r.id) && !state.struck.includes(r.id)).length;
-
-      document.getElementById('sView').textContent = sorted.length;
-      document.getElementById('sStar').textContent = state.starred.length;
-      document.getElementById('sActive').textContent = activeN;
-
-      const titles = {
-        active: 'Active listings (not starred)',
-        starred: 'Starred',
-        struck: 'Struck',
-        all: 'All listings'
-      };
-      document.getElementById('mainTitle').textContent = titles[state.view] || 'Listings';
-
-      const showStarBlock = favorites.length > 0 && state.view !== 'starred';
-      const starSec = document.getElementById('starredSection');
-      starSec.hidden = !showStarBlock;
-      if (showStarBlock) {
-        const st = document.getElementById('starTbl');
+      const favorites = sortRows(rows.filter((r) => state.starred.includes(r.id) && baseFilters(r)));
+      document.getElementById("sView").textContent = sorted.length;
+      document.getElementById("sTotal").textContent = rows.length;
+      document.getElementById("sStar").textContent = state.starred.length;
+      document.getElementById("sActive").textContent = rows.filter((r) => !state.starred.includes(r.id) && !state.struck.includes(r.id)).length;
+      const titles = { active: "Active listings", starred: "Starred", struck: "Struck", all: "All listings" };
+      document.getElementById("mainTitle").textContent = titles[state.view] || "Listings";
+      const starSec = document.getElementById("starredSection");
+      const showStar = favorites.length > 0 && state.view !== "starred";
+      starSec.hidden = !showStar;
+      if (showStar) {
+        const st = document.getElementById("starTbl");
         bindTable(st);
-        st.tBodies[0].innerHTML = favorites.map((r,i) => cell(r,i)).join('');
+        st.tBodies[0].innerHTML = favorites.map(rowHtml).join("");
       }
-
-      const mt = document.getElementById('mainTbl');
+      const mt = document.getElementById("mainTbl");
       bindTable(mt);
-      mt.tBodies[0].innerHTML = sorted.map((r,i) => cell(r,i)).join('');
-
-      const empty = document.getElementById('emptyMsg');
+      mt.tBodies[0].innerHTML = sorted.map(rowHtml).join("");
+      const empty = document.getElementById("emptyMsg");
       if (!sorted.length) {
         empty.hidden = false;
-        if (state.view === 'active' && state.starred.length)
-          empty.textContent = 'Nothing in Active — starred listings are in the Starred section above, or set View to All.';
-        else if (state.view === 'starred')
-          empty.textContent = 'No starred listings yet — click ☆ on any row.';
-        else if (state.view === 'struck')
-          empty.textContent = 'No struck listings yet — click ✕ to hide a listing.';
-        else
-          empty.textContent = 'Filters are hiding every listing. Reset filters or set View to All.';
+        empty.textContent = state.view === "starred"
+          ? "No starred listings yet."
+          : "Nothing matches these filters.";
       } else empty.hidden = true;
     }
 
-    ['fView','fTrack','fKind','fLine'].forEach(id => {
-      document.getElementById(id).addEventListener('change', (e) => {
-        const map = {fView:'view', fTrack:'track', fKind:'kind', fLine:'line'};
-        state[map[id]] = e.target.value;
-        persist(); render();
-      });
-    });
-    document.getElementById('fSearch').addEventListener('input', (e) => {
-      state.q = e.target.value; persist(); render();
-    });
-    document.getElementById('btnReset').onclick = () => {
-      state.view='active'; state.track='all'; state.kind='all'; state.line='all'; state.q='';
-      syncFiltersUI(); persist(); render();
-    };
-    document.getElementById('btnLoadSeed').onclick = () => {
-      if (!confirm('Replace your local stars/strikes/filters with Rod’s exported canvas shortlist?')) return;
-      Object.assign(state, applySeed(state));
-      state.q = '';
-      syncFiltersUI(); persist(); render();
-    };
-    document.getElementById('btnClearMarks').onclick = () => {
-      if (!confirm('Clear all stars and strikes saved in this browser?')) return;
-      state.starred=[]; state.struck=[]; state.seededFrom=null; persist(); render();
-    };
-
-    document.getElementById('btnExport').onclick = () => {
-      const seed = {
-        starred: state.starred,
-        struck: state.struck,
-        view: state.view,
-        track: state.track,
-        kind: state.kind,
-        line: state.line,
-        sortKey: state.sortKey,
-        sortDir: state.sortDir,
-      };
-      const baseStar = new Set((SEED.starred || []).map(String));
-      const baseStruck = new Set((SEED.struck || []).map(String));
-      const nextStar = new Set(seed.starred.map(String));
-      const nextStruck = new Set(seed.struck.map(String));
-      const changes = {
-        starredAdded: [...nextStar].filter(x => !baseStar.has(x)).sort(),
-        starredRemoved: [...baseStar].filter(x => !nextStar.has(x)).sort(),
-        struckAdded: [...nextStruck].filter(x => !baseStruck.has(x)).sort(),
-        struckRemoved: [...baseStruck].filter(x => !nextStruck.has(x)).sort(),
-      };
-      const proposal = {
-        format: 'tokyo-buy-search-shortlist-v1',
-        createdAt: new Date().toISOString(),
-        comparedTo: 'page-seed (Rod baseline baked into the site)',
-        changes,
-        seed,
-      };
-      const stamp = new Date().toISOString().slice(0,10);
-      const blob = new Blob([JSON.stringify(proposal, null, 2) + '\n'], { type: 'application/json' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `tokyo-shortlist-proposal-${stamp}.json`;
-      a.click();
-      URL.revokeObjectURL(a.href);
-      const summary = [
-        `Exported proposal (${stamp})`,
-        `+starred ${changes.starredAdded.length}  -starred ${changes.starredRemoved.length}`,
-        `+struck ${changes.struckAdded.length}  -struck ${changes.struckRemoved.length}`,
-        '',
-        'Send this file to Rod. He can run:',
-        '  python3 apply-proposal.py tokyo-shortlist-proposal-....json',
-        'then review with git diff seed-state.json',
-      ].join('\n');
-      alert(summary);
-    };
-
-    // URL helper: ?seed=1 forces Rod shortlist
-    if (new URLSearchParams(location.search).get('seed') === '1') {
-      Object.assign(state, applySeed(state));
-      syncFiltersUI(); persist();
+    function renderWards(wards) {
+      const ranked = [...wards].sort((a, b) => b.medianUSD - a.medianUSD);
+      const cheapest = [...wards].sort((a, b) => a.medianUSD - b.medianUSD)[0];
+      const mid = ranked[Math.floor(ranked.length / 2)];
+      const head = `<div class="stats">
+        <div class="stat"><b>${usd(ranked[0].medianUSD)}</b><span>Highest median · ${esc(ranked[0].ward)}</span></div>
+        <div class="stat"><b>${usd(cheapest.medianUSD)}</b><span>Lowest median · ${esc(cheapest.ward)}</span></div>
+        <div class="stat"><b>${usd(mid.medianUSD)}</b><span>Middle ward · ${esc(mid.ward)}</span></div>
+        <div class="stat"><b>23</b><span>Wards</span></div>
+      </div>
+      <h2>Median asking price by ward</h2>
+      <div class="table-wrap"><table><thead><tr>
+        <th>Ward</th><th>Sample</th><th>Median</th><th>P25</th><th>P75</th><th>Median $/m²</th><th>2+ rooms</th><th>From</th><th>→HND</th><th>→NRT</th>
+      </tr></thead><tbody>
+      ${ranked.map((w) => `<tr>
+        <td>${esc(w.ward)}</td>
+        <td class="num">${w.sampleN}</td>
+        <td class="num">${usd(w.medianUSD)}</td>
+        <td class="num">${usd(w.p25USD)}</td>
+        <td class="num">${usd(w.p75USD)}</td>
+        <td class="num">$${Number(w.medianPerSqm).toLocaleString()}</td>
+        <td class="num">${Math.round(w.familyShare)}%</td>
+        <td>${esc(w.station)}</td>
+        <td class="num">${w.haneda}m</td>
+        <td class="num">${w.narita}m</td>
+      </tr>`).join("")}
+      </tbody></table></div>
+      <h2>Listings by ward</h2>`;
+      const blocks = ranked.map((w) => `<section class="ward-block">
+        <h3>${esc(w.ward)} · median ${usd(w.medianUSD)} · HND ${w.haneda}m from ${esc(w.station)} · NRT ${w.narita}m</h3>
+        <div class="table-wrap"><table><thead><tr>
+          <th>Listing</th><th>Price</th><th>Beds</th><th>Size</th><th>Walk</th><th>Built</th><th>Renovated</th><th>Station</th>
+        </tr></thead><tbody>
+        ${(w.listings || []).map((r) => `<tr>
+          <td><a href="${esc(r.href)}" target="_blank" rel="noopener">${esc(r.title)}</a>${r.name ? `<div class="name">${esc(r.name)}</div>` : ""}</td>
+          <td class="num">${usd(r.priceUSD)}</td>
+          <td class="num">${r.beds == null ? "—" : r.beds}</td>
+          <td class="num">${r.sqm != null ? esc(r.sqm) + " m²" : "—"}</td>
+          <td class="num">${mins(r.walk)}</td>
+          <td>${esc(r.built || r.year || "—")}</td>
+          <td>${esc(r.reno || "—")}</td>
+          <td>${esc(r.station || "—")}</td>
+        </tr>`).join("")}
+        </tbody></table></div>
+      </section>`).join("");
+      document.getElementById("wardView").innerHTML = head + blocks;
     }
 
-    persist();
-    render();
+    async function loadSearch(id, push) {
+      const next = SEARCHES.find((s) => s.id === id) || SEARCHES[0];
+      if (state && search) saveState();
+      search = next;
+      if (push) history.replaceState(null, "", "#" + search.id);
+      showChrome();
+      if (!dataCache[search.id]) {
+        const res = await fetch(search.file);
+        if (!res.ok) throw new Error("Could not load " + search.file);
+        dataCache[search.id] = await res.json();
+      }
+      let saved = loadState(search.id);
+      if (search.id === "august" && !saved) saved = applyAugustSeed(defaultsFor(search));
+      state = Object.assign(defaultsFor(search), saved || {});
+      state.starred = Array.isArray(state.starred) ? state.starred.filter((x) => typeof x === "string") : [];
+      state.struck = Array.isArray(state.struck) ? state.struck.filter((x) => typeof x === "string") : [];
+      if (search.mode === "wards") {
+        renderWards(dataCache[search.id]);
+        return;
+      }
+      rows = dataCache[search.id];
+      rows.forEach((r) => { r.priority = (r.beds || 0) * 10 + (r.baths || 0); });
+      if (search.line) {
+        fillSelect(document.getElementById("fLine"), [...new Set(rows.map((r) => r.line).filter(Boolean))].sort(), "All lines");
+      }
+      if (search.area) {
+        fillSelect(document.getElementById("fArea"), [...new Set(rows.map((r) => r.area).filter(Boolean))].sort(), "All areas");
+      }
+      syncFilters();
+      saveState();
+      renderList();
+    }
+
+    function bootNav() {
+      const nav = document.getElementById("searchNav");
+      SEARCHES.forEach((s) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.dataset.id = s.id;
+        b.textContent = s.label;
+        b.onclick = () => loadSearch(s.id, true);
+        nav.appendChild(b);
+      });
+    }
+
+    ["fView", "fTrack", "fKind", "fLine", "fArea", "fBeds"].forEach((id) => {
+      document.getElementById(id).addEventListener("change", (e) => {
+        const map = { fView: "view", fTrack: "track", fKind: "kind", fLine: "line", fArea: "area", fBeds: "beds" };
+        state[map[id]] = e.target.value;
+        saveState();
+        renderList();
+      });
+    });
+    document.getElementById("fSearch").addEventListener("input", (e) => {
+      state.q = e.target.value;
+      saveState();
+      renderList();
+    });
+    document.getElementById("btnReset").onclick = () => {
+      const fresh = defaultsFor(search);
+      state.view = fresh.view; state.track = fresh.track; state.kind = fresh.kind;
+      state.line = fresh.line; state.area = fresh.area; state.beds = fresh.beds; state.q = "";
+      syncFilters(); saveState(); renderList();
+    };
+    document.getElementById("btnLoadSeed").onclick = () => {
+      if (!search.seed) return;
+      if (!confirm("Replace your local stars, strikes, and filters on the August list with Rod’s shortlist?")) return;
+      Object.assign(state, applyAugustSeed(state));
+      state.q = "";
+      syncFilters(); saveState(); renderList();
+    };
+    document.getElementById("btnClearMarks").onclick = () => {
+      if (!confirm("Clear stars and strikes for this search in this browser?")) return;
+      state.starred = []; state.struck = []; state.seededFrom = null;
+      saveState(); renderList();
+    };
+    document.getElementById("btnExport").onclick = () => {
+      const seed = {
+        search: search.id,
+        starred: state.starred, struck: state.struck,
+        view: state.view, track: state.track, kind: state.kind, line: state.line,
+        area: state.area, beds: state.beds, sortKey: state.sortKey, sortDir: state.sortDir
+      };
+      const baseStar = new Set(search.seed ? AUGUST_SEED.starred : []);
+      const baseStruck = new Set(search.seed ? AUGUST_SEED.struck : []);
+      const nextStar = new Set(seed.starred);
+      const nextStruck = new Set(seed.struck);
+      const changes = {
+        starredAdded: [...nextStar].filter((x) => !baseStar.has(x)).sort(),
+        starredRemoved: [...baseStar].filter((x) => !nextStar.has(x)).sort(),
+        struckAdded: [...nextStruck].filter((x) => !baseStruck.has(x)).sort(),
+        struckRemoved: [...baseStruck].filter((x) => !nextStruck.has(x)).sort()
+      };
+      const proposal = {
+        format: "tokyo-buy-search-shortlist-v1",
+        search: search.id,
+        createdAt: new Date().toISOString(),
+        comparedTo: search.seed ? "page-seed (Rod baseline on the August list)" : search.id,
+        changes, seed
+      };
+      const stamp = new Date().toISOString().slice(0, 10);
+      const blob = new Blob([JSON.stringify(proposal, null, 2) + "\n"], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `${search.id}-shortlist-${stamp}.json`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    };
+
+    window.addEventListener("hashchange", () => {
+      const id = location.hash.replace("#", "") || "august";
+      if (id !== search.id) loadSearch(id, false);
+    });
+
+    bootNav();
+    const start = location.hash.replace("#", "") || "august";
+    if (new URLSearchParams(location.search).get("seed") === "1" && (start === "august" || start === "")) {
+      localStorage.setItem(storeKey("august"), JSON.stringify(applyAugustSeed(defaultsFor(SEARCHES[0]))));
+    }
+    loadSearch(SEARCHES.some((s) => s.id === start) ? start : "august", true).catch((err) => {
+      document.getElementById("pageSub").textContent = String(err.message || err);
+    });
   </script>
 </body>
 </html>
