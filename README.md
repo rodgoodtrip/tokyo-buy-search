@@ -8,14 +8,14 @@ https://rodgoodtrip.github.io/tokyo-buy-search/
 
 | View | URL |
 | --- | --- |
-| August snapshot (original prices, Rod’s shortlist) | https://rodgoodtrip.github.io/tokyo-buy-search/#august |
+| Tokyo 23 wards under $600k | https://rodgoodtrip.github.io/tokyo-buy-search/#wards |
 | Tokyo / Yokohama, Nov 2026 | https://rodgoodtrip.github.io/tokyo-buy-search/#nov |
 | Shinjuku ≤ $600k | https://rodgoodtrip.github.io/tokyo-buy-search/#shinjuku |
 | Ueno / Taito ≤ $600k | https://rodgoodtrip.github.io/tokyo-buy-search/#ueno |
 | Osaka / Kansai | https://rodgoodtrip.github.io/tokyo-buy-search/#osaka |
-| Tokyo 23 wards under $600k | https://rodgoodtrip.github.io/tokyo-buy-search/#wards |
+| August 2026 (original prices, Rod’s shortlist) | https://rodgoodtrip.github.io/tokyo-buy-search/#august |
 
-Opening the site with no hash stays on the August snapshot. Force-load Rod’s shortlist on that view: https://rodgoodtrip.github.io/tokyo-buy-search/?seed=1
+Opening the site with no hash stays on August 2026. Force-load Rod’s shortlist on that view: https://rodgoodtrip.github.io/tokyo-buy-search/?seed=1
 
 ## Share a shortlist (no account)
 

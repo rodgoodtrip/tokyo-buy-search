@@ -172,20 +172,16 @@
   <script>
     const SEARCHES = [
       {
-        id: "august",
-        label: "August snapshot",
-        file: "data/august.json",
-        title: "Tokyo / Yokohama — August snapshot",
-        updated: "2026-08-26",
-        fx: "¥158.88/$",
-        sub: "The original owner-occupy list, kept so those prices stay as they were. Solo 1-room and joint 2+ rooms.",
-        callout: "Stars and strikes on this view stay in this browser. Export shortlist downloads a proposal against Rod’s baked-in seed.",
-        notes: "Transit minutes from Yahoo乗換案内 (weekday ~10:00): →新宿 via Shinjuku; →HND and →NRT are the airports. This snapshot is the August canvas and is not refreshed.",
-        seed: true,
-        track: true,
-        line: true,
-        sortKey: "tokyo",
-        cols: ["track","kind","title","priceUSD","monthlyUSD","sqm","pricePerSqm","trueCostPerSqm","walk","tokyo","haneda","narita","line","station"]
+        id: "wards",
+        label: "23 wards",
+        file: "data/wards.json",
+        title: "Tokyo 23 wards under $600k",
+        updated: "2026-11-17",
+        fx: "¥159.10/$",
+        sub: "Median asking price of used condos built in 1982 or later, at or under $600k. Airport times sit on the ward, from one central station.",
+        callout: "Each median is the middle of Suumo’s first six pages under ¥100M after the 1982 and $600k cuts. In central wards that is the stock Suumo surfaces first, not a census of the ward.",
+        notes: "Built is the completion year-month. Renovated is the oldest dated reform on the Suumo page, blank when none is listed. HND and NRT minutes are weekday 10:00 Yahoo times on 18 Nov 2026.",
+        mode: "wards"
       },
       {
         id: "nov",
@@ -248,16 +244,20 @@
         cols: ["track","kind","title","priceUSD","monthlyUSD","sqm","pricePerSqm","trueCostPerSqm","beds","baths","built","reno","walk","osaka","kix","area","station"]
       },
       {
-        id: "wards",
-        label: "23 wards",
-        file: "data/wards.json",
-        title: "Tokyo 23 wards under $600k",
-        updated: "2026-11-17",
-        fx: "¥159.10/$",
-        sub: "Median asking price of used condos built in 1982 or later, at or under $600k. Airport times sit on the ward, from one central station.",
-        callout: "Each median is the middle of Suumo’s first six pages under ¥100M after the 1982 and $600k cuts. In central wards that is the stock Suumo surfaces first, not a census of the ward.",
-        notes: "Built is the completion year-month. Renovated is the oldest dated reform on the Suumo page, blank when none is listed. HND and NRT minutes are weekday 10:00 Yahoo times on 18 Nov 2026.",
-        mode: "wards"
+        id: "august",
+        label: "August 2026",
+        file: "data/august.json",
+        title: "Tokyo / Yokohama — August 2026",
+        updated: "2026-08-26",
+        fx: "¥158.88/$",
+        sub: "The original owner-occupy list, kept so those prices stay as they were. Solo 1-room and joint 2+ rooms.",
+        callout: "Stars and strikes on this view stay in this browser. Export shortlist downloads a proposal against Rod’s baked-in seed.",
+        notes: "Transit minutes from Yahoo乗換案内 (weekday ~10:00): →新宿 via Shinjuku; →HND and →NRT are the airports. This snapshot is the August canvas and is not refreshed.",
+        seed: true,
+        track: true,
+        line: true,
+        sortKey: "tokyo",
+        cols: ["track","kind","title","priceUSD","monthlyUSD","sqm","pricePerSqm","trueCostPerSqm","walk","tokyo","haneda","narita","line","station"]
       }
     ];
 
@@ -582,7 +582,7 @@
     }
 
     async function loadSearch(id, push) {
-      const next = SEARCHES.find((s) => s.id === id) || SEARCHES[0];
+      const next = SEARCHES.find((s) => s.id === id) || SEARCHES.find((s) => s.id === "august");
       if (state && search) saveState();
       search = next;
       if (push) history.replaceState(null, "", "#" + search.id);
@@ -698,7 +698,7 @@
     bootNav();
     const start = location.hash.replace("#", "") || "august";
     if (new URLSearchParams(location.search).get("seed") === "1" && (start === "august" || start === "")) {
-      localStorage.setItem(storeKey("august"), JSON.stringify(applyAugustSeed(defaultsFor(SEARCHES[0]))));
+      localStorage.setItem(storeKey("august"), JSON.stringify(applyAugustSeed(defaultsFor(SEARCHES.find((s) => s.id === "august")))));
     }
     loadSearch(SEARCHES.some((s) => s.id === start) ? start : "august", true).catch((err) => {
       document.getElementById("pageSub").textContent = String(err.message || err);
